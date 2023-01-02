@@ -1,4 +1,11 @@
 [deps]
 AbstractTrees = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+CondaPkg = "992eb4ea-22a4-4c89-a5bb-47a3300528ab"
+Hwloc_jll = "e33a78d0-f292-5ffc-b300-72abe9b543c8"
+IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+MethodAnalysis = "85b6ec6f-f7df-4429-9514-a64bcd9ee824"
+PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
 Weave = "44d3d7a6-8a23-5bf8-98c5-b353f8df5ec9"
