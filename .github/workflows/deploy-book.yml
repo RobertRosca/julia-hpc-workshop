@@ -10,8 +10,7 @@ on:
 
 jobs:
   meta:
-    # runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: [self-hosted, ubuntu-latest]
     outputs:
       tag: ${{ steps.meta.outputs.version }}
     steps:
@@ -23,8 +22,7 @@ jobs:
 
   deploy-book:
     needs: meta
-    # runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: [self-hosted, ubuntu-latest]
     container:
       image: ghcr.io/robertrosca/julia-hpc-workshop:${{ needs.meta.outputs.tag }}
       credentials:
