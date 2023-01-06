@@ -38,6 +38,7 @@ jobs:
 
     - name: Build the book
       run: |
+        julia -e 'using IJulia; IJulia.installkernel("julia-1.8")'
         jupyter-book build .
         cp -r ./static/* ./_build/html/_static/.
         cp -r ./static ./_build/html/static
