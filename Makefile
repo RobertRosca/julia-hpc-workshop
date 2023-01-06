@@ -2,9 +2,10 @@ setup:
 	julia --project=$(CURDIR) -e "using Pkg; Pkg.instantiate(); Pkg.precompile()"
 	julia --project=$(CURDIR) -e "using PythonCall"
 	julia --project=$(CURDIR) -e "using MPI; MPI.install_mpiexecjl(; force=true)"
+	julia --project=$(CURDIR) -e 'using IJulia; IJulia.installkernel("julia")'
 
 html:
-	jupyter-book build . --builder html --path-output $(CURDIR)/html
+	jupyter-book build . --builder html
 	cp $(CURDIR)/static/* $(CURDIR)/_build/html/_static/.
 	cp -r $(CURDIR)/static $(CURDIR)/_build/html/static
 

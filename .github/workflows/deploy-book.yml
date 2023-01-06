@@ -10,7 +10,8 @@ on:
 
 jobs:
   meta:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     outputs:
       tag: ${{ steps.meta.outputs.version }}
     steps:
@@ -22,7 +23,8 @@ jobs:
 
   deploy-book:
     needs: meta
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     container:
       image: ghcr.io/robertrosca/julia-hpc-workshop:${{ needs.meta.outputs.tag }}
       credentials:
@@ -31,17 +33,22 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - name: Cache
+      uses: actions/cache@v1
       with:
-        python-version: 3.8
+        path: ./_build/.jupyter_cache
+
+    - name: Setup
+      run: |
+        echo $JULIA_DEPOT_PATH
+        make setup
+        julia -e "using Pkg; Pkg.status()"
+        julia --project=@. -e "using Pkg; Pkg.status()"
 
     - name: Build the book
       run: |
-        julia -e 'using IJulia; IJulia.installkernel("julia-1.8")'
-        jupyter-book build .
-        cp -r ./static/* ./_build/html/_static/.
-        cp -r ./static ./_build/html/static
+        export JULIA_PROJECT=$PWD
+        make html
 
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.9.1
