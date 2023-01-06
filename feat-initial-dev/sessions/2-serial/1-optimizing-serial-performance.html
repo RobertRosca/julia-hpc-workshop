@@ -1005,6 +1005,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.696 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  30.673 ns (1 allocation: 64 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <section id="example-1-element-wise-operations">
 <h3>Example 1: Element-Wise Operations<a class="headerlink" href="#example-1-element-wise-operations" title="Permalink to this headline">#</a></h3>
@@ -1020,10 +1028,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">f</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  759.086 μs (20001 allocations: 1.53 MiB)
 </pre></div>
 </div>
 </div>
@@ -1050,6 +1068,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  334.201 μs (1 allocation: 80 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="fix-2-broadcasting-aka-more-dots">
@@ -1069,6 +1092,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.528 ms (100001 allocations: 7.63 MiB)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1082,6 +1110,11 @@ title="Print to PDF"
 <span class="k">end</span>
 
 <span class="nd">@btime</span><span class="w"> </span><span class="n">f</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  233.971 μs (1 allocation: 80 bytes)
 </pre></div>
 </div>
 </div>
@@ -1102,6 +1135,11 @@ title="Print to PDF"
 <span class="k">end</span>
 
 <span class="nd">@btime</span><span class="w"> </span><span class="n">f</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  41.823 μs (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1134,6 +1172,20 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 66 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">74.047 ms</span> … <span class=" -Color -Color-Magenta"> 78.541 ms</span>  ┊ GC (min … max): 1.19% … 2.17%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">76.622 ms               </span>┊ GC (median):    1.96%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">76.342 ms</span> ± <span class=" -Color -Color-Green">964.904 μs</span>  ┊ GC (mean ± σ):  1.76% ± 0.46%
+
+                                  <span class=" -Color -Color-Green"> </span>   <span class=" -Color -Color-Blue">▃</span>█▁                       
+  ▆▁▄▄▁▁▁▄▄▁▄▁▄▁▄▁▁▆▄▁▁▁▁▇▄▆▆▁▁▁▆▆<span class=" -Color -Color-Green">▆</span>▄▄▇<span class=" -Color -Color-Blue">█</span>██▇▄▆▁▆▇▄▁▁▄▄▁▄▁▄▁▁▁▁▁▄ ▁
+  74 ms           Histogram: frequency by time         78.3 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">76.49 MiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">2004</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <section id="fix-preallocate-and-reuse-memory-in-place-matrix-multipy">
 <h4>Fix: Preallocate and reuse memory + in-place matrix-multipy<a class="headerlink" href="#fix-preallocate-and-reuse-memory-in-place-matrix-multipy" title="Permalink to this headline">#</a></h4>
@@ -1155,6 +1207,20 @@ There's a good chance that there will not be a large performance difference betw
 <span class="k">end</span>
 
 <span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 722 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">6.900 ms</span> … <span class=" -Color -Color-Magenta"> 8.265 ms</span>  ┊ GC (min … max): 0.00% … 15.72%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">6.921 ms              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.931 ms</span> ± <span class=" -Color -Color-Green">77.921 μs</span>  ┊ GC (mean ± σ):  0.06% ±  0.86%
+
+       ▂▅█<span class=" -Color -Color-Blue">█</span>▄▁ <span class=" -Color -Color-Green"> </span>                                               
+  ▂▃▃▄▆███<span class=" -Color -Color-Blue">█</span>██▆<span class=" -Color -Color-Green">▄</span>▃▂▂▂▁▂▁▁▁▂▁▂▁▁▁▁▂▁▁▁▁▁▁▂▁▂▁▁▁▁▁▂▁▂▁▂▂▂▂▃▂▂▂▂▂ ▃
+  6.9 ms         Histogram: frequency by time        7.05 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">234.52 KiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">6</span>.
 </pre></div>
 </div>
 </div>
@@ -1181,6 +1247,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  141.292 ns (4 allocations: 320 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <section id="fix-views">
 <h4>Fix: Views<a class="headerlink" href="#fix-views" title="Permalink to this headline">#</a></h4>
@@ -1192,6 +1263,11 @@ There's a good chance that there will not be a large performance difference betw
 <span class="c"># f(Y) = view(Y, 1:3, 1) .+ view(Y, 1:3, 2) .+ view(Y, 1:3, 3)</span>
 
 <span class="nd">@btime</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="o">$</span><span class="n">X</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  41.972 ns (1 allocation: 80 bytes)
 </pre></div>
 </div>
 </div>
@@ -1209,6 +1285,14 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  171.104 ns (2 allocations: 288 bytes)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4111883712180104
+</pre></div>
+</div>
+</div>
 </div>
 <section id="fix-call-directly-on-variable">
 <h4>Fix: Call Directly on Variable<a class="headerlink" href="#fix-call-directly-on-variable" title="Permalink to this headline">#</a></h4>
@@ -1216,6 +1300,11 @@ There's a good chance that there will not be a large performance difference betw
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum</span><span class="p">([</span><span class="n">sin</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  120.566 ns (1 allocation: 144 bytes)
 </pre></div>
 </div>
 </div>
@@ -1229,10 +1318,20 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  83.939 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">sin</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c"># two-argument version of sum</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  83.938 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1250,6 +1349,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  172.977 ns (2 allocations: 288 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1260,6 +1364,11 @@ There's a good chance that there will not be a large performance difference betw
 <span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  132.900 ns (1 allocation: 144 bytes)
 </pre></div>
 </div>
 </div>
@@ -1276,6 +1385,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  81.263 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1286,6 +1400,11 @@ There's a good chance that there will not be a large performance difference betw
 <span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  82.603 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1314,10 +1433,20 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 2 methods)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0
 </pre></div>
 </div>
 </div>
@@ -1328,10 +1457,81 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>()
+  from f() in Main at In[22]:4
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+Body<span class=" -Color -Color-Bold">::Any</span>
+1 ─
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> %1 = (
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 * Main.a)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">::Any</span>
+│   %2 = (%1 + Main.b)<span class=" -Color -Color-Bold">::Any</span>
+└──      return %2
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[22]:4 within `f`
+define 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nonnull <span class=" -Color -Color-Yellow">{}</span>* @julia_f_2890<span class=" -Color -Color-Yellow">()</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  %0 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">8</span>
+  %gcframe2 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">16</span>
+  %gcframe2.sub = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
+  %.sub = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %0, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
+  %1 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2 to <span class=" -Color -Color-Cyan">i8</span>*
+  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @llvm.memset.p0i8.i32<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i8</span>* noundef nonnull align <span class=" -Color -Color-Yellow">16</span> dereferenceable<span class=" -Color -Color-Yellow">(32)</span> %1, <span class=" -Color -Color-Cyan">i8</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">32</span>, <span class=" -Color -Color-Cyan">i1</span> false<span class=" -Color -Color-Yellow">)</span>
+  %thread_ptr = call <span class=" -Color -Color-Cyan">i8</span>* asm &quot;movq %fs:0, $0&quot;, &quot;=r&quot;<span class=" -Color -Color-Yellow">()</span> #3
+  %ppgcstack_i8 = <span class=" -Color -Color-Bold">getelementptr</span> <span class=" -Color -Color-Cyan">i8</span>, <span class=" -Color -Color-Cyan">i8</span>* %thread_ptr, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">-8</span>
+  %ppgcstack = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Cyan">i8</span>* %ppgcstack_i8 to <span class=" -Color -Color-Yellow">{}</span>****
+  %pgcstack = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>***, <span class=" -Color -Color-Yellow">{}</span>**** %ppgcstack, align <span class=" -Color -Color-Yellow">8</span>
+  %2 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2 to <span class=" -Color -Color-Cyan">i64</span>*
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">8</span>, <span class=" -Color -Color-Cyan">i64</span>* %2, align <span class=" -Color -Color-Yellow">16</span>
+  %3 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
+  %4 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>** %3 to <span class=" -Color -Color-Yellow">{}</span>***
+  %5 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>**, <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %5, <span class=" -Color -Color-Yellow">{}</span>*** %4, align <span class=" -Color -Color-Yellow">8</span>
+  %6 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack to <span class=" -Color -Color-Yellow">{}</span>***
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %gcframe2.sub, <span class=" -Color -Color-Yellow">{}</span>*** %6, align <span class=" -Color -Color-Yellow">8</span>
+  %7 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140484060791000</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">8</span>
+  %8 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %7, <span class=" -Color -Color-Yellow">{}</span>** %8, align <span class=" -Color -Color-Yellow">16</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491545034912</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
+  %9 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %0, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %7, <span class=" -Color -Color-Yellow">{}</span>** %9, align <span class=" -Color -Color-Yellow">8</span>
+  %10 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491332217904</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %11 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140484060801048</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">8</span>
+  %12 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">3</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %10, <span class=" -Color -Color-Yellow">{}</span>** %12, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %11, <span class=" -Color -Color-Yellow">{}</span>** %8, align <span class=" -Color -Color-Yellow">16</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %10, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %11, <span class=" -Color -Color-Yellow">{}</span>** %9, align <span class=" -Color -Color-Yellow">8</span>
+  %13 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491330596064</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %14 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %3, align <span class=" -Color -Color-Yellow">8</span>
+  %15 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack to <span class=" -Color -Color-Yellow">{}</span>**
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %14, <span class=" -Color -Color-Yellow">{}</span>** %15, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">{}</span>* %13
+<span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
 </div>
@@ -1353,10 +1553,44 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">local_scope</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for local_scope()
+  from local_scope() in Main at In[26]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(local_scope)</span>
+Locals
+  f<span class=" -Color -Color-Cyan">::var&quot;#f#7&quot;{Float64, Float64}</span>
+  b<span class=" -Color -Color-Cyan">::Float64</span>
+  a<span class=" -Color -Color-Cyan">::Float64</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─      (a = 2.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>)
+│        (b = 3.0)
+│   %3 = Main.:(var&quot;#f#7&quot;)<span class=" -Color -Color-Cyan">::Core.Const(var&quot;#f#7&quot;)</span>
+│   %4 = Core.typeof(b
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>::Core.Const(3.0))<span class=" -Color -Color-Cyan">::Core.Const(Float64)</span>
+│   %5 = Core.typeof(a::Core.Const(2.0))<span class=" -Color -Color-Cyan">::Core.Const(Float64)</span>
+│   %6 = Core.apply_type(%3, %4, %5)<span class=" -Color -Color-Cyan">::Core.Const(var&quot;#f#7&quot;{Float64, Float64})</span>
+│   %7 = b<span class=" -Color -Color-Cyan">::Core.Const(3.0)</span>
+│        (f = %new(%6, %7, a::Core.Const(2.0)))
+│   %9 = (f::Core.Const(var&quot;#f#7&quot;{Float64, Float64}(3.0, 2.0)))()<span class=" -Color -Color-Cyan">::Core.Const(7.0)</span>
+└──      return %9
 </pre></div>
 </div>
 </div>
@@ -1367,10 +1601,46 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[26]:1 within `local_scope`
+define <span class=" -Color -Color-Cyan">double</span> @julia_local_scope_3014<span class=" -Color -Color-Yellow">()</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> <span class=" -Color -Color-Yellow">7.000000e+00</span>
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">local_scope</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;local_scope&quot;
+	.section	.rodata.cst8,&quot;aM&quot;,@progbits,<span class=" -Color -Color-Yellow">8</span>
+	.p2align	<span class=" -Color -Color-Yellow">3</span>                               # -- Begin function julia_local_scope_3030
+.LCPI0_0:
+	.quad	<span class=" -Color -Color-Yellow">0x401c000000000000</span>              # double 7
+	.text
+	.globl	julia_local_scope_3030
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_local_scope_3030,@function
+julia_local_scope_3030:                 # @julia_local_scope_3030
+; ┌ @ In[26]:1 within `local_scope`
+	.cfi_startproc
+# %bb.0:                                # %top
+	<span class=" -Color -Color-Bold">movabsq</span>	$.LCPI0_0, %rax
+	<span class=" -Color -Color-Bold">vmovsd</span>	<span class=" -Color -Color-Yellow">(</span>%rax<span class=" -Color -Color-Yellow">)</span>, %xmm0                   # xmm0 = mem[0],zero
+	<span class=" -Color -Color-Bold">retq</span>
+.Lfunc_end0:
+	.size	julia_local_scope_3030, .Lfunc_end0-julia_local_scope_3030
+	.cfi_endproc
+; └
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
 </pre></div>
 </div>
 </div>
@@ -1391,6 +1661,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1398,10 +1673,31 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[30]:4 within `f`
+define <span class=" -Color -Color-Cyan">double</span> @julia_f_3034<span class=" -Color -Color-Yellow">()</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> <span class=" -Color -Color-Yellow">7.000000e+00</span>
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f()
+  from f() in Main at In[30]:4
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─ %1 = (2 * Main.C)<span class=" -Color -Color-Cyan">::Core.Const(4.0)</span>
+│   %2 = (%1 + Main.D)<span class=" -Color -Color-Cyan">::Core.Const(7.0)</span>
+└──      return %2
 </pre></div>
 </div>
 </div>
@@ -1415,10 +1711,25 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 3 methods)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:none</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>define <span class=" -Color -Color-Cyan">double</span> @julia_f_3042<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0, <span class=" -Color -Color-Cyan">double</span> %1<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  %2 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, <span class=" -Color -Color-Yellow">2.000000e+00</span>
+  %3 = <span class=" -Color -Color-Bold">fadd</span> <span class=" -Color -Color-Cyan">double</span> %2, %1
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> %3
+<span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
 </div>
@@ -1440,10 +1751,35 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 3 methods)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f(::Vector{Float64}, ::Bool)
+  from f(x, flag) in Main at In[35]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+  x<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+  flag<span class=" -Color -Color-Cyan">::Bool</span>
+Body<span class=" -Color -Color-Bold">::Union{Vector{Float64}, Vector{Int64}}</span>
+1 ─      goto #3 if not flag
+2 ─ %2 = Core.apply_type(Main.Vector, Main.Float64)<span class=" -Color -Color-Cyan">::Core.Const(Vector{Float64})</span>
+│   %3 = Main.convert(%2, x)<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+└──      return %3
+3 ─ %5 = Core.apply_type(Main.Vector, Main.Int64)<span class=" -Color -Color-Cyan">::Core.Const(Vector{Int64})</span>
+│   %6 = Base.broadcasted(Main.round, x)<span class=" -Color -Color-Cyan">::Base.Broadcast.Broadcasted{Base.Broadcast.DefaultArrayStyle{1}, Nothing, typeof(round), Tuple{Vector{Float64}}}</span>
+│   %7 = Base.materialize(%6)<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+│   %8 = Main.convert(%5, %7)<span class=" -Color -Color-Cyan">::Vector{Int64}</span>
+└──      return %8
 </pre></div>
 </div>
 </div>
@@ -1454,10 +1790,20 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Float64} (alias for Array{Float64, 1})
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="nb">false</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Int64} (alias for Array{Int64, 1})
 </pre></div>
 </div>
 </div>
@@ -1476,10 +1822,38 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 3 methods)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f(::Vector{Float64}, ::Bool)
+  from f(x, flag) in Main at In[39]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+  x<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+  flag<span class=" -Color -Color-Cyan">::Bool</span>
+Body<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+1 ─ %1 = Core.apply_type(Main.Vector, Main.Float64)<span class=" -Color -Color-Cyan">::Core.Const(Vector{Float64})</span>
+└──      goto #3 if not flag
+2 ─ %3 = Main.length(x)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %4 = (1:%3)<span class=" -Color -Color-Cyan">::Core.PartialStruct(UnitRange{Int64}, Any[Core.Const(1), Int64])</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>│   %5 = Base.convert(%1, %4)<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+│   %6 = Core.typeassert(%5, %1)<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+└──      return %6
+3 ─ %8 = Base.convert(%1, x)<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+│   %9 = Core.typeassert(%8, %1)<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+└──      return %9
 </pre></div>
 </div>
 </div>
@@ -1511,12 +1885,35 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 4 methods)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyType</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">)</span>
 
 <span class="nd">@code_warntype</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f(::MyType)
+  from f(a::MyType) in Main at In[42]:6
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+  a<span class=" -Color -Color-Cyan">::MyType</span>
+Body<span class=" -Color -Color-Bold">::Any</span>
+1 ─ %1 = Base.getproperty(a, :x)<span class=" -Color -Color-Bold">::Number</span>
+│   %2 = Core.apply_type(Base.Val, 2)<span class=" -Color -Color-Cyan">::Core.Const(Val{2})</span>
+│   %3 = (%2)()<span class=" -Color -Color-Cyan">::Core.Const(Val{2}())</span>
+│   %4 = Base.literal_pow(Main.:^, %1, %3)<span class=" -Color -Color-Bold">::Any</span>
+│   %5 = Base.getproperty(a, :x)<span class=" -Color -Color-Bold">::Number</span>
+│   %6 = Main.sqrt(%5)<span class=" -Color -Color-Bold">::Any</span>
+│   %7 = (%4 + %6)<span class=" -Color -Color-Bold">::Any</span>
+└──      return %7
 </pre></div>
 </div>
 </div>
@@ -1527,6 +1924,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  62.166 ns (3 allocations: 48 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1534,10 +1936,64 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[42]:6 within `f`
+define nonnull <span class=" -Color -Color-Yellow">{}</span>* @julia_f_3180<span class=" -Color -Color-Yellow">([2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* nocapture nonnull readonly align <span class=" -Color -Color-Yellow">8</span> dereferenceable<span class=" -Color -Color-Yellow">(16)</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  %1 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">8</span>
+  %gcframe2 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">16</span>
+  %gcframe2.sub = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
+  %.sub = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
+  %2 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2 to <span class=" -Color -Color-Cyan">i8</span>*
+  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @llvm.memset.p0i8.i32<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i8</span>* noundef nonnull align <span class=" -Color -Color-Yellow">16</span> dereferenceable<span class=" -Color -Color-Yellow">(32)</span> %2, <span class=" -Color -Color-Cyan">i8</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">32</span>, <span class=" -Color -Color-Cyan">i1</span> false<span class=" -Color -Color-Yellow">)</span>
+  %thread_ptr = call <span class=" -Color -Color-Cyan">i8</span>* asm &quot;movq %fs:0, $0&quot;, &quot;=r&quot;<span class=" -Color -Color-Yellow">()</span> #3
+  %ppgcstack_i8 = <span class=" -Color -Color-Bold">getelementptr</span> <span class=" -Color -Color-Cyan">i8</span>, <span class=" -Color -Color-Cyan">i8</span>* %thread_ptr, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">-8</span>
+  %ppgcstack = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Cyan">i8</span>* %ppgcstack_i8 to <span class=" -Color -Color-Yellow">{}</span>****
+  %pgcstack = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>***, <span class=" -Color -Color-Yellow">{}</span>**** %ppgcstack, align <span class=" -Color -Color-Yellow">8</span>
+; ┌ @ Base.jl:38 within `getproperty`
+   %3 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2 to <span class=" -Color -Color-Cyan">i64</span>*
+   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">8</span>, <span class=" -Color -Color-Cyan">i64</span>* %3, align <span class=" -Color -Color-Yellow">16</span>
+   %4 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
+   %5 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>** %4 to <span class=" -Color -Color-Yellow">{}</span>***
+   %6 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>**, <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack, align <span class=" -Color -Color-Yellow">8</span>
+   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %6, <span class=" -Color -Color-Yellow">{}</span>*** %5, align <span class=" -Color -Color-Yellow">8</span>
+   %7 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack to <span class=" -Color -Color-Yellow">{}</span>***
+   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %gcframe2.sub, <span class=" -Color -Color-Yellow">{}</span>*** %7, align <span class=" -Color -Color-Yellow">8</span>
+   %8 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %0, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
+   %9 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %8 unordered, align <span class=" -Color -Color-Yellow">8</span>
+; └
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491331441648</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
+  %10 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %9, <span class=" -Color -Color-Yellow">{}</span>** %10, align <span class=" -Color -Color-Yellow">8</span>
+  %11 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491338557392</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %11, align <span class=" -Color -Color-Yellow">8</span>
+  %12 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491331443216</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">3)</span>
+  %13 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">3</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %12, <span class=" -Color -Color-Yellow">{}</span>** %13, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %9, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
+  %14 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491338576816</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">1)</span>
+  %15 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %14, <span class=" -Color -Color-Yellow">{}</span>** %15, align <span class=" -Color -Color-Yellow">16</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %12, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %14, <span class=" -Color -Color-Yellow">{}</span>** %10, align <span class=" -Color -Color-Yellow">8</span>
+  %16 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491330596064</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %17 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %4, align <span class=" -Color -Color-Yellow">8</span>
+  %18 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack to <span class=" -Color -Color-Yellow">{}</span>**
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %17, <span class=" -Color -Color-Yellow">{}</span>** %18, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">{}</span>* %16
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyType
 </pre></div>
 </div>
 </div>
@@ -1556,11 +2012,34 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 5 methods)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyTypeConcrete</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">)</span>
 <span class="nd">@code_warntype</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f(::MyTypeConcrete)
+  from f(b::MyTypeConcrete) in Main at In[47]:6
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+  b<span class=" -Color -Color-Cyan">::MyTypeConcrete</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─ %1 = Base.getproperty(b, :x)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %2 = Core.apply_type(Base.Val, 2)<span class=" -Color -Color-Cyan">::Core.Const(Val{2})</span>
+│   %3 = (%2)()<span class=" -Color -Color-Cyan">::Core.Const(Val{2}())</span>
+│   %4 = Base.literal_pow(Main.:^, %1, %3)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %5 = Base.getproperty(b, :x)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %6 = Main.sqrt(%5)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %7 = (%4 + %6)<span class=" -Color -Color-Cyan">::Float64</span>
+└──      return %7
 </pre></div>
 </div>
 </div>
@@ -1571,10 +2050,54 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.386 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[47]:6 within `f`
+define <span class=" -Color -Color-Cyan">double</span> @julia_f_3194<span class=" -Color -Color-Yellow">({</span> <span class=" -Color -Color-Cyan">double</span>, <span class=" -Color -Color-Yellow">{}</span>* <span class=" -Color -Color-Yellow">}</span>* nocapture nonnull readonly align <span class=" -Color -Color-Yellow">8</span> dereferenceable<span class=" -Color -Color-Yellow">(16)</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+; ┌ @ Base.jl:38 within `getproperty`
+   %1 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">{</span> <span class=" -Color -Color-Cyan">double</span>, <span class=" -Color -Color-Yellow">{}</span>* <span class=" -Color -Color-Yellow">}</span>, <span class=" -Color -Color-Yellow">{</span> <span class=" -Color -Color-Cyan">double</span>, <span class=" -Color -Color-Yellow">{}</span>* <span class=" -Color -Color-Yellow">}</span>* %0, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">0</span>
+; └
+; ┌ @ intfuncs.jl:321 within `literal_pow`
+; │┌ @ float.jl:385 within `*`
+    %2 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Cyan">double</span>, <span class=" -Color -Color-Cyan">double</span>* %1, align <span class=" -Color -Color-Yellow">8</span>
+; └└
+; ┌ @ math.jl:591 within `sqrt`
+; │┌ @ float.jl:412 within `&lt;`
+    %3 = <span class=" -Color -Color-Bold">fcmp</span> <span class=" -Color -Color-Bold">uge</span> <span class=" -Color -Color-Cyan">double</span> %2, <span class=" -Color -Color-Yellow">0.000000e+00</span>
+; │└
+   <span class=" -Color -Color-Bold">br</span> <span class=" -Color -Color-Cyan">i1</span> %3, <span class=" -Color -Color-Cyan">label</span> %L8, <span class=" -Color -Color-Cyan">label</span> %L6
+
+L6:                                               ; preds = %top
+   %4 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @j_throw_complex_domainerror_3196<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140491545388968</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Cyan">double</span> %2<span class=" -Color -Color-Yellow">)</span> #0
+   <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @llvm.trap<span class=" -Color -Color-Yellow">()</span>
+   <span class=" -Color -Color-Bold">unreachable</span>
+
+L8:                                               ; preds = %top
+; └
+; ┌ @ intfuncs.jl:321 within `literal_pow`
+; │┌ @ float.jl:385 within `*`
+    %5 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %2, %2
+; └└
+; ┌ @ math.jl:592 within `sqrt`
+   %6 = <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">double</span> @llvm.sqrt.f64<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %2<span class=" -Color -Color-Yellow">)</span>
+; └
+; ┌ @ float.jl:383 within `+`
+   %7 = <span class=" -Color -Color-Bold">fadd</span> <span class=" -Color -Color-Cyan">double</span> %5, %6
+; └
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> %7
+<span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
 </div>
@@ -1594,6 +2117,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 6 methods)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1601,10 +2129,33 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyTypeParametric{Float64, String}(3.0, &quot;test&quot;)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f(::MyTypeParametric{Float64, String})
+  from f(c::MyTypeParametric) in Main at In[51]:6
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+  c<span class=" -Color -Color-Cyan">::MyTypeParametric{Float64, String}</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─ %1 = Base.getproperty(c, :x)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %2 = Core.apply_type(Base.Val, 2)<span class=" -Color -Color-Cyan">::Core.Const(Val{2})</span>
+│   %3 = (%2)()<span class=" -Color -Color-Cyan">::Core.Const(Val{2}())</span>
+│   %4 = Base.literal_pow(Main.:^, %1, %3)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %5 = Base.getproperty(c, :x)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %6 = Main.sqrt(%5)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %7 = (%4 + %6)<span class=" -Color -Color-Cyan">::Float64</span>
+└──      return %7
 </pre></div>
 </div>
 </div>
@@ -1616,6 +2167,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.815 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1623,10 +2179,20 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyTypeParametric{Float32, SubString{String}}(3.0f0, &quot;test&quot;)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="o">$</span><span class="n">c</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.355 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1690,10 +2256,34 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  85.832 ns (1 allocation: 896 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  187.643 ns (2 allocations: 912 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">DM</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">DM</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for +(::DiagonalMatrix{Int64}, ::DiagonalMatrix{Int64})
+  from +(Da::DiagonalMatrix, Db::DiagonalMatrix) in Main at In[57]:15
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(+)</span>
+  Da<span class=" -Color -Color-Cyan">::DiagonalMatrix{Int64}</span>
+  Db<span class=" -Color -Color-Cyan">::DiagonalMatrix{Int64}</span>
+Body<span class=" -Color -Color-Cyan">::DiagonalMatrix{Int64}</span>
+1 ─ %1 = Base.getproperty(Da, :diag)<span class=" -Color -Color-Cyan">::Vector{Int64}</span>
+│   %2 = Base.getproperty(Db, :diag)<span class=" -Color -Color-Cyan">::Vector{Int64}</span>
+│   %3 = (%1 + %2)<span class=" -Color -Color-Cyan">::Vector{Int64}</span>
+│   %4 = Main.DiagonalMatrix(%3)<span class=" -Color -Color-Cyan">::DiagonalMatrix{Int64}</span>
+└──      return %4
 </pre></div>
 </div>
 </div>
@@ -1704,11 +2294,46 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for +(::CoolerDiagonalMatrix{Int64}, ::CoolerDiagonalMatrix{Int64})
+  from +(Da::CoolerDiagonalMatrix, Db::CoolerDiagonalMatrix) in Main at In[58]:15
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(+)</span>
+  Da<span class=" -Color -Color-Cyan">::CoolerDiagonalMatrix{Int64}</span>
+  Db<span class=" -Color -Color-Cyan">::CoolerDiagonalMatrix{Int64}</span>
+Body<span class=" -Color -Color-Bold">::CoolerDiagonalMatrix</span>
+1 ─ %1 = Base.getproperty(Da, :diag)<span class=" -Color -Color-Bold">::AbstractVector{Int64}</span>
+│   %2 = Base.getproperty(Db, :diag)<span class=" -Color -Color-Bold">::AbstractVector{Int64}</span>
+│   %3 = (%1 + %2)<span class=" -Color -Color-Bold">::Any</span>
+│   %4 = Main.CoolerDiagonalMatrix(%3)<span class=" -Color -Color-Bold">::CoolerDiagonalMatrix</span>
+└──      return %4
+</pre></div>
+</div>
+</div>
 </div>
 <p>This is the same as the previous problem: an <code class="docutils literal notranslate"><span class="pre">AbstractVector{Int64}</span></code> is not a concrete type, it means:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">subtypes</span><span class="p">(</span><span class="kt">AbstractVector</span><span class="p">{</span><span class="kt">Int64</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14-element Vector{Any}:
+ AbstractRange{Int64}
+ Base.LogicalIndex{Int64}
+ Base.ReinterpretArray{Int64, 1, S} where S
+ Base.ReshapedArray{Int64, 1}
+ Core.Compiler.AbstractRange{Int64}
+ Core.Compiler.LinearIndices{1, R} where R&lt;:Tuple{Core.Compiler.AbstractUnitRange{Int64}}
+ DenseVector{Int64} (alias for DenseArray{Int64, 1})
+ LinearIndices{1, R} where R&lt;:Tuple{AbstractUnitRange{Int64}}
+ PermutedDimsArray{Int64, 1}
+ AbstractSparseVector{Int64} (alias for SparseArrays.AbstractSparseArray{Int64, Ti, 1} where Ti)
+ StaticArrays.TrivialView{A, Int64, 1} where A
+ StaticArray{S, Int64, 1} where S&lt;:Tuple
+ SubArray{Int64, 1}
+ Test.GenericArray{Int64, 1}
 </pre></div>
 </div>
 </div>
@@ -1742,6 +2367,15 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching MuchCoolerDiagonalMatrix(::UnitRange{Int64})
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">64</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1749,10 +2383,30 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UnitRange{Int64}
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">MuchCoolerDiagonalMatrix</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="w"> </span><span class="kt">UnitRange</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}}(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10×10 MuchCoolerDiagonalMatrix{Int64, UnitRange{Int64}}:
+ 1  0  0  0  0  0  0  0  0   0
+ 0  2  0  0  0  0  0  0  0   0
+ 0  0  3  0  0  0  0  0  0   0
+ 0  0  0  4  0  0  0  0  0   0
+ 0  0  0  0  5  0  0  0  0   0
+ 0  0  0  0  0  6  0  0  0   0
+ 0  0  0  0  0  0  7  0  0   0
+ 0  0  0  0  0  0  0  8  0   0
+ 0  0  0  0  0  0  0  0  9   0
+ 0  0  0  0  0  0  0  0  0  10
 </pre></div>
 </div>
 </div>
@@ -1763,10 +2417,30 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MuchCoolerDiagonalMatrix
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">MuchCoolerDiagonalMatrix</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="w"> </span><span class="kt">UnitRange</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}}(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10×10 MuchCoolerDiagonalMatrix{Int64, UnitRange{Int64}}:
+ 1  0  0  0  0  0  0  0  0   0
+ 0  2  0  0  0  0  0  0  0   0
+ 0  0  3  0  0  0  0  0  0   0
+ 0  0  0  4  0  0  0  0  0   0
+ 0  0  0  0  5  0  0  0  0   0
+ 0  0  0  0  0  6  0  0  0   0
+ 0  0  0  0  0  0  7  0  0   0
+ 0  0  0  0  0  0  0  8  0   0
+ 0  0  0  0  0  0  0  0  9   0
+ 0  0  0  0  0  0  0  0  0  10
 </pre></div>
 </div>
 </div>
@@ -1784,6 +2458,17 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  85.238 ns (1 allocation: 896 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  184.353 ns (2 allocations: 912 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  87.013 ns (1 allocation: 896 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1798,10 +2483,37 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  85.623 ns (1 allocation: 896 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  115.799 ns (3 allocations: 112 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  12.051 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">DM_mcool</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">DM_mcool</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for +(::MuchCoolerDiagonalMatrix{Int64, UnitRange{Int64}}, ::MuchCoolerDiagonalMatrix{Int64, UnitRange{Int64}})
+  from +(Da::MuchCoolerDiagonalMatrix, Db::MuchCoolerDiagonalMatrix) in Main at In[63]:15
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(+)</span>
+  Da<span class=" -Color -Color-Cyan">::MuchCoolerDiagonalMatrix{Int64, UnitRange{Int64}}</span>
+  Db<span class=" -Color -Color-Cyan">::MuchCoolerDiagonalMatrix{Int64, UnitRange{Int64}}</span>
+Body<span class=" -Color -Color-Cyan">::MuchCoolerDiagonalMatrix{Int64, StepRangeLen{Int64, Int64, Int64, Int64}}</span>
+1 ─ %1 = Base.getproperty(Da, :diag)<span class=" -Color -Color-Cyan">::UnitRange{Int64}</span>
+│   %2 = Base.getproperty(Db, :diag)<span class=" -Color -Color-Cyan">::UnitRange{Int64}</span>
+│   %3 = (%1 + %2)<span class=" -Color -Color-Cyan">::Core.PartialStruct(StepRangeLen{Int64, Int64, Int64, Int64}, Any[Int64, Core.Const(2), Int64, Core.Const(1)])</span>
+│   %4 = Main.MuchCoolerDiagonalMatrix(%3)<span class=" -Color -Color-Cyan">::Core.PartialStruct(MuchCoolerDiagonalMatrix{Int64, StepRangeLen{Int64, Int64, Int64, Int64}}, Any[Core.PartialStruct(StepRangeLen{Int64, Int64, Int64, Int64}, Any[Int64, Core.Const(2), Int64, Core.Const(1)])])</span>
+└──      return %4
 </pre></div>
 </div>
 </div>
@@ -1826,6 +2538,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  311.538 ns (3 allocations: 464 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1833,10 +2550,45 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f()
+  from f() in Main at In[72]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+Locals
+  @_2<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Int64, Int64}}</span>
+  numbers<span class=" -Color -Color-Cyan">::Vector{Any}</span>
+  i<span class=" -Color -Color-Cyan">::Int64</span>
+Body<span class=" -Color -Color-Bold">::Any</span>
+1 ─       (numbers = Base.vect())
+│   %2  = (1:10)<span class=" -Color -Color-Cyan">::Core.Const(1:10)</span>
+│         (@_2 = Base.iterate(%2))
+│   %4  = (@_2::Core.Const((1, 1)) === nothing)<span class=" -Color -Color-Cyan">::Core.Const(false)</span>
+│   %5  = Base.not_int(%4)<span class=" -Color -Color-Cyan">::Core.Const(true)</span>
+└──       goto #4 if not %5
+2 ┄ %7  = @_2<span class=" -Color -Color-Cyan">::Tuple{Int64, Int64}</span>
+│         (i = Core.getfield(%7, 1))
+│   %9  = Core.getfield(%7, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│         Main.push!(numbers, i)
+│         (@_2 = Base.iterate(%2, %9))
+│   %12 = (@_2 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %13 = Base.not_int(%12)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %13
+3 ─       goto #2
+4 ┄ %16 = Main.sum(numbers)<span class=" -Color -Color-Bold">::Any</span>
+└──       return %16
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Any} (alias for Array{Any, 1})
 </pre></div>
 </div>
 </div>
@@ -1855,10 +2607,45 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  157.088 ns (3 allocations: 480 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f()
+  from f() in Main at In[75]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+Locals
+  @_2<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Int64, Int64}}</span>
+  numbers<span class=" -Color -Color-Cyan">::Vector{Int64}</span>
+  i<span class=" -Color -Color-Cyan">::Int64</span>
+Body<span class=" -Color -Color-Cyan">::Int64</span>
+1 ─       (numbers = Base.getindex(Main.Int))
+│   %2  = (1:10)<span class=" -Color -Color-Cyan">::Core.Const(1:10)</span>
+│         (@_2 = Base.iterate(%2))
+│   %4  = (@_2::Core.Const((1, 1)) === nothing)<span class=" -Color -Color-Cyan">::Core.Const(false)</span>
+│   %5  = Base.not_int(%4)<span class=" -Color -Color-Cyan">::Core.Const(true)</span>
+└──       goto #4 if not %5
+2 ┄ %7  = @_2<span class=" -Color -Color-Cyan">::Tuple{Int64, Int64}</span>
+│         (i = Core.getfield(%7, 1))
+│   %9  = Core.getfield(%7, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│         Main.push!(numbers, i)
+│         (@_2 = Base.iterate(%2, %9))
+│   %12 = (@_2 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %13 = Base.not_int(%12)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %13
+3 ─       goto #2
+4 ┄ %16 = Main.sum(numbers)<span class=" -Color -Color-Cyan">::Int64</span>
+└──       return %16
 </pre></div>
 </div>
 </div>
@@ -1884,6 +2671,37 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f()
+  from f() in Main at In[77]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+Locals
+  @_2<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Int64, Int64}}</span>
+  x<span class=" -Color -Color-Bold">::Union{Float64, Int64}</span>
+  i<span class=" -Color -Color-Cyan">::Int64</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─       (x = 1)
+│   %2  = (1:10)<span class=" -Color -Color-Cyan">::Core.Const(1:10)</span>
+│         (@_2 = Base.iterate(%2))
+│   %4  = (@_2::Core.Const((1, 1)) === nothing)<span class=" -Color -Color-Cyan">::Core.Const(false)</span>
+│   %5  = Base.not_int(%4)<span class=" -Color -Color-Cyan">::Core.Const(true)</span>
+└──       goto #4 if not %5
+2 ┄ %7  = @_2<span class=" -Color -Color-Cyan">::Tuple{Int64, Int64}</span>
+│         (i = Core.getfield(%7, 1))
+│   %9  = Core.getfield(%7, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %10 = x<span class=" -Color -Color-Bold">::Union{Float64, Int64}</span>
+│   %11 = Main.rand()<span class=" -Color -Color-Cyan">::Float64</span>
+│         (x = %10 / %11)
+│         (@_2 = Base.iterate(%2, %9))
+│   %14 = (@_2 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %15 = Base.not_int(%14)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %15
+3 ─       goto #2
+4 ┄       return x::Float64
+</pre></div>
+</div>
+</div>
 </div>
 <p>(On a side note: since the type can only vary between <code class="docutils literal notranslate"><span class="pre">Float64</span></code> and <code class="docutils literal notranslate"><span class="pre">Int64</span></code>, Julia can still produce reasonable code by <em>union splitting</em>. I recommend reading <a class="reference external" href="https://julialang.org/blog/2018/08/union-splitting">this blog post</a> by Tim Holy.)</p>
 <section id="fix-1-initialize-with-correct-type">
@@ -1899,6 +2717,37 @@ There's a good chance that there will not be a large performance difference betw
 <span class="k">end</span>
 
 <span class="nd">@code_warntype</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f()
+  from f() in Main at In[78]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+Locals
+  @_2<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Int64, Int64}}</span>
+  x<span class=" -Color -Color-Cyan">::Float64</span>
+  i<span class=" -Color -Color-Cyan">::Int64</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─       (x = 1.0)
+│   %2  = (1:10)<span class=" -Color -Color-Cyan">::Core.Const(1:10)</span>
+│         (@_2 = Base.iterate(%2))
+│   %4  = (@_2::Core.Const((1, 1)) === nothing)<span class=" -Color -Color-Cyan">::Core.Const(false)</span>
+│   %5  = Base.not_int(%4)<span class=" -Color -Color-Cyan">::Core.Const(true)</span>
+└──       goto #4 if not %5
+2 ┄ %7  = @_2<span class=" -Color -Color-Cyan">::Tuple{Int64, Int64}</span>
+│         (i = Core.getfield(%7, 1))
+│   %9  = Core.getfield(%7, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %10 = x<span class=" -Color -Color-Cyan">::Float64</span>
+│   %11 = Main.rand()<span class=" -Color -Color-Cyan">::Float64</span>
+│         (x = %10 / %11)
+│         (@_2 = Base.iterate(%2, %9))
+│   %14 = (@_2 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %15 = Base.not_int(%14)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %15
+3 ─       goto #2
+4 ┄       return x
 </pre></div>
 </div>
 </div>
@@ -1920,6 +2769,40 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f()
+  from f() in Main at In[79]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+Locals
+  @_2<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Int64, Int64}}</span>
+  x<span class=" -Color -Color-Cyan">::Float64</span>
+  i<span class=" -Color -Color-Cyan">::Int64</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─ %1  = Base.convert(Main.Float64, 1)<span class=" -Color -Color-Cyan">::Core.Const(1.0)</span>
+│         (x = Core.typeassert(%1, Main.Float64))
+│   %3  = (1:10)<span class=" -Color -Color-Cyan">::Core.Const(1:10)</span>
+│         (@_2 = Base.iterate(%3))
+│   %5  = (@_2::Core.Const((1, 1)) === nothing)<span class=" -Color -Color-Cyan">::Core.Const(false)</span>
+│   %6  = Base.not_int(%5)<span class=" -Color -Color-Cyan">::Core.Const(true)</span>
+└──       goto #4 if not %6
+2 ┄ %8  = @_2<span class=" -Color -Color-Cyan">::Tuple{Int64, Int64}</span>
+│         (i = Core.getfield(%8, 1))
+│   %10 = Core.getfield(%8, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %11 = x<span class=" -Color -Color-Cyan">::Float64</span>
+│   %12 = Main.rand()<span class=" -Color -Color-Cyan">::Float64</span>
+│   %13 = (%11 / %12)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %14 = Base.convert(Main.Float64, %13)<span class=" -Color -Color-Cyan">::Float64</span>
+│         (x = Core.typeassert(%14, Main.Float64))
+│         (@_2 = Base.iterate(%3, %10))
+│   %17 = (@_2 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %18 = Base.not_int(%17)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %18
+3 ─       goto #2
+4 ┄       return x
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="fix-3-special-case-first-iteration">
@@ -1938,6 +2821,38 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for f()
+  from f() in Main at In[80]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(f)</span>
+Locals
+  @_2<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Int64, Int64}}</span>
+  x<span class=" -Color -Color-Cyan">::Float64</span>
+  i<span class=" -Color -Color-Cyan">::Int64</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─ %1  = Main.rand()<span class=" -Color -Color-Cyan">::Float64</span>
+│         (x = 1 / %1)
+│   %3  = (2:10)<span class=" -Color -Color-Cyan">::Core.Const(2:10)</span>
+│         (@_2 = Base.iterate(%3))
+│   %5  = (@_2::Core.Const((2, 2)) === nothing)<span class=" -Color -Color-Cyan">::Core.Const(false)</span>
+│   %6  = Base.not_int(%5)<span class=" -Color -Color-Cyan">::Core.Const(true)</span>
+└──       goto #4 if not %6
+2 ┄ %8  = @_2<span class=" -Color -Color-Cyan">::Tuple{Int64, Int64}</span>
+│         (i = Core.getfield(%8, 1))
+│   %10 = Core.getfield(%8, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %11 = x<span class=" -Color -Color-Cyan">::Float64</span>
+│   %12 = Main.rand()<span class=" -Color -Color-Cyan">::Float64</span>
+│         (x = %11 / %12)
+│         (@_2 = Base.iterate(%3, %10))
+│   %15 = (@_2 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %16 = Base.not_int(%15)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %16
+3 ─       goto #2
+4 ┄       return x
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1949,6 +2864,16 @@ There's a good chance that there will not be a large performance difference betw
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Union</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Float64</span><span class="p">,</span><span class="kt">String</span><span class="p">}[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3.2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Union{Float64, Int64, String}}:
+ 4
+ 2.0
+  &quot;test&quot;
+ 3.2
+ 1
 </pre></div>
 </div>
 </div>
@@ -1969,10 +2894,52 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for computation(::Vector{Union{Float64, Int64, String}})
+  from computation(data) in Main at In[82]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(computation)</span>
+  data<span class=" -Color -Color-Cyan">::Vector{Union{Float64, Int64, String}}</span>
+Locals
+  @_3<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Int64, Int64}}</span>
+  x<span class=" -Color -Color-Cyan">::Float64</span>
+  i<span class=" -Color -Color-Cyan">::Int64</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─       (x = 1.0)
+│   %2  = (1:100)<span class=" -Color -Color-Cyan">::Core.Const(1:100)</span>
+│         (@_3 = Base.iterate(%2))
+│   %4  = (@_3::Core.Const((1, 1)) === nothing)<span class=" -Color -Color-Cyan">::Core.Const(false)</span>
+│   %5  = Base.not_int(%4)<span class=" -Color -Color-Cyan">::Core.Const(true)</span>
+└──       goto #4 if not %5
+2 ┄ %7  = @_3<span class=" -Color -Color-Cyan">::Tuple{Int64, Int64}</span>
+│         (i = Core.getfield(%7, 1))
+│   %9  = Core.getfield(%7, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %10 = Base.getindex(data, 1)<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
+│         (x = Main.sin(%10))
+│   %12 = x<span class=" -Color -Color-Cyan">::Float64</span>
+│   %13 = Base.getindex(data, 2)<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
+│         (x = %12 + %13)
+│   %15 = x<span class=" -Color -Color-Cyan">::Float64</span>
+│   %16 = Base.getindex(data, 4)<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
+│         (x = %15 * %16)
+│         (@_3 = Base.iterate(%2, %9))
+│   %19 = (@_3 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %20 = Base.not_int(%19)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %20
+3 ─       goto #2
+4 ┄       return x
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">computation</span><span class="p">(</span><span class="o">$</span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.254 μs (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1998,10 +2965,36 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_computation_kernel (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">computation</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for computation(::Vector{Union{Float64, Int64, String}})
+  from computation(data) in Main at In[84]:1
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(computation)</span>
+  data<span class=" -Color -Color-Cyan">::Vector{Union{Float64, Int64, String}}</span>
+Locals
+  c<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  b<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
+  a<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─      (a = Base.getindex(data, 1))
+│        (b = Base.getindex(data, 2))
+│        (c = Base.getindex(data, 4))
+│   %4 = Main._computation_kernel(a, b, c)<span class=" -Color -Color-Cyan">::Float64</span>
+└──      return %4
 </pre></div>
 </div>
 </div>
@@ -2012,10 +3005,49 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for _computation_kernel(::Int64, ::Float64, ::Float64)
+  from _computation_kernel(a, b, c) in Main at In[84]:8
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(_computation_kernel)</span>
+  a<span class=" -Color -Color-Cyan">::Int64</span>
+  b<span class=" -Color -Color-Cyan">::Float64</span>
+  c<span class=" -Color -Color-Cyan">::Float64</span>
+Locals
+  @_5<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Int64, Int64}}</span>
+  x<span class=" -Color -Color-Cyan">::Float64</span>
+  i<span class=" -Color -Color-Cyan">::Int64</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─       (x = 1.0)
+│   %2  = (1:100)<span class=" -Color -Color-Cyan">::Core.Const(1:100)</span>
+│         (@_5 = Base.iterate(%2))
+│   %4  = (@_5::Core.Const((1, 1)) === nothing)<span class=" -Color -Color-Cyan">::Core.Const(false)</span>
+│   %5  = Base.not_int(%4)<span class=" -Color -Color-Cyan">::Core.Const(true)</span>
+└──       goto #4 if not %5
+2 ┄ %7  = @_5<span class=" -Color -Color-Cyan">::Tuple{Int64, Int64}</span>
+│         (i = Core.getfield(%7, 1))
+│   %9  = Core.getfield(%7, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│         (x = Main.sin(a))
+│         (x = x + b)
+│         (x = x * c)
+│         (@_5 = Base.iterate(%2, %9))
+│   %14 = (@_5 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %15 = Base.not_int(%14)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %15
+3 ─       goto #2
+4 ┄       return x
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">computation</span><span class="p">(</span><span class="o">$</span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  938.179 ns (1 allocation: 16 bytes)
 </pre></div>
 </div>
 </div>
@@ -2049,6 +3081,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>frow! (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2056,10 +3093,38 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 4749 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">671.161 μs</span> … <span class=" -Color -Color-Magenta">  2.620 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">734.856 μs               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">903.197 μs</span> ± <span class=" -Color -Color-Green">439.505 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+  ▅▆<span class=" -Color -Color-Blue">█</span>      <span class=" -Color -Color-Green"> </span>           ▁▂▃                                  ▂▂  ▁
+  ██<span class=" -Color -Color-Blue">█</span>█▁▁▁▁▁<span class=" -Color -Color-Green">▁</span>▁▁▁▁▁▁▁▁▁▄█████▇▅▅▄▁▃▁▃▁▃▁▃▁▁▁▁▃▃▁▁▁▁▄▄▆▇█▇▇█▆▄▆███ █
+  671 μs        Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time       2.34 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">frow!</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="n">setup</span><span class="o">=</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kt">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 1910 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">2.250 ms</span> … <span class=" -Color -Color-Magenta">  4.126 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">2.283 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">2.455 ms</span> ± <span class=" -Color -Color-Green">392.801 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+  █<span class=" -Color -Color-Blue">█</span>▆▂     <span class=" -Color -Color-Green"> </span>                        ▂▁             ▂▂         ▁
+  █<span class=" -Color -Color-Blue">█</span>██▄▁▄▁▄<span class=" -Color -Color-Green">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▄▄▁▁▄▆▅▆▅▄████▇▆▆▄▄▁▄▅▅▆▆▇████▅▅▆▄▆▅ █
+  2.25 ms      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      3.63 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
 </div>
 </div>
@@ -2087,6 +3152,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  200.583 μs (1 allocation: 80 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2101,6 +3171,11 @@ There's a good chance that there will not be a large performance difference betw
 <span class="k">end</span>
 
 <span class="nd">@btime</span><span class="w"> </span><span class="n">f_inbounds</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  501.244 μs (1 allocation: 80 bytes)
 </pre></div>
 </div>
 </div>
@@ -2130,6 +3205,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.294 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2145,6 +3225,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  102.699 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <p>(For integer input both versions have the same speed because integer addition is associative, in contrast to floating point arithmetics.)</p>
 <div class="cell docutils container">
@@ -2154,6 +3239,28 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<p>| Cpu Property       | Value                                                      |
+|:------------------ |:---------------------------------------------------------- |
+| Brand              | Intel(R) Xeon(R) Silver 4214R CPU &#64; 2.40GHz                |
+| Vendor             | :Intel                                                     |
+| Architecture       | :Skylake                                                   |
+| Model              | Family: 0x06, Model: 0x55, Stepping: 0x07, Type: 0x00      |
+| Cores              | 12 physical cores, 24 logical cores (on executing CPU)     |
+|                    | Hyperthreading hardware capability detected                |
+| Clock Frequencies  | 2400 / 3500 MHz (base/max), 100 MHz bus                    |
+| Data Cache         | Level 1:3 : (32, 1024, 16896) kbytes                       |
+|                    | 64 byte cache line size                                    |
+| Address Size       | 48 bits virtual, 46 bits physical                          |
+| SIMD               | 512 bit = 64 byte max. SIMD vector size                    |
+| Time Stamp Counter | TSC is accessible via <code class="docutils literal notranslate"><span class="pre">rdtsc</span></code>                              |
+|                    | TSC runs at constant rate (invariant from clock frequency) |
+| Perf. Monitoring   | Performance Monitoring Counters (PMC) revision 4           |
+|                    | Available hardware counters per logical core:              |
+|                    | 3 fixed-function counters of 48 bit width                  |
+|                    | 4 general-purpose counters of 48 bit width                 |
+| Hypervisor         | No                                                         |</p>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2161,6 +3268,14 @@ There's a good chance that there will not be a large performance difference betw
 
 <span class="nd">@btime</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">f_simd</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.294 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  58.790 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -2179,6 +3294,26 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;f&quot;
+	.globl	julia_f_4875                    # -- Begin function julia_f_4875
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_f_4875,@function
+julia_f_4875:                           # @julia_f_4875
+	.cfi_startproc
+# %bb.0:                                # %top
+	<span class=" -Color -Color-Bold">vmulsd</span>	%xmm1, %xmm0, %xmm0
+	<span class=" -Color -Color-Bold">vaddsd</span>	%xmm2, %xmm0, %xmm0
+	<span class=" -Color -Color-Bold">retq</span>
+.Lfunc_end0:
+	.size	julia_f_4875, .Lfunc_end0-julia_f_4875
+	.cfi_endproc
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
+</pre></div>
+</div>
+</div>
 </div>
 <img src="../../static/skylake_microarchitecture.png" width=700px>
 <p><strong>Source:</strong> <a class="reference external" href="https://software.intel.com/sites/default/files/managed/9e/bc/64-ia-32-architectures-optimization-manual.pdf">Intel® 64 and IA-32 Architectures Optimization Reference Manual</a></p>
@@ -2190,12 +3325,50 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;f_fma&quot;
+	.globl	julia_f_fma_4877                # -- Begin function julia_f_fma_4877
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_f_fma_4877,@function
+julia_f_fma_4877:                       # @julia_f_fma_4877
+	.cfi_startproc
+# %bb.0:                                # %L7
+	<span class=" -Color -Color-Bold">vfmadd213sd</span>	%xmm2, %xmm1, %xmm0     # xmm0 = (xmm1 * xmm0) + xmm2
+	<span class=" -Color -Color-Bold">retq</span>
+.Lfunc_end0:
+	.size	julia_f_fma_4877, .Lfunc_end0-julia_f_fma_4877
+	.cfi_endproc
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f_fastmath</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@fastmath</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span>
 
 <span class="nd">@code_native</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:none</span><span class="w"> </span><span class="n">f_fastmath</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;f_fastmath&quot;
+	.globl	julia_f_fastmath_4881           # -- Begin function julia_f_fastmath_4881
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_f_fastmath_4881,@function
+julia_f_fastmath_4881:                  # @julia_f_fastmath_4881
+	.cfi_startproc
+# %bb.0:                                # %top
+	<span class=" -Color -Color-Bold">vfmadd213sd</span>	%xmm2, %xmm1, %xmm0     # xmm0 = (xmm1 * xmm0) + xmm2
+	<span class=" -Color -Color-Bold">retq</span>
+.Lfunc_end0:
+	.size	julia_f_fastmath_4881, .Lfunc_end0-julia_f_fastmath_4881
+	.cfi_endproc
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
 </pre></div>
 </div>
 </div>
@@ -2217,6 +3390,11 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mul (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2224,6 +3402,14 @@ There's a good chance that there will not be a large performance difference betw
 
 <span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">x</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">x</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="mf">1e-3</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  899.545 ns (1 allocation: 7.94 KiB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  831.987 ns (1 allocation: 7.94 KiB)
 </pre></div>
 </div>
 </div>
@@ -2246,6 +3432,23 @@ There's a good chance that there will not be a large performance difference betw
 <span class="n">f</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
 
 <span class="nd">@trace</span><span class="w"> </span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Warning: uses global variable Main.a
+└ @ In[103]:6
+┌ Warning: uses global variable Main.b
+└ @ In[103]:6
+┌ Warning: dynamic dispatch to 2 * Main.a
+└ @ In[103]:6
+┌ Warning: dynamic dispatch to 2 * Main.a + Main.b
+└ @ In[103]:6
+┌ Warning: f returns Any
+└ @ In[103]:6
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0
 </pre></div>
 </div>
 </div>
@@ -2272,12 +3475,28 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>═════ 2 possible errors found ═════
+┌ @ In[104]:6 2 * %1
+│ runtime dispatch detected: <span class=" -Color -Color-Bold">(2 * %1::Any)::Any</span>
+└─────────────
+┌ @ In[104]:6 %2 + %3
+│ runtime dispatch detected: <span class=" -Color -Color-Bold">(%2::Any + %3::Any)::Any</span>
+└─────────────
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span>
 
 <span class="nd">@report_call</span><span class="w"> </span><span class="n">f</span><span class="p">()</span><span class="w"> </span><span class="c"># check for possible errors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No errors detected
 </pre></div>
 </div>
 </div>
@@ -2288,10 +3507,46 @@ There's a good chance that there will not be a large performance difference betw
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>═════ 1 possible error found ═════
+┌ @ In[105]:1 %1 + 2
+│ runtime dispatch detected: <span class=" -Color -Color-Bold">(%1::Any + 2)::Any</span>
+└─────────────
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@report_call</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="s">&quot;Hamburg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>═════ 2 possible errors found ═════
+<span class=" -Color -Color-Magenta">┌ @ reduce.jl:557 </span>Base.:(var&quot;#sum#267&quot;)(pairs(NamedTuple()), #self#, a)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">┌ @ reduce.jl:557 </span>sum(identity, a)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">┌ @ reduce.jl:528 </span>Base.:(var&quot;#sum#266&quot;)(pairs(NamedTuple()), #self#, f, a)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">┌ @ reduce.jl:528 </span>mapreduce(f, Base.add_sum, a)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">┌ @ reduce.jl:302 </span>Base.:(var&quot;#mapreduce#263&quot;)(pairs(NamedTuple()), #self#, f, op, itr)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">┌ @ reduce.jl:302 </span>mapfoldl(f, op, itr)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">┌ @ reduce.jl:170 </span>Base.:(var&quot;#mapfoldl#259&quot;)(Base._InitialValue(), #self#, f, op, itr)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">┌ @ reduce.jl:170 </span>Base.mapfoldl_impl(f, op, init, itr)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">┌ @ reduce.jl:44 </span>Base.foldl_impl(op′, nt, itr′)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">┌ @ reduce.jl:48 </span>v = Base._foldl_impl(op, nt, itr)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">┌ @ reduce.jl:62 </span>v = op(v, y[1])
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">┌ @ reduce.jl:81 </span>op.rf(acc, x)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span>┌ @ reduce.jl:24 x + y
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span>│ no matching method found `+(::Char, ::Char)`: <span class=" -Color -Color-Bold">(x::Char + y::Char)</span>
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span>└────────────────
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">┌ @ reduce.jl:49 </span>Base.reduce_empty_iter(op, itr)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">┌ @ reduce.jl:378 </span>Base.reduce_empty_iter(op, itr, Base.IteratorEltype(itr))
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">┌ @ reduce.jl:379 </span>Base.reduce_empty(op, eltype(itr))
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">┌ @ reduce.jl:355 </span>Base.reduce_empty(op.rf, T)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">┌ @ reduce.jl:347 </span>Base.reduce_empty(+, T)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span>┌ @ reduce.jl:338 zero(T)
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span>│ no matching method found `zero(::Type{Char})`: <span class=" -Color -Color-Bold">zero(T::Type{Char})</span>
+<span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span><span class=" -Color -Color-Yellow">│</span><span class=" -Color -Color-Green">│</span><span class=" -Color -Color-Magenta">│</span><span class=" -Color -Color-Blue">│</span>└─────────────────
 </pre></div>
 </div>
 </div>
@@ -2310,6 +3565,21 @@ There's a good chance that there will not be a large performance difference betw
 <span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
 
 <span class="c"># @descend A*B # doesn&#39;t work in Jupyter -&gt; use REPL</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10×10 Matrix{Float64}:
+ 0.409453   0.667646   0.236969   …  0.00735952  0.544901   0.914351
+ 0.209059   0.247098   0.926815      0.0297292   0.347426   0.394085
+ 0.205598   0.319785   0.508917      0.86597     0.481403   0.450411
+ 0.492561   0.839762   0.308361      0.287418    0.586917   0.832661
+ 0.662882   0.0391411  0.528149      0.0649912   0.688591   0.57068
+ 0.0562624  0.814872   0.953272   …  0.600523    0.0219495  0.410244
+ 0.964155   0.868095   0.958995      0.909251    0.740076   0.578036
+ 0.910975   0.419662   0.0519802     0.455877    0.99703    0.179759
+ 0.315087   0.0680965  0.943948      0.675927    0.599255   0.0503207
+ 0.8207     0.472398   0.771997      0.703278    0.230829   0.643849
 </pre></div>
 </div>
 </div>

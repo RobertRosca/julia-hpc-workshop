@@ -560,10 +560,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1:30
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UnitRange{Int64}
 </pre></div>
 </div>
 </div>
@@ -574,10 +584,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(UnitRange, AbstractUnitRange{T} where T&lt;:Real, OrdinalRange{T, T} where T&lt;:Real, AbstractRange{T} where T&lt;:Real, AbstractVector{T} where T&lt;:Real, Any)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractArray</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
 </pre></div>
 </div>
 </div>
@@ -589,6 +609,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -596,10 +621,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(30,)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Int64
 </pre></div>
 </div>
 </div>
@@ -612,6 +647,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(:start, :stop)
+</pre></div>
+</div>
+</div>
 </div>
 <p>or just by inspecting the source code</p>
 <div class="cell docutils container">
@@ -620,6 +660,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">UnitRange{T}(start::<b>T</b>, stop::<b>T</b>)<i> where T<:Real</i> in Base at <a href="https://github.com/JuliaLang/julia/tree/00177ebc4fcadaaa37c4c2cbca2f9db75ba4d8e3/base/range.jl#L393" target="_blank">range.jl:393</a></div></div>
 </div>
 <p>It is an <code class="docutils literal notranslate"><span class="pre">immutable</span></code> type which just holds the start and stop values.</p>
 <p>This means that indexing, <code class="docutils literal notranslate"><span class="pre">A[i]</span></code>, is not just a look-up but a (small) function (try <code class="docutils literal notranslate"><span class="pre">&#64;which</span> <span class="pre">getindex(x,</span> <span class="pre">4)</span></code>).</p>
@@ -631,11 +673,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.054129 seconds (2 allocations: 76.294 MiB, 28.49% gc time)
+</pre></div>
+</div>
+</div>
 </div>
 <p>But creating an immutable type of two numbers is essentially free, no matter what those two numbers are:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10_000_000</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000000 seconds
 </pre></div>
 </div>
 </div>
@@ -665,12 +717,28 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.096528 seconds (4 allocations: 152.588 MiB, 36.02% gc time)
+  0.000001 seconds
+20
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Sum all of the elements in the range:</span>
 <span class="nd">@time</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10_000_000</span><span class="p">))</span>
 <span class="nd">@time</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10_000_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.137820 seconds (2 allocations: 76.294 MiB, 67.53% gc time)
+  0.000001 seconds
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50000005000000
 </pre></div>
 </div>
 </div>
@@ -690,6 +758,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  192.219 ms (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <p>This effectively does the same thing the <code class="docutils literal notranslate"><span class="pre">collect</span></code> example does, just a few times slower, and far slower than the example using a range.</p>
 <div class="cell docutils container">
@@ -698,6 +771,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">sum(r::<b>AbstractRange{<:Real}</b>) in Base at <a href="https://github.com/JuliaLang/julia/tree/00177ebc4fcadaaa37c4c2cbca2f9db75ba4d8e3/base/range.jl#L1387" target="_blank">range.jl:1387</a></div></div>
 </div>
 <p>Duck typing and interfaces let us define specialised code that is very performant, and interacts with the rest of the language as expected.</p>
 </section>
@@ -723,6 +798,44 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching size(::DiagonalMatrix{Int64})
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">},</span> <span class="p">::</span><span class="n">Any</span><span class="p">)</span> <span class="n">where</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">}</span> <span class="n">at</span> <span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">42</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Adjoint</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">},</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Transpose</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">}}</span> <span class="n">where</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="o">&lt;</span><span class="p">:(</span><span class="n">AbstractVector</span><span class="p">)})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">adjtrans</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">173</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Adjoint</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">},</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Transpose</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">}}</span> <span class="n">where</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="o">&lt;</span><span class="p">:(</span><span class="n">AbstractMatrix</span><span class="p">)})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">adjtrans</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">174</span>
+  <span class="o">...</span>
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">length</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">279</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">isempty</span><span class="p">(</span><span class="n">a</span><span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1170</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IOContext</span><span class="p">{</span><span class="n">IOBuffer</span><span class="p">},</span> <span class="c1">#unused#::MIME{Symbol(&quot;text/plain&quot;)}, X::DiagonalMatrix{Int64})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">arrayshow</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">364</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">limitstringmime</span><span class="p">(</span><span class="n">mime</span><span class="p">::</span><span class="n">MIME</span><span class="p">{</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;text/plain&quot;</span><span class="p">)},</span> <span class="n">x</span><span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">inline</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">43</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">display_mimestring</span><span class="p">(</span><span class="n">m</span><span class="p">::</span><span class="n">MIME</span><span class="p">{</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;text/plain&quot;</span><span class="p">)},</span> <span class="n">x</span><span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">display</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">71</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">display_dict</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">display</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">102</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="c1">#invokelatest#2</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">729</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">invokelatest</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">726</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">execute_request</span><span class="p">(</span><span class="n">socket</span><span class="p">::</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">Socket</span><span class="p">,</span> <span class="n">msg</span><span class="p">::</span><span class="n">IJulia</span><span class="o">.</span><span class="n">Msg</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">execute_request</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">112</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="c1">#invokelatest#2</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">729</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">invokelatest</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">726</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">eventloop</span><span class="p">(</span><span class="n">socket</span><span class="p">::</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">Socket</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">eventloop</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">8</span>
+ <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="p">(::</span><span class="n">IJulia</span><span class="o">.</span><span class="n">var</span><span class="s2">&quot;#15#18&quot;</span><span class="p">)()</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">./</span><span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">484</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -734,6 +847,49 @@ title="Print to PDF"
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">DiagonalMatrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">CanonicalIndexError</span>: getindex not defined for DiagonalMatrix{Int64}
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error_if_canonical_getindex</span><span class="p">(::</span><span class="n">IndexCartesian</span><span class="p">,</span> <span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1260</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">getindex</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1240</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">isassigned</span><span class="p">(::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">565</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">alignment</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IOContext</span><span class="p">{</span><span class="n">IOBuffer</span><span class="p">},</span> <span class="n">X</span><span class="p">::</span><span class="n">AbstractVecOrMat</span><span class="p">,</span> <span class="n">rows</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">cols</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">cols_if_complete</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">cols_otherwise</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">sep</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">ncols</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">arrayshow</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">68</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">_print_matrix</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IOContext</span><span class="p">{</span><span class="n">IOBuffer</span><span class="p">},</span> <span class="n">X</span><span class="p">::</span><span class="n">AbstractVecOrMat</span><span class="p">,</span> <span class="n">pre</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">sep</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">post</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">hdots</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">vdots</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">ddots</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">hmod</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">vmod</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">rowsA</span><span class="p">::</span><span class="n">UnitRange</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">colsA</span><span class="p">::</span><span class="n">UnitRange</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">arrayshow</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">207</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">print_matrix</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IOContext</span><span class="p">{</span><span class="n">IOBuffer</span><span class="p">},</span> <span class="n">X</span><span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">pre</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">sep</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">post</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">hdots</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">vdots</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">ddots</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">hmod</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">vmod</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span> <span class="p">(</span><span class="n">repeats</span> <span class="mi">2</span> <span class="n">times</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">arrayshow</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">171</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">print_array</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">arrayshow</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">358</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IOContext</span><span class="p">{</span><span class="n">IOBuffer</span><span class="p">},</span> <span class="c1">#unused#::MIME{Symbol(&quot;text/plain&quot;)}, X::DiagonalMatrix{Int64})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">arrayshow</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">399</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">limitstringmime</span><span class="p">(</span><span class="n">mime</span><span class="p">::</span><span class="n">MIME</span><span class="p">{</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;text/plain&quot;</span><span class="p">)},</span> <span class="n">x</span><span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">inline</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">43</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">display_mimestring</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">display</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">71</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">display_dict</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">display</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">102</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="c1">#invokelatest#2</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">729</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="n">invokelatest</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">726</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="n">execute_request</span><span class="p">(</span><span class="n">socket</span><span class="p">::</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">Socket</span><span class="p">,</span> <span class="n">msg</span><span class="p">::</span><span class="n">IJulia</span><span class="o">.</span><span class="n">Msg</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">execute_request</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">112</span>
+ <span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="c1">#invokelatest#2</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">729</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="n">invokelatest</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">726</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="n">eventloop</span><span class="p">(</span><span class="n">socket</span><span class="p">::</span><span class="n">ZMQ</span><span class="o">.</span><span class="n">Socket</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">IJulia</span><span class="o">/</span><span class="mi">6</span><span class="n">TIq1</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">eventloop</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">8</span>
+ <span class="p">[</span><span class="mi">18</span><span class="p">]</span> <span class="p">(::</span><span class="n">IJulia</span><span class="o">.</span><span class="n">var</span><span class="s2">&quot;#15#18&quot;</span><span class="p">)()</span>
+    <span class="o">@</span> <span class="n">IJulia</span> <span class="o">./</span><span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">484</span>
 </pre></div>
 </div>
 </div>
@@ -757,11 +913,24 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 DiagonalMatrix{Int64}:
+ 1  0  0
+ 0  2  0
+ 0  0  3
+</pre></div>
+</div>
+</div>
 </div>
 <p>Note how it’s automagically pretty printed (despite the fact that we never defined any special printing)!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
 </div>
@@ -772,6 +941,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -779,10 +953,28 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 3)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">CanonicalIndexError</span>: setindex! not defined for DiagonalMatrix{Int64}
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">error_if_canonical_setindex</span><span class="p">(::</span><span class="n">IndexCartesian</span><span class="p">,</span> <span class="p">::</span><span class="n">DiagonalMatrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1354</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">setindex</span><span class="o">!(</span>::DiagonalMatrix<span class="o">{</span>Int64<span class="o">}</span>,<span class="w"> </span>::Int64,<span class="w"> </span>::Int64,<span class="w"> </span>::Int64<span class="o">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1343</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -807,6 +999,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -814,10 +1011,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 DiagonalMatrix{Int64}:
+ 1  0  0
+ 0  2  0
+ 0  0  5
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: cannot set off-diagonal entry (3, 4)
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">setindex</span><span class="o">!(</span>D::DiagonalMatrix<span class="o">{</span>Int64<span class="o">}</span>,<span class="w"> </span>v::Int64,<span class="w"> </span>i::Int64,<span class="w"> </span>j::Int64<span class="o">)</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span><span class="mi">5</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -829,10 +1045,23 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Int64
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="c"># addition</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Int64}:
+ 2  0   0
+ 0  4   0
+ 0  0  10
 </pre></div>
 </div>
 </div>
@@ -843,6 +1072,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Int64}:
+ 1  0   0
+ 0  4   0
+ 0  0  25
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -850,10 +1087,26 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
+ 1.0  0.0  0.0
+ 0.0  0.5  0.0
+ 0.0  0.0  0.2
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="w"> </span><span class="c"># broadcasting</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
+ 0.841471  0.0        0.0
+ 0.0       0.909297   0.0
+ 0.0       0.0       -0.958924
 </pre></div>
 </div>
 </div>
@@ -865,6 +1118,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eigen{Float64, Float64, Matrix{Float64}, Vector{Float64}}
+values:
+3-element Vector{Float64}:
+ 1.0
+ 2.0
+ 5.0
+vectors:
+3×3 Matrix{Float64}:
+ 1.0  0.0  0.0
+ 0.0  1.0  0.0
+ 0.0  0.0  1.0
+</pre></div>
+</div>
+</div>
 </div>
 <p>Of course, so far, these operations have suboptimal performance because they don’t utilize the special structure inherent to our <code class="docutils literal notranslate"><span class="pre">DiagonalMatrix</span></code> but fall back to generic implementations.</p>
 <div class="cell docutils container">
@@ -873,6 +1141,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">+(A::<b>AbstractArray</b>, B::<b>AbstractArray</b>) in Base at <a href="https://github.com/JuliaLang/julia/tree/00177ebc4fcadaaa37c4c2cbca2f9db75ba4d8e3/base/arraymath.jl#L6" target="_blank">arraymath.jl:6</a></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -887,6 +1157,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">+(Da::<b>DiagonalMatrix</b>, Db::<b>DiagonalMatrix</b>) in Main at In[37]:1</div></div>
 </div>
 <p>Important note: <strong>user defined types are just as good as built-in types!</strong></p>
 <p>There is nothing special about built-in types. In fact, <a class="reference external" href="https://github.com/JuliaLang/julia/blob/master/stdlib/LinearAlgebra/src/diagonal.jl#L5">they are implemented in essentially the same way</a>!</p>
@@ -912,11 +1184,26 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="nd">@time</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.062762 seconds (218.69 k allocations: 11.186 MiB, 99.52% compilation time)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
+ 0.971885  0.674907
+ 0.688734  0.603286
 </pre></div>
 </div>
 </div>
@@ -930,10 +1217,25 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000001 seconds (1 allocation: 96 bytes)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
+ 0.15418  0.750201
+ 1.21254  2.62833
 </pre></div>
 </div>
 </div>
@@ -953,10 +1255,34 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  44.874 ns (1 allocation: 96 bytes)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
+ 0.971885  0.674907
+ 0.688734  0.603286
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 989 evaluations.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">44.918 ns</span> … <span class=" -Color -Color-Magenta"> 1.580 μs</span>  ┊ GC (min … max): 0.00% … 95.22%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">46.888 ns              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">51.767 ns</span> ± <span class=" -Color -Color-Green">56.078 ns</span>  ┊ GC (mean ± σ):  4.77% ±  4.29%
+
+  ▂▇█<span class=" -Color -Color-Blue">▆</span>▃▁▁▂▂<span class=" -Color -Color-Green">▁</span>▂▁▁▁                                      ▁▁ ▁    ▂
+  ███<span class=" -Color -Color-Blue">█</span>█████<span class=" -Color -Color-Green">█</span>███████▆▆▅▄▄▄▁▁▁▄▁▁▁▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▆██████▇▇ █
+  44.9 ns      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      89.9 ns <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">96 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">1</span>.
 </pre></div>
 </div>
 </div>
@@ -975,6 +1301,14 @@ title="Print to PDF"
 
 <span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">Djl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">Djl</span><span class="p">;</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">D</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">D</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  90.401 ns (1 allocation: 896 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  91.142 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
 </div>
@@ -1015,6 +1349,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4.746 μs (2 allocations: 78.17 KiB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  117.864 ns (3 allocations: 112 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Works! But… why are the allocations up? Let’s explore more:</p>
 <div class="cell docutils container">
@@ -1024,6 +1366,14 @@ title="Print to PDF"
 
 <span class="n">D_cool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CoolerDiagonalMatrix</span><span class="p">(</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span><span class="p">))</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">D_cool</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">D_cool</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  85.980 ns (1 allocation: 896 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  192.195 ns (2 allocations: 912 bytes)
 </pre></div>
 </div>
 </div>
@@ -1051,6 +1401,11 @@ In [3]: %timeit d + d
 
 <span class="s">d + d</span>
 <span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.139 ms (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>

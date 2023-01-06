@@ -613,6 +613,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>func (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -621,6 +626,12 @@ title="Print to PDF"
 
 <span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
 <span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.098377 seconds (405.27 k allocations: 20.623 MiB, 99.99% compilation time)
+  0.000004 seconds (2 allocations: 160 bytes)
 </pre></div>
 </div>
 </div>
@@ -633,11 +644,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000004 seconds (2 allocations: 160 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <p>If one of the input types changes, Julia compiles a new specialization of the function!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Float64} (alias for Array{Float64, 1})
 </pre></div>
 </div>
 </div>
@@ -648,10 +669,23 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Int64}:
+ 1
+ 3
+ 5
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Int64} (alias for Array{Int64, 1})
 </pre></div>
 </div>
 </div>
@@ -660,6 +694,12 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c"># Vector{Int64}, Vector{Float64}</span>
 <span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.101842 seconds (345.65 k allocations: 17.312 MiB, 7.91% gc time, 99.99% compilation time)
+  0.000005 seconds (2 allocations: 160 bytes)
 </pre></div>
 </div>
 </div>
@@ -678,10 +718,19 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"># 1 method for generic function <b>func</b>:<ul><li> func(x, y) in Main at In[1]:1</li> </ul></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methodinstances</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Core.MethodInstance}:
+ MethodInstance for func(::Vector{Float64}, ::Vector{Float64})
+ MethodInstance for func(::Vector{Int64}, ::Vector{Float64})
 </pre></div>
 </div>
 </div>
@@ -713,10 +762,24 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>basic_condition (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">basic_condition</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+1 ─     goto #3 if not bool
+2 ─     return 0
+3 ─     return 1
+)
 </pre></div>
 </div>
 </div>
@@ -725,6 +788,18 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Increase verbosity with `debuginfo=:source`</span>
 <span class="nd">@code_lowered</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">basic_condition</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+   <span class=" -Color -Color-Yellow"> @ In[11]:2 within `basic_condition`</span>
+1 ─     goto #3 if not bool
+   <span class=" -Color -Color-Yellow"> @ In[11]:3 within `basic_condition`</span>
+2 ─     return 0
+   <span class=" -Color -Color-Yellow"> @ In[11]:5 within `basic_condition`</span>
+3 ─     return 1
+)
 </pre></div>
 </div>
 </div>
@@ -741,10 +816,42 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>basic_loop (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">basic_loop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+   <span class=" -Color -Color-Yellow"> @ In[14]:2 within `basic_loop`</span>
+1 ─       a = 0
+│  <span class=" -Color -Color-Yellow"> @ In[14]:3 within `basic_loop`</span>
+│   %2  = Base.vect(1, 2, 3)
+│         @_2 = Base.iterate(%2)
+│   %4  = @_2 === nothing
+│   %5  = Base.not_int(%4)
+└──       goto #4 if not %5
+2 ┄ %7  = @_2
+│         i = Core.getfield(%7, 1)
+│   %9  = Core.getfield(%7, 2)
+│  <span class=" -Color -Color-Yellow"> @ In[14]:4 within `basic_loop`</span>
+│         a = a + i
+│  <span class=" -Color -Color-Yellow"> @ In[14]:5 within `basic_loop`</span>
+│         @_2 = Base.iterate(%2, %9)
+│   %12 = @_2 === nothing
+│   %13 = Base.not_int(%12)
+└──       goto #4 if not %13
+3 ─       goto #2
+   <span class=" -Color -Color-Yellow"> @ In[14]:6 within `basic_loop`</span>
+4 ┄       return a
+)
 </pre></div>
 </div>
 </div>
@@ -770,10 +877,38 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nextfib (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+   <span class=" -Color -Color-Yellow"> @ In[16]:2 within `nextfib`</span>
+1 ─ %1 = Main.one(n)
+│   %2 = Main.one(n)
+│        a = %1
+└──      b = %2
+   <span class=" -Color -Color-Yellow"> @ In[16]:3 within `nextfib`</span>
+2 ┄ %5 = b &lt; n
+└──      goto #4 if not %5
+   <span class=" -Color -Color-Yellow"> @ In[16]:4 within `nextfib`</span>
+3 ─ %7 = b
+│   %8 = a + b
+│        a = %7
+│        b = %8
+│  <span class=" -Color -Color-Yellow"> @ In[16]:5 within `nextfib`</span>
+└──      goto #2
+   <span class=" -Color -Color-Yellow"> @ In[16]:6 within `nextfib`</span>
+4 ─      return b
+)
 </pre></div>
 </div>
 </div>
@@ -788,10 +923,54 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+1 ─      nothing::Nothing
+   <span class=" -Color -Color-Yellow"> @ In[16]:3 within `nextfib`</span>
+2 ┄ %2 = φ (#1 =&gt; 1.0, #3 =&gt; %6)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %3 = φ (#1 =&gt; 1.0, #3 =&gt; %2)<span class=" -Color -Color-Cyan">::Float64</span>
+│  <span class=" -Color -Color-Yellow">┌ @ float.jl:412 within `&lt;`</span>
+│  <span class=" -Color -Color-Yellow">│</span> %4 = Base.lt_float(%2, n)<span class=" -Color -Color-Cyan">::Bool</span>
+│  <span class=" -Color -Color-Yellow">└</span>
+└──      goto #4 if not %4
+   <span class=" -Color -Color-Yellow"> @ In[16]:4 within `nextfib`</span>
+   <span class=" -Color -Color-Yellow">┌ @ float.jl:383 within `+`</span>
+3 ─<span class=" -Color -Color-Yellow">│</span> %6 = Base.add_float(%3, %2)<span class=" -Color -Color-Cyan">::Float64</span>
+│  <span class=" -Color -Color-Yellow">└</span>
+│  <span class=" -Color -Color-Yellow"> @ In[16]:5 within `nextfib`</span>
+└──      goto #2
+   <span class=" -Color -Color-Yellow"> @ In[16]:6 within `nextfib`</span>
+4 ─      return %2
+) =&gt; Float64
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_typed</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+1 ─      nothing::Nothing
+   <span class=" -Color -Color-Yellow"> @ In[16]:3 within `nextfib`</span>
+2 ┄ %2 = φ (#1 =&gt; 1, #3 =&gt; %6)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %3 = φ (#1 =&gt; 1, #3 =&gt; %2)<span class=" -Color -Color-Cyan">::Int64</span>
+│  <span class=" -Color -Color-Yellow">┌ @ int.jl:83 within `&lt;`</span>
+│  <span class=" -Color -Color-Yellow">│</span> %4 = Base.slt_int(%2, n)<span class=" -Color -Color-Cyan">::Bool</span>
+│  <span class=" -Color -Color-Yellow">└</span>
+└──      goto #4 if not %4
+   <span class=" -Color -Color-Yellow"> @ In[16]:4 within `nextfib`</span>
+   <span class=" -Color -Color-Yellow">┌ @ int.jl:87 within `+`</span>
+3 ─<span class=" -Color -Color-Yellow">│</span> %6 = Base.add_int(%3, %2)<span class=" -Color -Color-Cyan">::Int64</span>
+│  <span class=" -Color -Color-Yellow">└</span>
+│  <span class=" -Color -Color-Yellow"> @ In[16]:5 within `nextfib`</span>
+└──      goto #2
+   <span class=" -Color -Color-Yellow"> @ In[16]:6 within `nextfib`</span>
+4 ─      return %2
+) =&gt; Int64
 </pre></div>
 </div>
 </div>
@@ -864,10 +1043,54 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[11]:1 within `basic_condition`
+define 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">i64</span> @julia_basic_condition_2456<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i8</span> zeroext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+;  @ In[11]:2 within `basic_condition`
+  %1 = <span class=" -Color -Color-Bold">and</span> <span class=" -Color -Color-Cyan">i8</span> %0, <span class=" -Color -Color-Yellow">1</span>
+  %2 = <span class=" -Color -Color-Bold">xor</span> <span class=" -Color -Color-Cyan">i8</span> %1, <span class=" -Color -Color-Yellow">1</span>
+  %3 = <span class=" -Color -Color-Bold">zext</span> <span class=" -Color -Color-Cyan">i8</span> %2 to <span class=" -Color -Color-Cyan">i64</span>
+;  @ In[11] within `basic_condition`
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %3
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[16]:1 within `nextfib`
+define <span class=" -Color -Color-Cyan">i64</span> @julia_nextfib_2479<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  <span class=" -Color -Color-Bold">br</span> <span class=" -Color -Color-Cyan">label</span> %L2
+
+L2:                                               ; preds = %L2, %top
+  %value_phi = <span class=" -Color -Color-Bold">phi</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">[</span> <span class=" -Color -Color-Yellow">1</span>, %top <span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[</span> %1, %L2 <span class=" -Color -Color-Yellow">]</span>
+  %value_phi1 = <span class=" -Color -Color-Bold">phi</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">[</span> <span class=" -Color -Color-Yellow">1</span>, %top <span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[</span> %value_phi, %L2 <span class=" -Color -Color-Yellow">]</span>
+;  @ In[16]:3 within `nextfib`
+; ┌ @ int.jl:83 within `&lt;`
+   %.not = <span class=" -Color -Color-Bold">icmp</span> <span class=" -Color -Color-Bold">slt</span> <span class=" -Color -Color-Cyan">i64</span> %value_phi, %0
+; └
+;  @ In[16]:4 within `nextfib`
+; ┌ @ int.jl:87 within `+`
+   %1 = <span class=" -Color -Color-Bold">add</span> <span class=" -Color -Color-Cyan">i64</span> %value_phi1, %value_phi
+; └
+;  @ In[16]:3 within `nextfib`
+  <span class=" -Color -Color-Bold">br</span> <span class=" -Color -Color-Cyan">i1</span> %.not, <span class=" -Color -Color-Cyan">label</span> %L2, <span class=" -Color -Color-Cyan">label</span> %L8
+
+L8:                                               ; preds = %L2
+;  @ In[16]:6 within `nextfib`
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %value_phi
+<span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
 </div>
@@ -881,11 +1104,102 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;nextfib&quot;
+	.globl	julia_nextfib_2495              # -- Begin function julia_nextfib_2495
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_nextfib_2495,@function
+julia_nextfib_2495:                     # @julia_nextfib_2495
+; ┌ @ In[16]:1 within `nextfib`
+	.cfi_startproc
+# %bb.0:                                # %top
+	<span class=" -Color -Color-Bold">movl</span>	<span class=" -Color -Color-Yellow">$1</span>, %ecx
+	<span class=" -Color -Color-Bold">movl</span>	<span class=" -Color -Color-Yellow">$1</span>, %eax
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+.LBB0_1:                                # %L2
+                                        # =&gt;This Inner Loop Header: Depth=1
+	<span class=" -Color -Color-Bold">movq</span>	%rax, %rdx
+	<span class=" -Color -Color-Bold">movq</span>	%rcx, %rax
+; │ @ In[16]:4 within `nextfib`
+; │┌ @ int.jl:87 within `+`
+	<span class=" -Color -Color-Bold">addq</span>	%rcx, %rdx
+	<span class=" -Color -Color-Bold">movq</span>	%rdx, %rcx
+; │└
+; │ @ In[16]:3 within `nextfib`
+; │┌ @ int.jl:83 within `&lt;`
+	<span class=" -Color -Color-Bold">cmpq</span>	%rdi, %rax
+; │└
+	<span class=" -Color -Color-Bold">jl</span>	.LBB0_1
+# %bb.2:                                # %L8
+; │ @ In[16]:6 within `nextfib`
+	<span class=" -Color -Color-Bold">retq</span>
+.Lfunc_end0:
+	.size	julia_nextfib_2495, .Lfunc_end0-julia_nextfib_2495
+	.cfi_endproc
+; └
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
+</pre></div>
+</div>
+</div>
 </div>
 <p>Let’s compare this to integer input.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;nextfib&quot;
+	.section	.rodata.cst8,&quot;aM&quot;,@progbits,<span class=" -Color -Color-Yellow">8</span>
+	.p2align	<span class=" -Color -Color-Yellow">3</span>                               # -- Begin function julia_nextfib_2499
+.LCPI0_0:
+	.quad	<span class=" -Color -Color-Yellow">0x3ff0000000000000</span>              # double 1
+	.text
+	.globl	julia_nextfib_2499
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_nextfib_2499,@function
+julia_nextfib_2499:                     # @julia_nextfib_2499
+; ┌ @ In[16]:1 within `nextfib`
+	.cfi_startproc
+# %bb.0:                                # %top
+	<span class=" -Color -Color-Bold">movabsq</span>	$.LCPI0_0, %rax
+	<span class=" -Color -Color-Bold">vmovsd</span>	<span class=" -Color -Color-Yellow">(</span>%rax<span class=" -Color -Color-Yellow">)</span>, %xmm1                   # xmm1 = mem[0],zero
+; │ @ In[16]:3 within `nextfib`
+; │┌ @ float.jl:412 within `&lt;`
+	<span class=" -Color -Color-Bold">vucomisd</span>	%xmm1, %xmm0
+; │└
+	<span class=" -Color -Color-Bold">jbe</span>	.LBB0_3
+# %bb.1:                                # %L6.preheader
+	<span class=" -Color -Color-Bold">vmovsd</span>	<span class=" -Color -Color-Yellow">(</span>%rax<span class=" -Color -Color-Yellow">)</span>, %xmm2                   # xmm2 = mem[0],zero
+	<span class=" -Color -Color-Bold">vmovapd</span>	%xmm2, %xmm3
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+.LBB0_2:                                # %L6
+                                        # =&gt;This Inner Loop Header: Depth=1
+; │ @ In[16]:4 within `nextfib`
+; │┌ @ float.jl:383 within `+`
+	<span class=" -Color -Color-Bold">vaddsd</span>	%xmm2, %xmm3, %xmm1
+; │└
+; │ @ In[16]:3 within `nextfib`
+; │┌ @ float.jl:412 within `&lt;`
+	<span class=" -Color -Color-Bold">vucomisd</span>	%xmm1, %xmm0
+	<span class=" -Color -Color-Bold">vmovapd</span>	%xmm3, %xmm2
+	<span class=" -Color -Color-Bold">vmovapd</span>	%xmm1, %xmm3
+; │└
+	<span class=" -Color -Color-Bold">ja</span>	.LBB0_2
+.LBB0_3:                                # %L8
+; │ @ In[16]:6 within `nextfib`
+	<span class=" -Color -Color-Bold">vmovapd</span>	%xmm1, %xmm0
+	<span class=" -Color -Color-Bold">retq</span>
+.Lfunc_end0:
+	.size	julia_nextfib_2499, .Lfunc_end0-julia_nextfib_2499
+	.cfi_endproc
+; └
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
 </pre></div>
 </div>
 </div>
@@ -927,6 +1241,20 @@ In [2]: %timeit nextfib(100_000)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 10 evaluations.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.820 μs</span> … <span class=" -Color -Color-Magenta"> 4.251 μs</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.843 μs              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.850 μs</span> ± <span class=" -Color -Color-Green">58.686 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+    ▃█<span class=" -Color -Color-Blue">▆</span><span class=" -Color -Color-Green"> </span>                                                      
+  ▂▄██<span class=" -Color -Color-Blue">█</span><span class=" -Color -Color-Green">▇</span>▃▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▂▂▁▂▂▂▂▂▁▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ▂
+  1.82 μs        Histogram: frequency by time        2.17 μs <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now, for reference, here is the standard implementation in Julia:</p>
 <div class="cell docutils container">
@@ -941,10 +1269,29 @@ In [2]: %timeit nextfib(100_000)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nextfib (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">100_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 1000 evaluations.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">3.032 ns</span> … <span class=" -Color -Color-Magenta">7.933 ns</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">3.035 ns             </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">3.045 ns</span> ± <span class=" -Color -Color-Green">0.184 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+                        ▁           <span class=" -Color -Color-Blue">█</span>          ▂             
+  ▂▁▁▁▁▁▁▁▁▁▁▃▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▁<span class=" -Color -Color-Blue">█</span>▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▃ ▂
+  3.03 ns        Histogram: frequency by time       3.04 ns <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
 </div>
 </div>
@@ -967,10 +1314,29 @@ In [2]: %timeit nextfib(100_000)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nextfib_bad (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">nextfib_bad</span><span class="p">(</span><span class="mi">100_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 10 evaluations.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.080 μs</span> … <span class=" -Color -Color-Magenta">  2.549 μs</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.252 μs               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.214 μs</span> ± <span class=" -Color -Color-Green">128.423 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+  ▃▇█▆▄▂▂       <span class=" -Color -Color-Green"> </span>  ▂<span class=" -Color -Color-Blue">▇</span>▆▅▅▄▃▂▂▁▂▂▁▁   ▂▂▂▂                      ▂
+  █████████▇▇▆▆▆<span class=" -Color -Color-Green">▆</span>▄▄█<span class=" -Color -Color-Blue">█</span>█████████████▇██████▇▇▅▆▇▆▆▆▆▆▄▅▄▂▅▅▄▅▄▄ █
+  1.08 μs      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      1.65 μs <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">368 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">15</span>.
 </pre></div>
 </div>
 </div>
@@ -1018,12 +1384,22 @@ In [4]: %timeit A + B
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  658.276 ns (1 allocation: 16 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
 <span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  161.487 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
 </div>
@@ -1034,6 +1410,11 @@ In [4]: %timeit A + B
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix{Float64} (alias for Array{Float64, 2})
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1041,10 +1422,29 @@ In [4]: %timeit A + B
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 10)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="w"> </span><span class="c"># the size of A isn&#39;t type information</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching size(::Type{Matrix{Float64}})
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Adjoint</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">},</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Transpose</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">}}</span> <span class="n">where</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="o">&lt;</span><span class="p">:(</span><span class="n">AbstractVector</span><span class="p">)})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">adjtrans</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">173</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Adjoint</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">},</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Transpose</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">}}</span> <span class="n">where</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="o">&lt;</span><span class="p">:(</span><span class="n">AbstractMatrix</span><span class="p">)})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">adjtrans</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">174</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QR</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QRCompactWY</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QRPivoted</span><span class="p">})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">qr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">581</span>
+  <span class="o">...</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1070,6 +1470,11 @@ In [4]: %timeit A + B
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SMatrix{10, 10, Float64, 100} (alias for SArray{Tuple{10, 10}, Float64, 2, 100})
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1077,10 +1482,20 @@ In [4]: %timeit A + B
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 10)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  23.777 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1150,10 +1565,22 @@ In [4]: %timeit det_2x2(M)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>det_2x2 (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Int64}:
+ 1  2
+ 3  4
 </pre></div>
 </div>
 </div>
@@ -1164,10 +1591,20 @@ In [4]: %timeit det_2x2(M)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">det_2x2</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  18.082 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1186,10 +1623,20 @@ In [4]: %timeit det_2x2(M)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  336.973 ns (3 allocations: 192 bytes)
 </pre></div>
 </div>
 </div>
@@ -1204,10 +1651,22 @@ In [4]: %timeit det_2x2(M)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 SMatrix{2, 2, Int64, 4} with indices SOneTo(2)×SOneTo(2):
+ 1  2
+ 3  4
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">det</span><span class="p">(</span><span class="o">$</span><span class="n">S</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.374 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1218,6 +1677,11 @@ In [4]: %timeit det_2x2(M)
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det_2x2_optimized</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">det_2x2_optimized</span><span class="p">(</span><span class="o">$</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.377 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1244,12 +1708,25 @@ In [4]: %timeit det_2x2(M)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_function_typed (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Nope! Julia’s type inference is powerful. Specifying types <strong>is not</strong> necessary for best performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">my_function</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">my_function_typed</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.355 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.354 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>

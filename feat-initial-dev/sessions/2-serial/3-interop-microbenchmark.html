@@ -715,10 +715,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python int: </span>6
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pyimport</span><span class="p">(</span><span class="s">&quot;numpy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python module: </span>&lt;module &#39;numpy&#39; from &#39;/usr/local/lib/python3.9/dist-packages/numpy/__init__.py&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -729,11 +739,27 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python ndarray:</span>
+array([ 2.23147022+0.j       ,  0.65194254+0.j       ,
+       -0.67535629+0.j       , -0.2060629 +0.2090315j,
+       -0.2060629 -0.2090315j])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python ndarray:</span>
+array([ 2.54144468+0.j        , -0.33871911+0.j        ,
+        0.3132099 +0.18692591j,  0.3132099 -0.18692591j,
+        0.66282571+0.j        ])
 </pre></div>
 </div>
 </div>
@@ -757,10 +783,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>py_sinpi (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">py_sinpi</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.2246467991473533e-15
 </pre></div>
 </div>
 </div>
@@ -770,6 +806,14 @@ title="Print to PDF"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">py_sinpi</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">sinpi</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c"># built-in Julia function</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.632 μs (3 allocations: 48 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.695 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -812,11 +856,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/tmp/jl_gl4VsxYvqr.so&quot;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Binding the function from the shared library:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c_sum</span><span class="p">(</span><span class="n">X</span><span class="o">::</span><span class="kt">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@ccall</span><span class="w"> </span><span class="n">Clib</span><span class="o">.</span><span class="n">c_sum</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">::</span><span class="kt">Csize_t</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="o">::</span><span class="kt">Ptr</span><span class="p">{</span><span class="kt">Float64</span><span class="p">})</span><span class="o">::</span><span class="kt">Float64</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c_sum (generic function with 1 method)
 </pre></div>
 </div>
 </div>
@@ -827,11 +881,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.493799814055841
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">c_sum</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7.549 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -853,10 +917,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5079402825656124
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">py_sinpi</span><span class="p">(</span><span class="n">c_sum</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">)));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.730 μs (3 allocations: 48 bytes)
 </pre></div>
 </div>
 </div>
@@ -882,10 +956,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.999935642724615e6
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">()</span><span class="w"> </span><span class="c"># to store the measurement results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{Any, Any}()
 </pre></div>
 </div>
 </div>
@@ -908,10 +992,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python module: </span>&lt;module &#39;numpy&#39; from &#39;/usr/local/lib/python3.9/dist-packages/numpy/__init__.py&#39;&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">numpy_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python function: </span>&lt;function sum at 0x7ff73c074550&gt;
 </pre></div>
 </div>
 </div>
@@ -922,10 +1016,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 763 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">6.459 ms</span> … <span class=" -Color -Color-Magenta">  8.202 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">6.516 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.550 ms</span> ± <span class=" -Color -Color-Green">120.305 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+   ▅▇█▇▆▅<span class=" -Color -Color-Blue">▅</span>▆▅▅<span class=" -Color -Color-Green">▄</span>▄▂▃     ▁ ▁               ▁                      
+  ███████<span class=" -Color -Color-Blue">█</span>███<span class=" -Color -Color-Green">█</span>███▆▇▆▅▇█▆█▇▇▅▆▄▆▄▅▅▄▁▅▁▆▇█▇▇▅▇▇▄▁▄▄▄▄▅▄▁▁▄▁▁▁▄ █
+  6.46 ms      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      6.96 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">928 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">23</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Python (numpy)&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.458949
 </pre></div>
 </div>
 </div>
@@ -954,6 +1067,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python function: </span>&lt;function mysum at 0x7ff6bc033ca0&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -968,10 +1086,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 16 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">326.503 ms</span> … <span class=" -Color -Color-Magenta">379.400 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">327.977 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">332.510 ms</span> ± <span class=" -Color -Color-Green"> 13.191 ms</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+   █<span class=" -Color -Color-Blue"> </span>    <span class=" -Color -Color-Green"> </span>                                                       
+  ▄█<span class=" -Color -Color-Blue">▇</span>▄▁▁▁<span class=" -Color -Color-Green">▄</span>▁▁▁▁▁▁▁▁▁▁▁▁▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▄ ▁
+  327 ms           Histogram: frequency by time          379 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">16 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">1</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Python (hand-written)&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>326.502998
 </pre></div>
 </div>
 </div>
@@ -986,6 +1123,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python builtin_function_or_method: </span>&lt;built-in function sum&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -993,10 +1135,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 100 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">49.921 ms</span> … <span class=" -Color -Color-Magenta">63.026 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">50.035 ms              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">50.203 ms</span> ± <span class=" -Color -Color-Green"> 1.317 ms</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+  ▂▆█<span class=" -Color -Color-Blue">▇</span>▆  <span class=" -Color -Color-Green"> </span>                                                     
+  ███<span class=" -Color -Color-Blue">█</span>██▇<span class=" -Color -Color-Green">▅</span>▅▁▁▅▅▅▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▅ ▅
+  49.9 ms      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      52.3 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">16 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">1</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Python (built-in)&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49.921347
 </pre></div>
 </div>
 </div>
@@ -1032,6 +1193,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: redefinition of constant Clib. This may fail, cause incorrect answers, or produce other errors.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/tmp/jl_aT4bejKTAD.so&quot;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1048,10 +1217,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c_sum (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c_sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
 </pre></div>
 </div>
 </div>
@@ -1062,10 +1241,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 352 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">14.000 ms</span> … <span class=" -Color -Color-Magenta"> 14.652 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">14.119 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">14.200 ms</span> ± <span class=" -Color -Color-Green">175.720 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+       ▄▂▂█▅   <span class=" -Color -Color-Blue"> </span>        <span class=" -Color -Color-Green"> </span>                                       
+  ▃▄▃▃███████▆▃<span class=" -Color -Color-Blue">▅</span>██▅▃▄▂▄▅<span class=" -Color -Color-Green">▆</span>▅▄▁▁▁▁▂▁▁▁▂▂▁▂▁▁▁▁▁▂▂▁▂▃▄▃▅▅▃▇▄█▅▃▅▄▄ ▃
+  14 ms           Histogram: frequency by time         14.6 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;C&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.999658
 </pre></div>
 </div>
 </div>
@@ -1087,6 +1285,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c_sum_fastmath (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1094,10 +1297,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 589 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">8.430 ms</span> … <span class=" -Color -Color-Magenta"> 9.697 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">8.484 ms              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">8.487 ms</span> ± <span class=" -Color -Color-Green">53.696 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+                                ▂▃ ▂▃ <span class=" -Color -Color-Blue">█</span>▆<span class=" -Color -Color-Green">▂</span>  ▂▁                 
+  ▂▁▁▁▁▁▁▁▁▁▃▃▁▁▃▃▃▃▃▄▃▁▃▃▂▄▅▇▆███▇███<span class=" -Color -Color-Blue">█</span>█<span class=" -Color -Color-Green">█</span>▇▇██▇▆▄▄▄▄▃▃▄▃▃▃▃▁▃ ▃
+  8.43 ms        Histogram: frequency by time        8.52 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;C (fastmath)&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.430125
 </pre></div>
 </div>
 </div>
@@ -1114,10 +1336,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 820 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">5.975 ms</span> … <span class=" -Color -Color-Magenta">  6.764 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">6.059 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.095 ms</span> ± <span class=" -Color -Color-Green">120.003 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+   ▇▇▁▂ ▆▃▄▆▃<span class=" -Color -Color-Blue">█</span>▆▅▂ <span class=" -Color -Color-Green"> </span>                                     ▁      
+  ▆██████████<span class=" -Color -Color-Blue">█</span>████<span class=" -Color -Color-Green">▆</span>▇▇▄▆▄▄▄▃▃▃▃▃▁▁▃▃▂▃▃▃▂▂▃▃▁▂▃▂▂▂▂▃▁▂▃▃▄██▅▅▃ ▄
+  5.98 ms         Histogram: frequency by time        6.41 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Julia (built-in)&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.975432
 </pre></div>
 </div>
 </div>
@@ -1132,10 +1373,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 19 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">262.999 ms</span> … <span class=" -Color -Color-Magenta">272.718 ms</span>  ┊ GC (min … max): 0.00% … 5.47%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">266.162 ms               </span>┊ GC (median):    5.21%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">266.929 ms</span> ± <span class=" -Color -Color-Green">  2.867 ms</span>  ┊ GC (mean ± σ):  4.24% ± 2.25%
+
+             █      ▃<span class=" -Color -Color-Blue"> </span> ▃   <span class=" -Color -Color-Green"> </span>                                     
+  ▇▁▁▁▇▁▁▁▁▁▁█▇▁▁▇▁▁█<span class=" -Color -Color-Blue">▇</span>▇█▇▁▁<span class=" -Color -Color-Green">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▇▁▁▁▁▁▁▁▁▁▁▇▁▁▇▁▁▁▇▁▁▁▇ ▁
+  263 ms           Histogram: frequency by time          273 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">152.59 MiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">9999999</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Julia (built-in, Any)&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>262.998801
 </pre></div>
 </div>
 </div>
@@ -1155,6 +1415,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mysum (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1162,10 +1427,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 350 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">14.131 ms</span> … <span class=" -Color -Color-Magenta"> 14.596 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">14.212 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">14.305 ms</span> ± <span class=" -Color -Color-Green">168.802 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+    ▃██      <span class=" -Color -Color-Blue"> </span>           <span class=" -Color -Color-Green"> </span>                                      
+  ▂▆███▇▆▆▅▅▇<span class=" -Color -Color-Blue">▆</span>▅▄▃▂▃▃▄▄▃▃▃<span class=" -Color -Color-Green">▁</span>▂▁▁▂▁▂▂▁▂▁▁▁▁▁▂▂▁▂▃▁▃▃▃▃▄▄▅▅▃▄▃▆██▅▃ ▃
+  14.1 ms         Histogram: frequency by time         14.6 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Julia (hand-written)&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.131375
 </pre></div>
 </div>
 </div>
@@ -1185,6 +1469,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mysum_fastmath (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1192,10 +1481,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 840 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">5.863 ms</span> … <span class=" -Color -Color-Magenta"> 6.630 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">5.907 ms              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">5.947 ms</span> ± <span class=" -Color -Color-Green">93.766 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+   ▁▇█▇<span class=" -Color -Color-Blue"> </span>    <span class=" -Color -Color-Green"> </span>                                                 
+  ▄████<span class=" -Color -Color-Blue">█</span>▆▃▃▃<span class=" -Color -Color-Green">▄</span>▆▆▇▅▄▄▄▃▃▃▃▃▂▃▂▃▃▂▂▂▂▂▁▂▂▂▂▁▂▁▁▂▁▁▂▂▁▂▁▁▁▂▂▂▁▂▃ ▃
+  5.86 ms        Histogram: frequency by time        6.33 ms <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Julia (hand-written, fastmath)&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">times</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.862664
 </pre></div>
 </div>
 </div>
@@ -1212,11 +1520,29 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Julia (hand-written, fastmath)......5.86
+Julia (built-in)....................5.98
+Python (numpy)......................6.46
+C (fastmath)........................8.43
+C...................................14.0
+Julia (hand-written)...............14.13
+Python (built-in)..................49.92
+Julia (built-in, Any)..............263.0
+Python (hand-written)..............326.5
+</pre></div>
+</div>
+</div>
 </div>
 <p>And of course, our hand-written Julia implementation is type-generic!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mysum_fastmath</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.618376036780818 + 5.36440939263753im
 </pre></div>
 </div>
 </div>
@@ -1233,6 +1559,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">log(x::<b>Float64</b>) in Base.Math at <a href="https://github.com/JuliaLang/julia/tree/00177ebc4fcadaaa37c4c2cbca2f9db75ba4d8e3/base/special/log.jl#L267" target="_blank">special/log.jl:267</a></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1249,6 +1577,17 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.695 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7.681 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.033 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="exp">
@@ -1259,6 +1598,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">exp(x::<b>Union{Float16, Float32, Float64}</b>) in Base.Math at <a href="https://github.com/JuliaLang/julia/tree/00177ebc4fcadaaa37c4c2cbca2f9db75ba4d8e3/base/special/exp.jl#L326" target="_blank">special/exp.jl:326</a></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1272,6 +1613,17 @@ title="Print to PDF"
 <span class="nd">@btime</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="mf">1.2</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">cexp</span><span class="p">(</span><span class="mf">1.2</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">llvmexp</span><span class="p">(</span><span class="mf">1.2</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.696 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8.581 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.040 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1304,6 +1656,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1323,11 +1680,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mul_naive! (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mul_naive!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
 <span class="n">C</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
 </pre></div>
 </div>
 </div>
@@ -1351,11 +1718,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mul_turbo! (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mul_turbo!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
 <span class="n">C</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
 </pre></div>
 </div>
 </div>
@@ -1399,11 +1776,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c_gemm (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c_gemm</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
 <span class="n">C</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
 </pre></div>
 </div>
 </div>
@@ -1414,6 +1801,20 @@ title="Print to PDF"
 <span class="nd">@btime</span><span class="w"> </span><span class="n">mul_turbo!</span><span class="p">(</span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">mul!</span><span class="p">(</span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">c_gemm</span><span class="p">(</span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  829.949 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  135.991 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  236.209 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  440.520 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>

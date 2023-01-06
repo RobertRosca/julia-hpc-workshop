@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Development Workflow" href="5-workflow.html" />
@@ -548,6 +550,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_naive (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -558,6 +565,11 @@ title="Print to PDF"
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
 <span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_generic (generic function with 1 method)
 </pre></div>
 </div>
 </div>
@@ -577,12 +589,28 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  133.678 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  133.674 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="mi">100_000</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">sum_naive</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">);</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">sum_generic</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  133.682 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  10.981 μs (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -604,10 +632,25 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python module: </span>&lt;module &#39;numpy&#39; from &#39;/usr/local/lib/python3.9/dist-packages/numpy/__init__.py&#39;&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">increasing</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python ndarray:</span>
+array([[  1,   1,   1,   1,   1],
+       [  1,   2,   4,   8,  16],
+       [  1,   3,   9,  27,  81],
+       [  1,   4,  16,  64, 256],
+       [  1,   5,  25, 125, 625]])
 </pre></div>
 </div>
 </div>
@@ -633,10 +676,25 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vander (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vander</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Int64}:
+ 1  1   1    1    1
+ 1  2   4    8   16
+ 1  3   9   27   81
+ 1  4  16   64  256
+ 1  5  25  125  625
 </pre></div>
 </div>
 </div>
@@ -669,6 +727,15 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{Int32}:
+ 1   4    16     64
+ 1   8    64    512
+ 1  16   256   4096
+ 1  32  1024  32768
+</pre></div>
+</div>
+</div>
 </div>
 <p>It even works for non-numerical types. The only requirement is that the type has a <em>one</em> (identity element) and a multiplication operation defined.</p>
 </section>
@@ -690,6 +757,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split} \begin{equation}
+\left[
+\begin{array}{c}
+a \\
+b \\
+c \\
+d \\
+e \\
+\end{array}
+\right]
+\end{equation}
+ \end{split}\]</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -697,12 +779,42 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split} \begin{equation}
+\left[
+\begin{array}{ccccc}
+1 &amp; a &amp; a^{2} &amp; a^{3} &amp; a^{4} \\
+1 &amp; b &amp; b^{2} &amp; b^{3} &amp; b^{4} \\
+1 &amp; c &amp; c^{2} &amp; c^{3} &amp; c^{4} \\
+1 &amp; d &amp; d^{2} &amp; d^{3} &amp; d^{4} \\
+1 &amp; e &amp; e^{2} &amp; e^{3} &amp; e^{4} \\
+\end{array}
+\right]
+\end{equation}
+ \end{split}\]</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">substitute</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">Dict</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split} \begin{equation}
+\left[
+\begin{array}{ccccc}
+1 &amp; a &amp; a^{2} &amp; a^{3} &amp; a^{4} \\
+1 &amp; 2 &amp; 4 &amp; 8 &amp; 16 \\
+1 &amp; c &amp; c^{2} &amp; c^{3} &amp; c^{4} \\
+1 &amp; 4 &amp; 16 &amp; 64 &amp; 256 \\
+1 &amp; e &amp; e^{2} &amp; e^{3} &amp; e^{4} \\
+\end{array}
+\right]
+\end{equation}
+ \end{split}\]</div>
 </div>
 </div>
 </section>
@@ -714,10 +826,30 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element Vector{BigFloat}:
+ 0.9040579212887486140365045126208140379377672575880978437106494487373439179658292
+ 0.5457420989183448695611984557221764356059315262169483068965402098932588837912343
+ 0.9064785923280681859963618296412276040976571832483970093554709596488391248664593
+ 0.9166509375977649368026135096143575151490852109646445493136292547546994161308635
+ 0.8459501194327296597332383417889860925620098931163959195855612002306390315584868
+ 0.3048590577928795295059419397692714037982466900749033719792174693131411573309868
+ 0.6283104417592831699327838221572291671019845751163546805016315231549305027371736
+ 0.6724499188773406876532762712214967291614339922090261907036708293056559180417833
+ 0.3198548508008727068637062379890366887069981472235720428328299858791221948100327
+ 0.06883378985020368607934316258411055819930357148677936859489752286611349910050147
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.113187728646236046164968083108706232320418047245119283474098403783743646333351
 </pre></div>
 </div>
 </div>
