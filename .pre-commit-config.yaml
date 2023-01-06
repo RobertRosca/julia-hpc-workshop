@@ -4,6 +4,7 @@ repos:
       - id: jupyter-nb-clear-output
         name: jupyter-nb-clear-output
         files: \.ipynb$
+        exclude: sessions/2-serial/2-simd/*
         stages: [commit]
         language: system
         entry: jupyter-nbconvert --ClearOutputPreprocessor.enabled=True --inplace
