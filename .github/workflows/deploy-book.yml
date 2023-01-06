@@ -12,19 +12,19 @@ jobs:
   meta:
     runs-on: ubuntu-latest
     outputs:
-      labels: ${{ steps.meta.outputs.labels }}
+      tag: ${{ steps.meta.outputs.version }}
     steps:
-    - name: Extract metadata (tags, labels) for Docker
+      - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-
   deploy-book:
+    needs: meta
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/robertrosca/julia-hpc-workshop:{{ needs.meta.outputs.labels }}
+      image: ghcr.io/robertrosca/julia-hpc-workshop:${{ needs.meta.outputs.tag }}
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
@@ -47,4 +47,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_build/html
-        destination_dir: ./${{ needs.meta.outputs.labels }}
+        destination_dir: ./${{ needs.meta.outputs.tag }}
