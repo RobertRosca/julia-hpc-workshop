@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Parallel Computing &#8212; Julia for HPC&lt;br&gt;EuXFEL Workshop</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Distributed Computing: Distributed standard library" href="2-distributed-computing.html" />
+    <link rel="prev" title="Performance Considerations for Linear Algebra" href="../2-serial/4-linalg-pefrormance.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Julia for HPC<br>EuXFEL Workshop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Jupyter for HPC - EuXFEL Trial Run
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 1 - Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/0-syntax.html">
+   Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/1-types-dispatch.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/2-duck-typing-benchmarking.html">
+   Duck Typing, Interfaces, and Benchmarkin
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/3-specialization.html">
+   Code Specialization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/4-generic-programming.html">
+   Generic programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/5-workflow.html">
+   Development Workflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/6-pkg-management.html">
+   Package Management
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 2 - Serial
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/1-optimizing-serial-performance.html">
+   Optimizing “Serial” Performance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/2-simd.html">
+   SIMD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/3-interop-microbenchmark.html">
+   Programming language interoperability (Interop)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/4-linalg-pefrormance.html">
+   Performance Considerations for Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 3 - Parallel
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Parallel Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-distributed-computing.html">
+   Distributed Computing:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-distributed-computing-mpi.html">
+   Distributed Computing: Message Passing Interface (MPI)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-multithreading.html">
+   Multithreading
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/robertrosca/julia-hpc-workshop/master?urlpath=tree/sessions/3-parallel/1-parallelism-concurrency.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/robertrosca/julia-hpc-workshop"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/robertrosca/julia-hpc-workshop/issues/new?title=Issue%20on%20page%20%2Fsessions/3-parallel/1-parallelism-concurrency.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/sessions/3-parallel/1-parallelism-concurrency.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-thoughts">
+   General thoughts
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-go-parallel">
+     Why go parallel?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-to-go-parallel">
+     When to go parallel?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-many-cpu-threads-cores-do-i-have">
+     How many CPU threads / cores do I have?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-many-cpu-threads-cores-does-hawk-have">
+     How many CPU threads / cores does Hawk have?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#amdahl-s-law">
+     Amdahl’s law
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-computing-in-julia">
+     Parallel computing in Julia
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tasks">
+   Tasks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#async-and-sync">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     @async
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     @sync
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Parallel Computing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-thoughts">
+   General thoughts
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#why-go-parallel">
+     Why go parallel?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-to-go-parallel">
+     When to go parallel?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-many-cpu-threads-cores-do-i-have">
+     How many CPU threads / cores do I have?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-many-cpu-threads-cores-does-hawk-have">
+     How many CPU threads / cores does Hawk have?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#amdahl-s-law">
+     Amdahl’s law
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-computing-in-julia">
+     Parallel computing in Julia
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tasks">
+   Tasks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#async-and-sync">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     @async
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     @sync
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="parallel-computing">
+<h1>Parallel Computing<a class="headerlink" href="#parallel-computing" title="Permalink to this headline">#</a></h1>
+<section id="general-thoughts">
+<h2>General thoughts<a class="headerlink" href="#general-thoughts" title="Permalink to this headline">#</a></h2>
+<p>Parallel computing is a programming method that <strong>harnesses the power of multiple processors (typically CPU cores) at once</strong>.</p>
+<p>There are many types of parallelism, some of which are (from micro to macro)</p>
+<ul class="simple">
+<li><p><strong>Instruction level parallelism</strong> (e.g. SIMD)</p></li>
+<li><p><strong>Multi-threading</strong> (shared memory)</p></li>
+<li><p><strong>Multi-processing</strong> (shared system memory)</p></li>
+<li><p><strong>Distributed processing</strong> (typically no shared memory)</p></li>
+</ul>
+<p><strong>Import note before we start: At the center of an efficient parallel code is a fast serial code!!</strong></p>
+<section id="why-go-parallel">
+<h3>Why go parallel?<a class="headerlink" href="#why-go-parallel" title="Permalink to this headline">#</a></h3>
+<img src="../../static/42-years-processor-trend.svg" width=700px></section>
+<section id="when-to-go-parallel">
+<h3>When to go parallel?<a class="headerlink" href="#when-to-go-parallel" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>If parts of your (optimized!) serial code aren’t fast enough.</p>
+<ul>
+<li><p>note that parallelization typically increases the code complexity</p></li>
+</ul>
+</li>
+<li><p>If your system has multiple execution units (CPU threads, GPU threads, …).</p>
+<ul>
+<li><p>particularly import on large supercomputers but also already on modern desktop computers and laptops.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="how-many-cpu-threads-cores-do-i-have">
+<h3>How many CPU threads / cores do I have?<a class="headerlink" href="#how-many-cpu-threads-cores-do-i-have" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Hwloc</span>
+<span class="n">Hwloc</span><span class="o">.</span><span class="n">num_physical_cores</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that there may be more than one CPU thread per physical CPU core (e.g. hyperthreading).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Sys</span><span class="o">.</span><span class="n">CPU_THREADS</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-many-cpu-threads-cores-does-hawk-have">
+<h3>How many CPU threads / cores does Hawk have?<a class="headerlink" href="#how-many-cpu-threads-cores-does-hawk-have" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="https://www.hlrs.de/solutions/systems/hpe-apollo-hawk">Hawk has about 720k CPU cores!</a></p>
+<p>Even if you only use a single node you have access to 128 CPU cores (64 per CPU). Hence, if you would use only a single core, the node utilization would be less than 1%.</p>
+</section>
+<section id="amdahl-s-law">
+<h3>Amdahl’s law<a class="headerlink" href="#amdahl-s-law" title="Permalink to this headline">#</a></h3>
+<p>Naive strong scaling expectation: I have 4 cores, give me my 4x speedup!</p>
+<blockquote>
+<div><p>If <span class="math notranslate nohighlight">\(p\)</span> is the fraction of a code that can be parallelized than the maximal theoretical speedup by parallelizing on <span class="math notranslate nohighlight">\(n\)</span> cores is given by
+$<span class="math notranslate nohighlight">\( F(n) = 1/(1-p + p/n) \)</span>$</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+<span class="n">F</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot</span><span class="p">()</span>
+<span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">sort</span><span class="p">(</span><span class="n">vcat</span><span class="p">(</span><span class="mf">0.2</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">0.95</span><span class="p">])))</span>
+<span class="w">    </span><span class="n">plot!</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">lab</span><span class="o">=</span><span class="s">&quot;</span><span class="si">$</span><span class="p">(</span><span class="kt">Int</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span><span class="s">%&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="n">legend</span><span class="o">=</span><span class="ss">:topleft</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;number of cores&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;parallel speedup&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">frame</span><span class="o">=</span><span class="ss">:box</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">pl</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1-parallelism-concurrency_13_0.svg" src="../../_images/1-parallelism-concurrency_13_0.svg" /></div>
+</div>
+</section>
+<section id="parallel-computing-in-julia">
+<h3><a class="reference external" href="https://docs.julialang.org/en/v1/manual/parallel-computing/">Parallel computing</a> in Julia<a class="headerlink" href="#parallel-computing-in-julia" title="Permalink to this headline">#</a></h3>
+<p>Julia provides support for all types of parallelism mentioned above (same order)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;simd</span></code>, <a class="reference external" href="https://github.com/eschnett/SIMD.jl">SIMD.jl</a>, <a class="reference external" href="https://github.com/JuliaSIMD/LoopVectorization.jl">LoopVectorization.jl</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Threads.&#64;threads</span></code>, <code class="docutils literal notranslate"><span class="pre">Threads.&#64;spawn</span></code>, <a class="reference external" href="https://github.com/JuliaFolds/FLoops.jl">FLoops.jl</a>, <a class="reference external" href="https://github.com/tkf/ThreadsX.jl">ThreadsX.jl</a> …</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;spawnat</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;fetch</span></code>, <code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code>, <code class="docutils literal notranslate"><span class="pre">SharedArray</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;spawnat</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;fetch</span></code>, <code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code>, <a class="reference external" href="https://github.com/JuliaParallel/DistributedArrays.jl">DistributedArrays.jl</a>, <a class="reference external" href="https://github.com/JuliaParallel/MPI.jl">MPI.jl</a></p></li>
+</ul>
+<p>With supercomputing in mind, we will start by focusing on multi-process parallelism which allows us to utilize multiple cores on the same or different nodes/machines (distributed computing).</p>
+<p>But before we do, it’s instructive to take a closer look at <strong>tasks</strong>.</p>
+</section>
+</section>
+<section id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">#</a></h2>
+<p>By default, Julia waits for every command to finish (”<strong>blocking</strong>”) and run everything sequentially.</p>
+<p><strong>Tasks</strong> are a control flow feature that allows computations to be suspended and resumed in a flexible manner to implement <strong>cooperative multitasking</strong>. (This feature is sometimes called by other names, such as coroutines, green-, or lightweight threads.)</p>
+<p>Tasks are managed by Julia and can be run in a <strong>concurrent</strong> fashion.</p>
+<blockquote>
+<div><p><strong>Concurrency</strong> means executing multiple tasks at the same time but not necessarily simultaneously.</p>
+</div></blockquote>
+<p>An important use case is <strong>asynchronous I/O</strong>, which is typically slow. Examples are</p>
+<ul class="simple">
+<li><p><strong>multiple user input</strong> (Why not already process some of the input?)</p></li>
+<li><p><strong>data dumping to disk</strong> (Maybe it’s possible to continue a calculation?)</p></li>
+<li><p><strong>receiving calculations from worker processes</strong></p></li>
+</ul>
+</section>
+<section id="async-and-sync">
+<h2><code class="docutils literal notranslate"><span class="pre">&#64;async</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;sync</span></code><a class="headerlink" href="#async-and-sync" title="Permalink to this headline">#</a></h2>
+<p>We can create and schedule a task for asynchronous execution with the <a class="reference external" href="https://docs.julialang.org/en/v1/base/parallel/#Base.&#64;async"><code class="docutils literal notranslate"><span class="pre">&#64;async</span></code> macro</a>.</p>
+<p>What this means is that for whatever falls into its scope, Julia will start a task to then proceed to whatever comes next in the script without waiting for the task to complete (”<strong>non-blocking</strong>”).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.000578 seconds (66 allocations: 1.688 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="nd">@async</span><span class="w"> </span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.011920 seconds (12.74 k allocations: 724.993 KiB, 53.88% compilation time)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (runnable) @0x00007ff5352d5cd0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Julia allows the script to proceed (and the <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> macro to fully execute) without waiting for the task (in this case, sleeping for two seconds) to complete.</p>
+<p>We can use the partner macro <code class="docutils literal notranslate"><span class="pre">&#64;sync</span></code> to synchronize, that is wait for all encapsulated tasks. (see <code class="docutils literal notranslate"><span class="pre">?&#64;sync</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="nd">@sync</span><span class="w"> </span><span class="nd">@async</span><span class="w"> </span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.018938 seconds (811 allocations: 46.063 KiB, 0.90% compilation time)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00007ff51a17dfb0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Of course, here it doesn’t make much sense to write <code class="docutils literal notranslate"><span class="pre">&#64;sync</span> <span class="pre">&#64;async</span></code> - we could simply drop it altogether. A better example is the following.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="nd">@sync</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.006158 seconds (1.03 k allocations: 63.416 KiB, 0.22% compilation time)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00007ff51a17e850
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@async</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00007ff53415e400
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">wait</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fetch</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000×1000 Matrix{Float64}:
+ 263.249  251.925  248.986  253.605  …  257.844  248.085  250.237  251.395
+ 257.095  256.587  249.41   249.821     254.466  250.387  242.402  244.305
+ 253.985  247.5    251.114  246.457     250.973  245.276  237.862  246.125
+ 249.405  248.132  244.666  246.563     244.609  242.719  234.838  241.069
+ 260.434  248.835  251.449  251.491     257.321  245.83   248.911  245.863
+ 252.536  249.985  245.383  250.276  …  246.917  244.226  236.871  235.984
+ 251.204  245.683  249.145  252.163     246.693  239.219  242.925  242.7
+ 253.041  252.66   250.389  253.545     254.743  239.727  249.325  245.364
+ 260.851  250.716  255.548  257.406     254.395  250.072  247.319  247.948
+ 244.25   238.893  235.695  237.747     238.464  233.968  233.569  234.328
+ 255.472  259.947  254.258  255.597  …  259.484  250.618  246.18   255.219
+ 252.851  249.65   255.06   254.542     252.629  243.492  243.528  248.339
+ 245.809  237.148  234.595  237.963     245.008  232.536  230.308  235.146
+   ⋮                                 ⋱                             
+ 251.175  251.748  243.473  250.962     253.175  241.321  239.814  242.359
+ 258.158  245.585  252.79   250.261     250.988  245.785  247.221  248.977
+ 255.509  252.349  249.548  251.689  …  254.702  242.263  243.33   241.664
+ 247.833  240.98   248.751  248.527     245.023  242.801  235.51   243.927
+ 251.146  243.778  247.607  254.705     251.161  238.816  242.397  245.212
+ 256.346  247.571  256.3    249.256     256.24   241.483  242.511  245.014
+ 254.434  249.466  251.984  252.713     249.441  247.423  239.469  238.865
+ 256.848  249.649  253.705  253.658  …  253.887  242.939  242.195  247.634
+ 239.402  233.38   236.961  235.121     240.306  230.043  228.556  232.006
+ 251.916  247.562  238.877  250.357     246.556  240.642  239.97   242.748
+ 257.51   256.698  254.891  251.937     258.121  247.637  245.782  246.459
+ 260.043  245.561  245.616  248.384     249.765  246.572  236.871  249.92
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.8"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.8",
+            path: "./sessions/3-parallel"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.8'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../2-serial/4-linalg-pefrormance.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Performance Considerations for Linear Algebra</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2-distributed-computing.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Distributed Computing: <code class="docutils literal notranslate"><span class="pre">Distributed</span></code> standard library</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Robert Rosca<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

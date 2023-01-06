@@ -1,0 +1,2392 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Distributed Computing: Distributed standard library &#8212; Julia for HPC&lt;br&gt;EuXFEL Workshop</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Distributed Computing: Message Passing Interface (MPI)" href="3-distributed-computing-mpi.html" />
+    <link rel="prev" title="Parallel Computing" href="1-parallelism-concurrency.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Julia for HPC<br>EuXFEL Workshop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Jupyter for HPC - EuXFEL Trial Run
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 1 - Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/0-syntax.html">
+   Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/1-types-dispatch.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/2-duck-typing-benchmarking.html">
+   Duck Typing, Interfaces, and Benchmarkin
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/3-specialization.html">
+   Code Specialization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/4-generic-programming.html">
+   Generic programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/5-workflow.html">
+   Development Workflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/6-pkg-management.html">
+   Package Management
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 2 - Serial
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/1-optimizing-serial-performance.html">
+   Optimizing “Serial” Performance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/2-simd.html">
+   SIMD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/3-interop-microbenchmark.html">
+   Programming language interoperability (Interop)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/4-linalg-pefrormance.html">
+   Performance Considerations for Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 3 - Parallel
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-parallelism-concurrency.html">
+   Parallel Computing
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Distributed Computing:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-distributed-computing-mpi.html">
+   Distributed Computing: Message Passing Interface (MPI)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-multithreading.html">
+   Multithreading
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/robertrosca/julia-hpc-workshop/master?urlpath=tree/sessions/3-parallel/2-distributed-computing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/robertrosca/julia-hpc-workshop"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/robertrosca/julia-hpc-workshop/issues/new?title=Issue%20on%20page%20%2Fsessions/3-parallel/2-distributed-computing.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/sessions/3-parallel/2-distributed-computing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distributed-standard-library">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-master-to-rule-them-all-spawn-spawnat-fetch-fetchfrom-everywhere">
+     One master to rule them all -
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @spawn
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @spawnat
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @fetch
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @fetchfrom
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @everywhere
+      </span>
+     </code>
+     …
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-movement">
+     Data movement
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#computer-latency-at-a-human-scale">
+       Computer latency at a human scale
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoid-globals-once-more">
+     Avoid globals (once more)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explicit-data-movement-channel-and-remotechannel">
+     Explicit data movement:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Channel
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       RemoteChannel
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#remotechannel">
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         RemoteChannel
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#high-level-tools-distributed-and-pmap">
+     High-level tools:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @distributed
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pmap
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#distributed-loops-distributed">
+       Distributed loops (
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         @distributed
+        </span>
+       </code>
+       )
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-reduction">
+       Example: Reduction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-common-mistake">
+       A common mistake
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-sharedarrays">
+       Example:
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         SharedArray
+        </span>
+       </code>
+       s
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-map-pmap">
+     Parallel map:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pmap
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-singular-values-of-multiple-matrices">
+       Example: Singular values of multiple matrices
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-to-choose-which-distributed-vs-pmap">
+     When to choose which? (
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @distributed
+      </span>
+     </code>
+     vs
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pmap
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#high-level-array-abstractions-distributedarrays-jl">
+   High-level array abstractions: DistributedArrays.jl
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#actual-distributed-computing-comments">
+   <em>
+    Actual
+   </em>
+   distributed computing: Comments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-workers-on-other-machines">
+     Creating workers on other machines
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Distributed Computing: Distributed standard library</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distributed-standard-library">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-master-to-rule-them-all-spawn-spawnat-fetch-fetchfrom-everywhere">
+     One master to rule them all -
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @spawn
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @spawnat
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @fetch
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @fetchfrom
+      </span>
+     </code>
+     ,
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @everywhere
+      </span>
+     </code>
+     …
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-movement">
+     Data movement
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#computer-latency-at-a-human-scale">
+       Computer latency at a human scale
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoid-globals-once-more">
+     Avoid globals (once more)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explicit-data-movement-channel-and-remotechannel">
+     Explicit data movement:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Channel
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       RemoteChannel
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#remotechannel">
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         RemoteChannel
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#high-level-tools-distributed-and-pmap">
+     High-level tools:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @distributed
+      </span>
+     </code>
+     and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pmap
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#distributed-loops-distributed">
+       Distributed loops (
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         @distributed
+        </span>
+       </code>
+       )
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-reduction">
+       Example: Reduction
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-common-mistake">
+       A common mistake
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-sharedarrays">
+       Example:
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         SharedArray
+        </span>
+       </code>
+       s
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-map-pmap">
+     Parallel map:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pmap
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-singular-values-of-multiple-matrices">
+       Example: Singular values of multiple matrices
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#when-to-choose-which-distributed-vs-pmap">
+     When to choose which? (
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @distributed
+      </span>
+     </code>
+     vs
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       pmap
+      </span>
+     </code>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#high-level-array-abstractions-distributedarrays-jl">
+   High-level array abstractions: DistributedArrays.jl
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#actual-distributed-computing-comments">
+   <em>
+    Actual
+   </em>
+   distributed computing: Comments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-workers-on-other-machines">
+     Creating workers on other machines
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="distributed-computing-distributed-standard-library">
+<h1>Distributed Computing: <code class="docutils literal notranslate"><span class="pre">Distributed</span></code> standard library<a class="headerlink" href="#distributed-computing-distributed-standard-library" title="Permalink to this headline">#</a></h1>
+<p><strong>What</strong></p>
+<ul class="simple">
+<li><p><strong>single Julia process -&gt; multiple Julia processes</strong> that coordinate to perform certain computations</p></li>
+</ul>
+<p><strong>Why</strong></p>
+<ul class="simple">
+<li><p>Scaling things up: run computations on multiple CPU cores, potentially even on different machines, e.g. nodes of a supercomputer or a local cluster of desktop machines.</p></li>
+<li><p>Effectively increase your memory: process a large dataset, which wouldn’t fit into local memory, in parallel across multiple machines with separate dedicated RAM.</p></li>
+</ul>
+<p><strong>Julia provides two fundamental implementations and paradigms</strong></p>
+<ul class="simple">
+<li><p>Julia’s built-in <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/Distributed/"><code class="docutils literal notranslate"><span class="pre">Distributed</span></code> standard library</a></p>
+<ul>
+<li><p>master-worker model</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://www.mpi-forum.org/">Message Passing Interface (MPI)</a> through <a class="reference external" href="https://github.com/JuliaParallel/MPI.jl">MPI.jl</a></p>
+<ul>
+<li><p>Single Program Multiple Data (SPMD)</p></li>
+</ul>
+</li>
+</ul>
+<p>The focus of this notebook is on the <strong><code class="docutils literal notranslate"><span class="pre">Distributed</span></code> standard library.</strong></p>
+<section id="distributed-standard-library">
+<h2><code class="docutils literal notranslate"><span class="pre">Distributed</span></code> standard library<a class="headerlink" href="#distributed-standard-library" title="Permalink to this headline">#</a></h2>
+<p>Julia’s <code class="docutils literal notranslate"><span class="pre">Distributed</span></code> follows a master-worker paradigm for its native distributed parallelism: <strong>One master process coordinates all the worker processes, which perform the actual computations.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">nprocs</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">nworkers</span><span class="p">()</span><span class="w"> </span><span class="c"># the master is considered a worker as long as there are no real workers</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p>To increase the number of workers, i.e. Julia processes, from within a Julia session we can dynamically call <strong><code class="docutils literal notranslate"><span class="pre">addprocs</span></code></strong>.</p>
+<p>Alternatively, when starting Julia from the command line, one can use the <code class="docutils literal notranslate"><span class="pre">-p</span></code> option up front. Example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span> <span class="o">-</span><span class="n">p</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>will start Julia with 5 processes, 1 master and 4 workers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">addprocs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Every process has a Julia internal <code class="docutils literal notranslate"><span class="pre">pid</span></code> (process id). The master is always 1. You can get the workers pids from <code class="docutils literal notranslate"><span class="pre">workers()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the 4 worker’s pids aren’t necessarily 2, 3, 4 and 5 and one shouldn’t rely on those literal values. Let’s remove the processes and add them once more.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rmprocs</span><span class="p">(</span><span class="n">workers</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00007f2c9216d2c0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">nworkers</span><span class="p">()</span><span class="w"> </span><span class="c"># only the master is left</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">addprocs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 6
+ 7
+ 8
+ 9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 6
+ 7
+ 8
+ 9
+</pre></div>
+</div>
+</div>
+</div>
+<section id="one-master-to-rule-them-all-spawn-spawnat-fetch-fetchfrom-everywhere">
+<h3>One master to rule them all - <code class="docutils literal notranslate"><span class="pre">&#64;spawn</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;spawnat</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;fetch</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;fetchfrom</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;everywhere</span></code>…<a class="headerlink" href="#one-master-to-rule-them-all-spawn-spawnat-fetch-fetchfrom-everywhere" title="Permalink to this headline">#</a></h3>
+<p>To execute commands and start computations on workers we can use the following macros</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;spawn</span></code>: run a command or a code block on any worker and return a <code class="docutils literal notranslate"><span class="pre">Future</span></code> to it’s result. It’s basically a version of <code class="docutils literal notranslate"><span class="pre">&#64;async</span></code> for remote processes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;spawnat</span></code>: same as <code class="docutils literal notranslate"><span class="pre">&#64;spawn</span></code> but one can choose a specific worker by providing its pid.</p></li>
+</ul>
+<p><strong>Example:</strong> Let’s say we would like to generate a random matrix on one of the workers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@spawn</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c"># similar to @async</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Future(6, 1, 10, ReentrantLock(nothing, 0x00000000, 0x00, Base.GenericCondition{Base.Threads.SpinLock}(Base.InvasiveLinkedList{Task}(nothing, nothing), Base.Threads.SpinLock(0)), (0, 139836487385856, 5)), nothing)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawn</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Future(7, 1, 11, ReentrantLock(nothing, 0x00000000, 0x00, Base.GenericCondition{Base.Threads.SpinLock}(Base.InvasiveLinkedList{Task}(nothing, nothing), Base.Threads.SpinLock(0)), (0, 0, 139637976727552)), nothing)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fetch</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because the combination of spawning at fetching is so common, there is <code class="docutils literal notranslate"><span class="pre">&#64;fetch</span></code> which combines them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@fetch</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@fetch</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
+ 0.44632   0.986978   0.870381
+ 0.426559  0.787115   0.898901
+ 0.840754  0.0946891  0.468125
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which worker did the work?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@fetch</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span>
+<span class="w">    </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 6:	6
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">&#64;spawnat</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;fetchfrom</span></code> we can delegate the work to a specific worker.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@fetchfrom</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span>
+<span class="w">    </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 7:	7
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">&#64;sync</span></code> as a blocker to wait for all workers to complete their tasks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@sync</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">pids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">    </span><span class="nd">@spawn</span><span class="w"> </span><span class="p">(</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Today is reverse day!&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nd">@spawn</span><span class="w"> </span><span class="p">(</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot; class!&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nd">@spawn</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="k">end</span><span class="p">;</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Done!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 9:	Hello
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 8:	 class!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 7:	Today is reverse day!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, now that we understood all that, let’s delegate a <em>complicated</em> calculation</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Random</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">complicated_calculation</span><span class="p">()</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># so complex that it takes a long time :)</span>
+<span class="w">    </span><span class="n">randexp</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="nd">@fetch</span><span class="w"> </span><span class="n">complicated_calculation</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">On</span> <span class="n">worker</span> <span class="mi">6</span><span class="p">:</span>
+<span class="ne">UndefVarError</span>: #complicated_calculation not defined
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">deserialize_datatype</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1364</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">handle_deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">866</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">813</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">handle_deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">873</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">813</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">deserialize_global_from_main</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">clusterserialize</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">160</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="c1">#5</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">clusterserialize</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">72</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">foreach</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2774</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">clusterserialize</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">72</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">handle_deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">959</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">813</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">handle_deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">870</span>
+ <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="n">deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">813</span>
+ <span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="n">handle_deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">873</span>
+ <span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="n">deserialize</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Serialization</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">Serialization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">813</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="n">deserialize_msg</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">messages</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">87</span>
+ <span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="c1">#invokelatest#2</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">729</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">18</span><span class="p">]</span> <span class="n">invokelatest</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">726</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="n">message_handler_loop</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">process_messages</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">176</span>
+ <span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="n">process_tcp_streams</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">process_messages</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">133</span>
+ <span class="p">[</span><span class="mi">21</span><span class="p">]</span> <span class="c1">#103</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">484</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">remotecall_fetch</span><span class="p">(::</span><span class="n">Function</span><span class="p">,</span> <span class="p">::</span><span class="n">Distributed</span><span class="o">.</span><span class="n">Worker</span><span class="p">;</span> <span class="n">kwargs</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Union</span><span class="p">{},</span> <span class="n">Tuple</span><span class="p">{},</span> <span class="n">NamedTuple</span><span class="p">{(),</span> <span class="n">Tuple</span><span class="p">{}}})</span>
+   <span class="o">@</span> <span class="n">Distributed</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">remotecall</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">465</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">remotecall_fetch</span><span class="p">(::</span><span class="n">Function</span><span class="p">,</span> <span class="p">::</span><span class="n">Distributed</span><span class="o">.</span><span class="n">Worker</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Distributed</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">remotecall</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">454</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">remotecall_fetch</span><span class="p">(::</span><span class="n">Function</span><span class="p">,</span> <span class="p">::</span><span class="n">Int64</span><span class="p">;</span> <span class="n">kwargs</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Union</span><span class="p">{},</span> <span class="n">Tuple</span><span class="p">{},</span> <span class="n">NamedTuple</span><span class="p">{(),</span> <span class="n">Tuple</span><span class="p">{}}})</span>
+   <span class="o">@</span> <span class="n">Distributed</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">remotecall</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">492</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">remotecall_fetch</span><span class="p">(::</span><span class="n">Function</span><span class="p">,</span> <span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Distributed</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">Distributed</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">remotecall</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">492</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span><span class="mi">8</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What happened?</p>
+<p><strong>Every worker is a separate Julia process.</strong> (Think of having multiple Julia REPLs open at once.)</p>
+<p>We only defined <code class="docutils literal notranslate"><span class="pre">complicated_calculation()</span></code> on the master process. The function doesn’t exist on any of the workers yet.</p>
+<p>The macro <code class="docutils literal notranslate"><span class="pre">&#64;everywhere</span></code> allows us to perform steps on all processes (master and worker). This is particularly useful for loading packages and functions definitions etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">begin</span><span class="w"> </span><span class="c"># execute this block on all workers</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">Random</span>
+
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">complicated_calculation</span><span class="p">()</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="n">randexp</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c"># lives in Random</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@fetch</span><span class="w"> </span><span class="n">complicated_calculation</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Float64}:
+ 0.18977406505502015
+ 2.771799431488359
+ 0.6231555377447034
+ 2.102223539400404
+ 0.12245289797967951
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-movement">
+<h3>Data movement<a class="headerlink" href="#data-movement" title="Permalink to this headline">#</a></h3>
+<p>There is a crucial difference between the following two pieces of code. Can you guess what it is? (without reading on 😉)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">method1</span><span class="p">()</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@fetch</span><span class="w"> </span><span class="n">A</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="o">^</span><span class="mi">2</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method1 (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">method2</span><span class="p">()</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@fetch</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>method2 (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s benchmark them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">method1</span><span class="p">();</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">method2</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  438.825 μs (98 allocations: 238.10 KiB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  362.775 μs (71 allocations: 81.25 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Method 1 is slower, because <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> are created on the master process, transferred to a worker, and squared and multiplied on the worker process before the result is finally transferred back to the master.</p>
+<p>Method 2, on the other hand, creates, squares, and multiplies the random matrix all on the work process and only submits the result to the master.</p>
+<p>Hence, <code class="docutils literal notranslate"><span class="pre">method1</span></code> is <strong>transferring 3x as much data</strong> between the master and the worker!</p>
+<p><strong>Efficient data movement is crucial for efficient parallel computing!</strong></p>
+<p>In this toy example, it’s rather easy to identify the faster method.</p>
+<p>In a real program, however, understanding data movement does require more thought and likely some measurement.</p>
+<p>For example, if the first process needs matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> in a follow-up computation then the first method might be better in this case. Or, if computing <code class="docutils literal notranslate"><span class="pre">A</span></code> is expensive and only the current process has it, then moving it to another process might be unavoidable.</p>
+<section id="computer-latency-at-a-human-scale">
+<h4>Computer latency at a human scale<a class="headerlink" href="#computer-latency-at-a-human-scale" title="Permalink to this headline">#</a></h4>
+<p>To understand why thinking about data is important it’s instructive to look at the time scales involved in data access.</p>
+<img src="../../static/latency_human_scales.png" width=900px>
+<p>(taken from <a class="reference external" href="https://www.prowesscorp.com/computer-latency-at-a-human-scale/">https://www.prowesscorp.com/computer-latency-at-a-human-scale/</a>)</p>
+</section>
+</section>
+<section id="avoid-globals-once-more">
+<h3>Avoid globals (once more)<a class="headerlink" href="#avoid-globals-once-more" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">myglobal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">whohas</span><span class="p">(</span><span class="n">s</span><span class="o">::</span><span class="kt">String</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Symbol</span><span class="p">(</span><span class="o">$</span><span class="n">s</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isdefined</span><span class="p">(</span><span class="n">Main</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">)</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$var</span><span class="s"> exists.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Doesn&#39;t exist.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="nb">nothing</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>whohas (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">whohas</span><span class="p">(</span><span class="s">&quot;myglobal&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>myglobal exists.
+      From worker 8:	Doesn&#39;t exist.
+      From worker 7:	Doesn&#39;t exist.
+      From worker 9:	Doesn&#39;t exist.
+      From worker 6:	Doesn&#39;t exist.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@fetchfrom</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">myglobal</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">whohas</span><span class="p">(</span><span class="s">&quot;myglobal&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>myglobal exists.
+      From worker 7:	Doesn&#39;t exist.
+      From worker 8:	Doesn&#39;t exist.
+      From worker 9:	Doesn&#39;t exist.
+      From worker 6:	myglobal exists.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Globals get copied to workers and continue to exist as globals even after the call.</p>
+<p>This could lead to <strong>memory accumulation</strong> if many globals are used (just as it would in a single Julia session).</p>
+<p>It’s better to avoid them.</p>
+</section>
+<section id="explicit-data-movement-channel-and-remotechannel">
+<h3>Explicit data movement: <code class="docutils literal notranslate"><span class="pre">Channel</span></code> and <code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code><a class="headerlink" href="#explicit-data-movement-channel-and-remotechannel" title="Permalink to this headline">#</a></h3>
+<p>Implement communication between tasks. Functions: <code class="docutils literal notranslate"><span class="pre">put!</span></code>, <code class="docutils literal notranslate"><span class="pre">take!</span></code>, <code class="docutils literal notranslate"><span class="pre">fetch</span></code>, <code class="docutils literal notranslate"><span class="pre">isready</span></code> and <code class="docutils literal notranslate"><span class="pre">wait</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c"># a channel that can hold up to 5 integers</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Channel{Int64}(5) (empty)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isready</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span><span class="w"> </span><span class="c"># something in the channel?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>false
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">put!</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isready</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fetch</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">take!</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isready</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>false
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">put!</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fetch</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">take!</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Be careful</strong>, <code class="docutils literal notranslate"><span class="pre">take!</span></code> and <code class="docutils literal notranslate"><span class="pre">put!</span></code> are blocking if the channel is empty or full!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isready</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>false
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># take!(ch) if we execute this, while isready(ch) == false, the current Julia session will hang.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="remotechannel">
+<h4><code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code><a class="headerlink" href="#remotechannel" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Channel</span></code> is local to a process. Worker 2 cannot directly refer to a <code class="docutils literal notranslate"><span class="pre">Channel</span></code> on worker 3 and vice-versa.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code>, however, can put and take values across workers. A <code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code> can be thought of as a handle to a <code class="docutils literal notranslate"><span class="pre">Channel</span></code>.</p></li>
+<li><p>Any process with a reference to a <code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code> can put and take items from the channel. Data is automatically sent to (or retrieved from) the process a <code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code> is associated with.</p></li>
+<li><p>The process id, pid, associated with a <code class="docutils literal notranslate"><span class="pre">RemoteChannel</span></code> identifies the process where the backing store, i.e., the backing Channel exists.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">nworkers</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">addprocs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 10
+ 11
+ 12
+ 13
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">do_something</span><span class="p">()</span>
+<span class="w">    </span><span class="n">rc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RemoteChannel</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">10</span><span class="p">))</span><span class="w"> </span><span class="c"># lives on the master</span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">        </span><span class="nd">@spawnat</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">put!</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span><span class="w"> </span><span class="n">myid</span><span class="p">())</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">rc</span>
+<span class="k">end</span>
+
+<span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">do_something</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RemoteChannel{Channel{Int64}}(1, 1, 35712)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isready</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">while</span><span class="w"> </span><span class="n">isready</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>take!(r) = 6
+take!(r) = 9
+take!(r) = 8
+take!(r) = 7
+take!(r) = 11
+take!(r) = 13
+take!(r) = 10
+take!(r) = 12
+</pre></div>
+</div>
+</div>
+</div>
+<p>The ecosystem also contains a couple of tools, that make data transfer even simpler. See for example <a class="reference external" href="https://github.com/ChrisRackauckas/ParallelDataTransfer.jl/">ParallelDataTransfer.jl</a>.</p>
+</section>
+</section>
+<section id="high-level-tools-distributed-and-pmap">
+<h3>High-level tools: <code class="docutils literal notranslate"><span class="pre">&#64;distributed</span></code> and <code class="docutils literal notranslate"><span class="pre">pmap</span></code><a class="headerlink" href="#high-level-tools-distributed-and-pmap" title="Permalink to this headline">#</a></h3>
+<p>So far we have seen some of the fundamental building blocks for distributed computing in Julia. However, in practice, one wants to think as little as possible about how to distribute the work and explicitly spawn tasks.</p>
+<p>Fortunately, many useful parallel computations do not require (much) data movement at all. A common example is a direct Monte Carlo simulation, where multiple processes can handle independent simulation trials simultaneously. (We’ll get to that later in the exercises!)</p>
+<p>Julia provides <strong>high-level convenience</strong> tools to</p>
+<ul class="simple">
+<li><p>parallelize loops (<a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/Distributed/#Distributed.&#64;distributed"><strong><code class="docutils literal notranslate"><span class="pre">&#64;distributed</span></code></strong></a>) and</p></li>
+<li><p>apply a function to all elements of a collection (<a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/Distributed/#Distributed.pmap"><strong><code class="docutils literal notranslate"><span class="pre">pmap</span></code></strong></a>)</p></li>
+</ul>
+<section id="distributed-loops-distributed">
+<h4>Distributed loops (<code class="docutils literal notranslate"><span class="pre">&#64;distributed</span></code>)<a class="headerlink" href="#distributed-loops-distributed" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span><span class="p">,</span><span class="w"> </span><span class="n">BenchmarkTools</span><span class="p">;</span>
+<span class="n">rmprocs</span><span class="p">(</span><span class="n">workers</span><span class="p">());</span>
+<span class="n">addprocs</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="n">nworkers</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-reduction">
+<h4>Example: Reduction<a class="headerlink" href="#example-reduction" title="Permalink to this headline">#</a></h4>
+<p>Task: Counting heads in a series of coin tosses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">count_heads_loop</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Bool</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">c</span>
+<span class="k">end</span>
+
+<span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200_000_000</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">count_heads_loop</span><span class="p">(</span><span class="o">$</span><span class="n">N</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  279.942 ms (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that these kinds of computations are called <strong>reductions</strong> (with <code class="docutils literal notranslate"><span class="pre">+</span></code> being the <strong>reducer function</strong>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">count_heads_reduce</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapreduce</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Bool</span><span class="p">),</span><span class="w"> </span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">count_heads_reduce</span><span class="p">(</span><span class="o">$</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  284.010 ms (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99988610
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">count_heads_distributed_loop</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@distributed</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="kt">Int</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="kt">Bool</span><span class="p">))</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">c</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count_heads_distributed_loop (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">count_heads_distributed_loop</span><span class="p">(</span><span class="o">$</span><span class="n">N</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  70.113 ms (303 allocations: 12.70 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The distributed version is about <strong>4x faster</strong>, which is all we could hope for.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">&#64;distributed</span></code> the work is <strong>evenly distributed</strong> between the workers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">count_heads_distributed_verbose</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@distributed</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="kt">Bool</span><span class="p">))</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="n">x</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">c</span>
+<span class="k">end</span>
+
+<span class="n">count_heads_distributed_verbose</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 17:	0
+      From worker 17:	0
+      From worker 14:	0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 14:	1
+      From worker 16:	0
+      From worker 16:	0
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, by using <code class="docutils literal notranslate"><span class="pre">&#64;distributed</span></code> we let Julia decide how to split up the work and can’t control it ourselves.</p>
+</section>
+<section id="a-common-mistake">
+<h4>A common mistake<a class="headerlink" href="#a-common-mistake" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="nd">@distributed</span><span class="w"> </span><span class="p">(</span><span class="o">+</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">a</span>
+<span class="k">end</span>
+
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 15:	0
+      From worker 15:	0
+</pre></div>
+</div>
+</div>
+</div>
+<p>What do you expect the value of <code class="docutils literal notranslate"><span class="pre">a</span></code> to be?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-sharedarrays">
+<h4>Example: <code class="docutils literal notranslate"><span class="pre">SharedArray</span></code>s<a class="headerlink" href="#example-sharedarrays" title="Permalink to this headline">#</a></h4>
+<p>Apart from <code class="docutils literal notranslate"><span class="pre">&#64;distributed</span> <span class="pre">(reducer)</span> <span class="pre">...</span></code> there also is a <code class="docutils literal notranslate"><span class="pre">&#64;distributed</span> <span class="pre">for</span> <span class="pre">...</span></code> form. The latter is <strong>non-blocking</strong> and returns a <code class="docutils literal notranslate"><span class="pre">Task</span></code>. (You can think of it as a distributed version of <code class="docutils literal notranslate"><span class="pre">&#64;spawn</span></code> for all the iterations.)</p>
+<p>However, since the loop body will be executed on different processes, one must be careful to operate on data structures that are available on all processes (similar to the mistake highlighted above).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">square_broken</span><span class="p">()</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="nd">@distributed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">A</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>square_broken (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">square_broken</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element Vector{Int64}:
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>To actually make all processes operate on the same array, one can use a <code class="docutils literal notranslate"><span class="pre">SharedArray</span></code>. For this to work, the <strong>processes need to live on the same host</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">SharedArrays</span><span class="w"> </span><span class="c"># must be loaded everywhere</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×2 Matrix{Float64}:
+ 0.353184  0.861388
+ 0.650822  0.0492796
+ 0.462273  0.933608
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SharedArray</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×2 SharedMatrix{Float64}:
+ 0.353184  0.861388
+ 0.650822  0.0492796
+ 0.462273  0.933608
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">square!</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span><span class="w"> </span><span class="c"># mimicing some computational cost</span>
+<span class="w">        </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">square_distributed!</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="nd">@distributed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span><span class="w"> </span><span class="c"># mimicing some computational cost</span>
+<span class="w">        </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SharedArray</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="nd">@btime</span><span class="w"> </span><span class="n">square!</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">square_distributed!</span><span class="p">(</span><span class="o">$</span><span class="n">S</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  210.014 ms (508 allocations: 15.84 KiB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  51.370 ms (553 allocations: 25.50 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="parallel-map-pmap">
+<h3>Parallel map: <code class="docutils literal notranslate"><span class="pre">pmap</span></code><a class="headerlink" href="#parallel-map-pmap" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">square!</span></code> functions above are typical <code class="docutils literal notranslate"><span class="pre">map</span></code> operations where a function <code class="docutils literal notranslate"><span class="pre">f</span></code> is applied to all elements of a collection.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element Vector{Int64}:
+   1
+   4
+   9
+  16
+  25
+  36
+  49
+  64
+  81
+ 100
+</pre></div>
+</div>
+</div>
+</div>
+<p>Such a pattern can be parallelized in Julia via the high-level function <code class="docutils literal notranslate"><span class="pre">pmap</span></code> (“parallel map”).</p>
+<section id="example-singular-values-of-multiple-matrices">
+<h4>Example: Singular values of multiple matrices<a class="headerlink" href="#example-singular-values-of-multiple-matrices" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span><span class="p">,</span><span class="w"> </span><span class="n">BenchmarkTools</span><span class="p">;</span>
+<span class="n">rmprocs</span><span class="p">(</span><span class="n">workers</span><span class="p">());</span>
+<span class="n">addprocs</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="n">nworkers</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+
+<span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Matrix</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}[</span><span class="n">rand</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">svdvals</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Float64}:
+ 1.0216980852237818
+ 0.45650439041729374
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">(</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element Vector{Vector{Float64}}:
+ [99.36478911134684, 8.173702897413058, 7.928579712801169, 7.818922556296819, 7.675549977450574, 7.569268553425834, 7.464279500603051, 7.392049350263816, 7.310649159357482, 7.287375603513707  …  0.2899659774210302, 0.275172570650729, 0.2588523537721128, 0.21642086399721663, 0.20131400623655207, 0.13184790798427934, 0.09588495912306268, 0.05083618817035918, 0.0349110667448174, 0.005155540075515823]
+ [100.39455338314728, 7.991750276086012, 7.9535126712008895, 7.747874712409252, 7.55238024145027, 7.533906094159177, 7.4325521551458795, 7.3402076847656685, 7.270688234392999, 7.2402184951483655  …  0.31443799790665106, 0.30653755948349865, 0.26761087918937204, 0.24860477256864538, 0.20268221465117503, 0.19050462417240907, 0.1047958322711369, 0.09825018385940695, 0.038157336304634575, 0.007924757505799752]
+ [100.17335333496476, 7.997160830857619, 7.834854523828157, 7.6862409037985975, 7.5588295992509265, 7.5213832055249785, 7.424559121182999, 7.382909740216071, 7.311672160834122, 7.205954491102092  …  0.3165138436466822, 0.26365521159817895, 0.23483850438410028, 0.21887159953634366, 0.17917961774653507, 0.15295167859947542, 0.1365723438896426, 0.09722582478512024, 0.0417276201857464, 0.014526976126335958]
+ [100.26129773498461, 8.05767052467573, 7.793513066589888, 7.696003384672306, 7.538149192405975, 7.474889604135352, 7.413677830484542, 7.374943291798586, 7.314311027035507, 7.183950031857245  …  0.31153181389859824, 0.27818500279108255, 0.23813408101786868, 0.1990064764791857, 0.15146394027680554, 0.13894129471245042, 0.09684255903185482, 0.07443042494808093, 0.06272046395443426, 0.022737585869583108]
+ [100.25927830708989, 8.205732306536632, 8.143007127109628, 7.7604155809269, 7.67965144294876, 7.614160337743642, 7.509788613907729, 7.436223495340703, 7.30309660987675, 7.276620235556511  …  0.2998980421683844, 0.283634968575726, 0.24677961129208487, 0.2050080843579322, 0.18298505220436756, 0.12495889701891373, 0.09051781787098297, 0.08083404531175173, 0.019206325549343917, 0.003202011454608104]
+ [99.45762547008042, 8.038224797519273, 7.91382330401012, 7.771435729891187, 7.749684276347026, 7.633618158607116, 7.4994262562356715, 7.385856873008447, 7.255674690782872, 7.164334770140247  …  0.31096854185673756, 0.2641070012056896, 0.22955536451299186, 0.2116195493720748, 0.16506165519402835, 0.14016342426034295, 0.11465361499831782, 0.11143397108206571, 0.053189304402851856, 0.006134407570656399]
+ [100.29015264747456, 7.995893464096488, 7.971125557016326, 7.803297882635571, 7.706364870808463, 7.6029384001775195, 7.4342967256107935, 7.320217213453217, 7.2758584799386234, 7.262203989516647  …  0.31142384585565586, 0.26531987744230207, 0.20800476896114928, 0.17175703661305064, 0.15276296426361263, 0.1329233317096787, 0.1158860766924951, 0.08203861862090175, 0.03620211001798765, 0.014692520840097706]
+ [100.05267169302252, 8.000801116793275, 7.832951871600938, 7.710897352364088, 7.659343975625848, 7.575103603136331, 7.492543213189055, 7.3642719157555545, 7.26131222640204, 7.160015302496709  …  0.2789240855211583, 0.24158198662040825, 0.21182397959689767, 0.1878103413984584, 0.13446677579983424, 0.09615268996818113, 0.08800563327371941, 0.04710072229672249, 0.03352330498466929, 0.008918513845827286]
+ [100.22314531866621, 8.113120629721571, 7.926725299782921, 7.737883366246097, 7.655780388463917, 7.594683071170136, 7.450525074645044, 7.374069496875635, 7.328139266213918, 7.281185775264769  …  0.2876896165966981, 0.27353302321671324, 0.24181856286196898, 0.2200255190245985, 0.1645615757920593, 0.13607924367860297, 0.11545968199006289, 0.09049575654024411, 0.040561746886865514, 0.01599955932781679]
+ [100.20283640011161, 8.087920593095145, 7.847667928560838, 7.798747903771164, 7.668494334214719, 7.595442781931669, 7.403559365744471, 7.338806297442961, 7.284009904561565, 7.2141189852640215  …  0.2750855085913959, 0.24617632188711142, 0.20859124817517263, 0.19604364884043413, 0.15535950170698395, 0.13959775156473903, 0.09800738279475676, 0.06710680361954023, 0.05445992385793637, 6.502441559650383e-5]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pmap</span><span class="p">(</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element Vector{Vector{Float64}}:
+ [99.36478911134684, 8.173702897413074, 7.928579712801168, 7.818922556296815, 7.675549977450578, 7.569268553425831, 7.464279500603051, 7.392049350263823, 7.310649159357491, 7.287375603513704  …  0.2899659774210304, 0.2751725706507292, 0.2588523537721127, 0.21642086399721708, 0.2013140062365517, 0.1318479079842792, 0.09588495912306247, 0.0508361881703594, 0.03491106674481702, 0.005155540075516291]
+ [100.39455338314728, 7.991750276086013, 7.953512671200891, 7.747874712409263, 7.552380241450266, 7.533906094159181, 7.432552155145882, 7.340207684765675, 7.270688234393002, 7.240218495148362  …  0.31443799790665067, 0.3065375594834988, 0.2676108791893727, 0.24860477256864594, 0.20268221465117522, 0.19050462417240877, 0.10479583227113684, 0.09825018385940631, 0.03815733630463426, 0.007924757505798902]
+ [100.17335333496476, 7.99716083085762, 7.834854523828163, 7.6862409037985895, 7.558829599250922, 7.521383205524982, 7.42455912118299, 7.382909740216062, 7.3116721608341235, 7.205954491102081  …  0.316513843646682, 0.26365521159817956, 0.23483850438410017, 0.21887159953634436, 0.179179617746536, 0.15295167859947575, 0.13657234388964284, 0.09722582478511985, 0.04172762018574641, 0.014526976126334903]
+ [100.26129773498461, 8.057670524675727, 7.793513066589892, 7.696003384672289, 7.538149192405969, 7.474889604135346, 7.413677830484547, 7.374943291798586, 7.3143110270355125, 7.183950031857251  …  0.3115318138985984, 0.2781850027910822, 0.23813408101786857, 0.19900647647918587, 0.1514639402768056, 0.13894129471245026, 0.09684255903185421, 0.07443042494808089, 0.06272046395443479, 0.022737585869583396]
+ [100.25927830708989, 8.205732306536628, 8.143007127109612, 7.760415580926902, 7.67965144294876, 7.614160337743645, 7.509788613907726, 7.436223495340701, 7.303096609876749, 7.276620235556508  …  0.2998980421683843, 0.2836349685757256, 0.2467796112920847, 0.20500808435793214, 0.18298505220436792, 0.12495889701891395, 0.09051781787098279, 0.08083404531175217, 0.01920632554934403, 0.0032020114546081565]
+ [99.45762547008042, 8.038224797519273, 7.91382330401011, 7.77143572989118, 7.749684276347023, 7.633618158607116, 7.499426256235673, 7.385856873008438, 7.255674690782878, 7.164334770140247  …  0.31096854185673817, 0.2641070012056897, 0.2295553645129923, 0.2116195493720748, 0.16506165519402866, 0.14016342426034342, 0.1146536149983183, 0.11143397108206592, 0.05318930440285292, 0.00613440757065738]
+ [100.29015264747456, 7.995893464096486, 7.971125557016327, 7.803297882635568, 7.706364870808464, 7.6029384001775195, 7.434296725610796, 7.320217213453213, 7.27585847993863, 7.262203989516654  …  0.3114238458556545, 0.2653198774423012, 0.20800476896114878, 0.1717570366130499, 0.15276296426361188, 0.1329233317096793, 0.11588607669249569, 0.082038618620901, 0.0362021100179881, 0.014692520840097376]
+ [100.05267169302252, 8.00080111679327, 7.832951871600927, 7.710897352364095, 7.659343975625848, 7.57510360313632, 7.49254321318905, 7.364271915755558, 7.261312226402043, 7.160015302496702  …  0.2789240855211591, 0.24158198662040792, 0.21182397959689742, 0.18781034139845829, 0.13446677579983388, 0.09615268996818058, 0.08800563327371982, 0.0471007222967223, 0.03352330498466997, 0.008918513845826724]
+ [100.22314531866621, 8.113120629721568, 7.926725299782921, 7.737883366246082, 7.65578038846392, 7.594683071170144, 7.450525074645046, 7.374069496875639, 7.328139266213926, 7.28118577526477  …  0.2876896165966979, 0.27353302321671363, 0.24181856286196854, 0.2200255190245989, 0.16456157579205952, 0.13607924367860366, 0.11545968199006357, 0.09049575654024473, 0.040561746886865785, 0.01599955932781652]
+ [100.20283640011161, 8.087920593095143, 7.847667928560841, 7.798747903771166, 7.668494334214717, 7.595442781931668, 7.403559365744466, 7.338806297442961, 7.284009904561567, 7.214118985264019  …  0.2750855085913967, 0.2461763218871119, 0.2085912481751727, 0.19604364884043338, 0.15535950170698434, 0.13959775156473883, 0.09800738279475629, 0.06710680361953959, 0.054459923857936354, 6.502441559581328e-5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check that this indeed utilized multiple workers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pmap</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">m</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span>
+<span class="w">    </span><span class="n">svdvals</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 18:	18
+      From worker 19:	19
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 21:	21
+      From worker 20:	20
+      From worker 18:	18
+      From worker 19:	19
+      From worker 21:	21
+      From worker 20:	20
+      From worker 18:	18
+      From worker 19:	19
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="o">$</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">M</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">pmap</span><span class="p">(</span><span class="o">$</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  61.804 ms (81 allocations: 4.22 MiB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  15.130 ms (508 allocations: 36.91 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="when-to-choose-which-distributed-vs-pmap">
+<h3>When to choose which? (<code class="docutils literal notranslate"><span class="pre">&#64;distributed</span></code> vs <code class="docutils literal notranslate"><span class="pre">pmap</span></code>)<a class="headerlink" href="#when-to-choose-which-distributed-vs-pmap" title="Permalink to this headline">#</a></h3>
+<p>Julia’s <code class="docutils literal notranslate"><span class="pre">pmap</span></code> is designed for the case where</p>
+<ul class="simple">
+<li><p>one wants to apply <strong>a function to a collection</strong>,</p></li>
+<li><p>each function call does a <strong>larger amount of work</strong>, and/or</p></li>
+<li><p>the <strong>workload is non-uniform</strong> (load-balancing).</p></li>
+</ul>
+<p>On the other hand, <code class="docutils literal notranslate"><span class="pre">&#64;distributed</span></code> is good for</p>
+<ul class="simple">
+<li><p><strong>reductions</strong>, like sums, where</p></li>
+<li><p><strong>each iteration may be tiny</strong>, i.e. perhaps only summing two numbers, and/or</p></li>
+<li><p>each iteration <strong>takes about the same time</strong> (uniform)</p></li>
+</ul>
+</section>
+</section>
+<section id="high-level-array-abstractions-distributedarrays-jl">
+<h2>High-level array abstractions: <a class="reference external" href="https://github.com/JuliaParallel/DistributedArrays.jl">DistributedArrays.jl</a><a class="headerlink" href="#high-level-array-abstractions-distributedarrays-jl" title="Permalink to this headline">#</a></h2>
+<p>In a <code class="docutils literal notranslate"><span class="pre">DArray</span></code>, each process has local access to just a chunk of the data, and no two processes share the same chunk. Processes can be on different hosts.</p>
+<p>Distributed arrays are for example useful if</p>
+<ul class="simple">
+<li><p>Expensive calculations should be performed in parallel on parts of the array on different hosts.</p></li>
+<li><p>The data doesn’t fit into the local machines memory (i.e. loading big files in parallel).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span><span class="p">,</span><span class="w"> </span><span class="n">BenchmarkTools</span><span class="p">;</span>
+<span class="n">rmprocs</span><span class="p">(</span><span class="n">workers</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># make sure that all workers use the same Julia environment</span>
+<span class="n">addprocs</span><span class="p">(</span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">exeflags</span><span class="o">=</span><span class="s">&quot;--project&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 22
+ 23
+ 24
+ 25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># check</span>
+<span class="nd">@everywhere</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">active_project</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Base.active_project() = &quot;/__w/julia-hpc-workshop/julia-hpc-workshop/Project.toml&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 22:	Base.active_project() = &quot;/__w/julia-hpc-workshop/julia-hpc-workshop/Project.toml&quot;
+      From worker 23:	Base.active_project() = &quot;/__w/julia-hpc-workshop/julia-hpc-workshop/Project.toml&quot;
+      From worker 25:	Base.active_project() = &quot;/__w/julia-hpc-workshop/julia-hpc-workshop/Project.toml&quot;
+      From worker 24:	Base.active_project() = &quot;/__w/julia-hpc-workshop/julia-hpc-workshop/Project.toml&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">DistributedArrays</span><span class="p">,</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Matrix</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}[</span><span class="n">rand</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distribute</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element DArray{Matrix{Float64}, 1, Vector{Matrix{Float64}}}:
+ [0.9315728945836727 0.575197643423051 … 0.06073397438663619 0.7435918884664054; 0.19885040300547951 0.06404758896928142 … 0.754427300407162 0.04107733434972105; … ; 0.07718667330390994 0.10197225974491142 … 0.43801802741167006 0.7878179890940868; 0.45560973014294626 0.3727360055888006 … 0.3792020026513082 0.7787842421362995]
+ [0.4582006288605206 0.5689402932687008 … 0.06428762331456628 0.9075967895786207; 0.4462371084414588 0.759757123675368 … 0.8796938648979324 0.4566881190823443; … ; 0.3832717243113498 0.2897662554934137 … 0.5284992981708496 0.5901467582366836; 0.6530606613985762 0.1527828708348884 … 0.06037745110366466 0.2086213044833357]
+ [0.3635658841430154 0.42158547869874996 … 0.99304672501618 0.20840516099052298; 0.5212583782438506 0.24160909451462664 … 0.8430617882392575 0.5938039945371788; … ; 0.6413448660845218 0.41270782314195364 … 0.8219327879579931 0.030796410963994103; 0.4231993181540036 0.29604707881332204 … 0.6648047087680753 0.2173163100176312]
+ [0.7097745817723916 0.6239321936378007 … 0.537577793287748 0.18909004988554556; 0.7954019960516246 0.7593466478201326 … 0.9081144812391095 0.504207208004368; … ; 0.41760078517870236 0.9154969513741419 … 0.38813615076675756 0.6832506604348354; 0.8362856938176987 0.14401552428153386 … 0.7797077259315196 0.9930692040363173]
+ [0.6262359809158304 0.38180125474401927 … 0.33639850897064505 0.29587400291233545; 0.6346882313066767 0.9103133372443759 … 0.0365196440369252 0.44774691470087613; … ; 0.23013902026401833 0.2553136512895897 … 0.7555302316040118 0.9306848252935287; 0.4515355648063145 0.38339654133041023 … 0.23068566022713266 0.49205406935819385]
+ [0.5256961846090457 0.14033335493151655 … 0.6725707584776182 0.807326224782374; 0.5425661024958283 0.22788231487685173 … 0.15185435545441606 0.6545850256045795; … ; 0.35538710917439753 0.28699175926548903 … 0.8960968777921211 0.3212396942302711; 0.291914399802951 0.7403427115936905 … 0.3842435314332906 0.8328764379736688]
+ [0.7419922545241089 0.33478789408019727 … 0.36647380873531943 0.5735036018705503; 0.29777579424434275 0.23033622941966292 … 0.07951127635755795 0.24808930553156872; … ; 0.7613146695299022 0.8517423777972825 … 0.6141130534170914 0.3378701988949231; 0.9525756474210632 0.05441314483418158 … 0.7650030586333556 0.0697516525659887]
+ [0.8307084817972926 0.004275539807079731 … 0.3321608067128623 0.668256659569411; 0.9857678521360426 0.3339466911412191 … 0.31583890068686793 0.6043717909583418; … ; 0.41656173975608213 0.8174549167860535 … 0.1721536269449474 0.3810374781638476; 0.2624540348256643 0.8091770436184466 … 0.3355223597174237 0.026478130310725767]
+ [0.9917140290264166 0.2014740062646112 … 0.15411294259791397 0.8645218343310342; 0.7699524135757742 0.43486198220281724 … 0.3655017527263129 0.7761677869727389; … ; 0.9238473754118803 0.7086659887183278 … 0.9291016889633232 0.372010699815316; 0.573075820700772 0.49287105737581993 … 0.6683300478570002 0.6824470862023012]
+ [0.6253475184214765 0.04490121368291311 … 0.9768117078321903 0.9178148964787206; 0.867127640237895 0.6109245219991687 … 0.798409367810416 0.9077779894534259; … ; 0.1945800666821882 0.3651549206782173 … 0.3424625566350413 0.43444410062550975; 0.11210611964064598 0.050992129172817036 … 0.14631617539899955 0.7632855028262485]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which workers hold parts of D?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">procs</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 22
+ 23
+ 24
+ 25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 22
+ 23
+ 24
+ 25
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which parts do they hold?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">localpart</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="w"> </span><span class="c"># the master doesn&#39;t hold anything</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix{Float64}[]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Which parts do they hold?</span>
+<span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="nd">@fetchfrom</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">DistributedArrays</span><span class="o">.</span><span class="n">localindices</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1:3,)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4:6,)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7:8,)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9:10,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="o">$</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">M</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="o">$</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">D</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  62.096 ms (81 allocations: 4.22 MiB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  14.780 ms (554 allocations: 25.70 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">pmap</span><span class="p">(</span><span class="o">$</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  15.212 ms (511 allocations: 37.00 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="actual-distributed-computing-comments">
+<h2><em>Actual</em> distributed computing: Comments<a class="headerlink" href="#actual-distributed-computing-comments" title="Permalink to this headline">#</a></h2>
+<section id="creating-workers-on-other-machines">
+<h3>Creating workers on other machines<a class="headerlink" href="#creating-workers-on-other-machines" title="Permalink to this headline">#</a></h3>
+<p>So far we have worked with multiple process on the same system, because we simply used <code class="docutils literal notranslate"><span class="pre">addprocs(::Integer)</span></code>. To put worker processes on other machines, e.g. nodes of a cluster, we need to modify the initial <code class="docutils literal notranslate"><span class="pre">addprocs</span></code> call appropriately.</p>
+<p>In Julia, starting worker processes is handled by <a class="reference external" href="https://docs.julialang.org/en/v1/manual/distributed-computing/#ClusterManagers">ClusterManagers</a>.</p>
+<ul class="simple">
+<li><p>The default one is <code class="docutils literal notranslate"><span class="pre">LocalManager</span></code>. It is automatically used when running <code class="docutils literal notranslate"><span class="pre">addprocs(i::Integer)</span></code> and we have implicitly used it already.</p></li>
+<li><p>Another important one is <code class="docutils literal notranslate"><span class="pre">SSHManager</span></code>. It is automatically used when running <code class="docutils literal notranslate"><span class="pre">addprocs(hostnames::Array)</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">addprocs([&quot;node123&quot;,</span> <span class="pre">&quot;node456&quot;])</span></code>. The only requirement is a <strong>passwordless ssh access</strong> to all specified hosts.</p></li>
+<li><p>Cluster managers for SLURM, PBS, and others are provided in <a class="reference external" href="https://github.com/JuliaParallel/ClusterManagers.jl">ClusterManagers.jl</a>. For SLURM, this will make <code class="docutils literal notranslate"><span class="pre">addprocs</span></code> use <code class="docutils literal notranslate"><span class="pre">srun</span></code> under the hood.</p></li>
+</ul>
+<p><em>Demonstrate in terminal from thp node</em></p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
+
+<span class="n">addprocs</span><span class="p">([</span><span class="s">&quot;l93&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;l94&quot;</span><span class="p">])</span>
+
+<span class="nd">@everywhere</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">gethostname</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>One can also start multiple processes on different machines:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">addprocs</span><span class="p">([(</span><span class="s">&quot;node123&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;node456&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)])</span><span class="w"> </span><span class="c"># starts 2 workers on node123 and 3 workers on node456</span>
+
+<span class="c"># Use :auto to start as many processes as CPU threads are available</span>
+</pre></div>
+</div>
+<p><strong>Be aware of different paths:</strong></p>
+<ul class="simple">
+<li><p>By default, <code class="docutils literal notranslate"><span class="pre">addprocs</span></code> expects to find the julia executable on the remote machines under the same path as on the host (master).</p></li>
+<li><p>It will also try to <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the same folder (set the working directory).</p></li>
+</ul>
+<p>As you can see from <code class="docutils literal notranslate"><span class="pre">?addprocs</span></code>, <code class="docutils literal notranslate"><span class="pre">addprocs</span></code> takes a bunch of keyword arguments, two of which are of particular importance in this regard:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dir</span></code>: working directory for the worker processes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exename</span></code>: path to julia executable (potentially augmented with pre-commands) for the worker processes</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># cleanup</span>
+<span class="n">rmprocs</span><span class="p">(</span><span class="n">workers</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00007f2e44b19880
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.8"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.8",
+            path: "./sessions/3-parallel"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.8'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="1-parallelism-concurrency.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Parallel Computing</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="3-distributed-computing-mpi.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Distributed Computing: Message Passing Interface (MPI)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Robert Rosca<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

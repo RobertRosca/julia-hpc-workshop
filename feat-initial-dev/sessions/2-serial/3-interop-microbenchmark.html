@@ -184,6 +184,39 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 3 - Parallel
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/1-parallelism-concurrency.html">
+   Parallel Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/2-distributed-computing.html">
+   Distributed Computing:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/3-distributed-computing-mpi.html">
+   Distributed Computing: Message Passing Interface (MPI)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/4-multithreading.html">
+   Multithreading
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -741,9 +774,9 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python ndarray:</span>
-array([ 2.23147022+0.j       ,  0.65194254+0.j       ,
-       -0.67535629+0.j       , -0.2060629 +0.2090315j,
-       -0.2060629 -0.2090315j])
+array([ 2.49077042+0.j        ,  0.5870478 +0.j        ,
+       -0.81670469+0.j        , -0.24697034+0.55524577j,
+       -0.24697034-0.55524577j])
 </pre></div>
 </div>
 </div>
@@ -757,9 +790,9 @@ array([ 2.23147022+0.j       ,  0.65194254+0.j       ,
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python ndarray:</span>
-array([ 2.54144468+0.j        , -0.33871911+0.j        ,
-        0.3132099 +0.18692591j,  0.3132099 -0.18692591j,
-        0.66282571+0.j        ])
+array([ 2.54982077+0.j        , -0.4011143 +0.22430806j,
+       -0.4011143 -0.22430806j,  0.96509204+0.j        ,
+        0.37555676+0.j        ])
 </pre></div>
 </div>
 </div>
@@ -810,7 +843,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.632 μs (3 allocations: 48 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.687 μs (3 allocations: 48 bytes)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.695 ns (0 allocations: 0 bytes)
@@ -857,7 +890,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/tmp/jl_gl4VsxYvqr.so&quot;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/tmp/jl_0l6Vunu5yL.so&quot;
 </pre></div>
 </div>
 </div>
@@ -882,7 +915,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.493799814055841
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.640470230171535
 </pre></div>
 </div>
 </div>
@@ -895,7 +928,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7.549 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8.042 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -918,7 +951,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5079402825656124
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8655376984228581
 </pre></div>
 </div>
 </div>
@@ -930,7 +963,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.730 μs (3 allocations: 48 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.704 μs (3 allocations: 48 bytes)
 </pre></div>
 </div>
 </div>
@@ -957,7 +990,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.999935642724615e6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.000342439637186e6
 </pre></div>
 </div>
 </div>
@@ -1005,7 +1038,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python function: </span>&lt;function sum at 0x7ff73c074550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python function: </span>&lt;function sum at 0x7f506c417550&gt;
 </pre></div>
 </div>
 </div>
@@ -1017,14 +1050,14 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 763 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">6.459 ms</span> … <span class=" -Color -Color-Magenta">  8.202 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">6.516 ms               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.550 ms</span> ± <span class=" -Color -Color-Green">120.305 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 777 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">6.347 ms</span> … <span class=" -Color -Color-Magenta">  8.674 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">6.393 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.427 ms</span> ± <span class=" -Color -Color-Green">139.687 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-   ▅▇█▇▆▅<span class=" -Color -Color-Blue">▅</span>▆▅▅<span class=" -Color -Color-Green">▄</span>▄▂▃     ▁ ▁               ▁                      
-  ███████<span class=" -Color -Color-Blue">█</span>███<span class=" -Color -Color-Green">█</span>███▆▇▆▅▇█▆█▇▇▅▆▄▆▄▅▅▄▁▅▁▆▇█▇▇▅▇▇▄▁▄▄▄▄▅▄▁▁▄▁▁▁▄ █
-  6.46 ms      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      6.96 ms <span class=" -Color -Color-Bold">&lt;</span>
+    ▃▅█▅▄<span class=" -Color -Color-Blue">▅</span>▃▁▁  <span class=" -Color -Color-Green"> </span>                                               
+  ▄▅█████<span class=" -Color -Color-Blue">█</span>███▇▇<span class=" -Color -Color-Green">▄</span>▄▄▃▄▃▂▃▂▂▂▂▂▁▂▂▂▂▂▁▁▂▁▂▂▁▁▁▂▁▁▁▁▂▂▂▃▃▃▃▃▃▂▂▃▂ ▃
+  6.35 ms         Histogram: frequency by time        6.72 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">928 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">23</span>.
 </pre></div>
@@ -1038,7 +1071,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.458949
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.346829
 </pre></div>
 </div>
 </div>
@@ -1068,7 +1101,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python function: </span>&lt;function mysum at 0x7ff6bc033ca0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">Python function: </span>&lt;function mysum at 0x7f506ba8eca0&gt;
 </pre></div>
 </div>
 </div>
@@ -1088,13 +1121,13 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 16 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">326.503 ms</span> … <span class=" -Color -Color-Magenta">379.400 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">327.977 ms               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">332.510 ms</span> ± <span class=" -Color -Color-Green"> 13.191 ms</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">327.377 ms</span> … <span class=" -Color -Color-Magenta">342.342 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">328.962 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">329.860 ms</span> ± <span class=" -Color -Color-Green">  3.454 ms</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-   █<span class=" -Color -Color-Blue"> </span>    <span class=" -Color -Color-Green"> </span>                                                       
-  ▄█<span class=" -Color -Color-Blue">▇</span>▄▁▁▁<span class=" -Color -Color-Green">▄</span>▁▁▁▁▁▁▁▁▁▁▁▁▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▄ ▁
-  327 ms           Histogram: frequency by time          379 ms <span class=" -Color -Color-Bold">&lt;</span>
+       █<span class=" -Color -Color-Blue">█</span> ▁ <span class=" -Color -Color-Green"> </span>                                                    
+  ▆▁▁▆▆█<span class=" -Color -Color-Blue">█</span>▁█▁<span class=" -Color -Color-Green">▆</span>▁▁▁▁▁▁▆▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▆ ▁
+  327 ms           Histogram: frequency by time          342 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">16 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">1</span>.
 </pre></div>
@@ -1108,7 +1141,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>326.502998
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>327.37702
 </pre></div>
 </div>
 </div>
@@ -1137,13 +1170,13 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 100 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">49.921 ms</span> … <span class=" -Color -Color-Magenta">63.026 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">50.035 ms              </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">50.203 ms</span> ± <span class=" -Color -Color-Green"> 1.317 ms</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">50.068 ms</span> … <span class=" -Color -Color-Magenta"> 51.093 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">50.273 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">50.277 ms</span> ± <span class=" -Color -Color-Green">142.436 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-  ▂▆█<span class=" -Color -Color-Blue">▇</span>▆  <span class=" -Color -Color-Green"> </span>                                                     
-  ███<span class=" -Color -Color-Blue">█</span>██▇<span class=" -Color -Color-Green">▅</span>▅▁▁▅▅▅▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▅ ▅
-  49.9 ms      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      52.3 ms <span class=" -Color -Color-Bold">&lt;</span>
+                    <span class=" -Color -Color-Blue">█</span>▁                                          
+  ▃▅▃▅▄▃▆▄▁▃▃▁█▄▆▆▇▅<span class=" -Color -Color-Blue">█</span>█▇▅▅▅▃▃▃▃▄▁▁▁▁▁▄▃▁▁▁▁▁▁▁▁▁▁▁▃▁▁▃▁▁▁▃▁▁▁▁▃ ▃
+  50.1 ms         Histogram: frequency by time         50.7 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">16 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">1</span>.
 </pre></div>
@@ -1157,7 +1190,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49.921347
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.068248
 </pre></div>
 </div>
 </div>
@@ -1197,7 +1230,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: redefinition of constant Clib. This may fail, cause incorrect answers, or produce other errors.
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/tmp/jl_aT4bejKTAD.so&quot;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/tmp/jl_87OFW7EzYt.so&quot;
 </pre></div>
 </div>
 </div>
@@ -1242,13 +1275,13 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 352 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">14.000 ms</span> … <span class=" -Color -Color-Magenta"> 14.652 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">14.119 ms               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">14.200 ms</span> ± <span class=" -Color -Color-Green">175.720 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 353 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">13.981 ms</span> … <span class=" -Color -Color-Magenta"> 15.625 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">14.080 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">14.171 ms</span> ± <span class=" -Color -Color-Green">192.985 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-       ▄▂▂█▅   <span class=" -Color -Color-Blue"> </span>        <span class=" -Color -Color-Green"> </span>                                       
-  ▃▄▃▃███████▆▃<span class=" -Color -Color-Blue">▅</span>██▅▃▄▂▄▅<span class=" -Color -Color-Green">▆</span>▅▄▁▁▁▁▂▁▁▁▂▂▁▂▁▁▁▁▁▂▂▁▂▃▄▃▅▅▃▇▄█▅▃▅▄▄ ▃
+    ▁▅▄▅▁█▁ <span class=" -Color -Color-Blue"> </span>▁        <span class=" -Color -Color-Green"> </span>                                         
+  ▄▄███████▆<span class=" -Color -Color-Blue">█</span>█▅▂▅▅▂▅▃▅<span class=" -Color -Color-Green">▃</span>▂▃▃▄▃▄▃▂▃▃▁▁▁▃▃▂▁▂▂▁▂▂▃▄▆▅▅▅▄▂▃▁▄▂▃▄▅▆▃ ▃
   14 ms           Histogram: frequency by time         14.6 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
@@ -1263,7 +1296,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.999658
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.981165
 </pre></div>
 </div>
 </div>
@@ -1299,13 +1332,13 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 589 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">8.430 ms</span> … <span class=" -Color -Color-Magenta"> 9.697 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">8.484 ms              </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">8.487 ms</span> ± <span class=" -Color -Color-Green">53.696 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">8.365 ms</span> … <span class=" -Color -Color-Magenta"> 8.979 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">8.483 ms              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">8.484 ms</span> ± <span class=" -Color -Color-Green">31.145 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-                                ▂▃ ▂▃ <span class=" -Color -Color-Blue">█</span>▆<span class=" -Color -Color-Green">▂</span>  ▂▁                 
-  ▂▁▁▁▁▁▁▁▁▁▃▃▁▁▃▃▃▃▃▄▃▁▃▃▂▄▅▇▆███▇███<span class=" -Color -Color-Blue">█</span>█<span class=" -Color -Color-Green">█</span>▇▇██▇▆▄▄▄▄▃▃▄▃▃▃▃▁▃ ▃
-  8.43 ms        Histogram: frequency by time        8.52 ms <span class=" -Color -Color-Bold">&lt;</span>
+                           ▁▃▅▆▇▇<span class=" -Color -Color-Blue">█</span><span class=" -Color -Color-Green">▇</span>▇▅▄▂▁                      
+  ▄▁▁▁▁▁▄▁▁▄▁▁▁▁▅▅▇▄▅▄▆▇██▇██████<span class=" -Color -Color-Blue">█</span><span class=" -Color -Color-Green">█</span>█████▅▁▁▅▁▄▆▄▆▁▄▄▄▁▁▁▁▁▁▄ █
+  8.37 ms      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time     8.58 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
@@ -1319,7 +1352,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.430125
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.365378
 </pre></div>
 </div>
 </div>
@@ -1337,14 +1370,14 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 820 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">5.975 ms</span> … <span class=" -Color -Color-Magenta">  6.764 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">6.059 ms               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.095 ms</span> ± <span class=" -Color -Color-Green">120.003 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 832 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">5.831 ms</span> … <span class=" -Color -Color-Magenta">  8.334 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">5.946 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.004 ms</span> ± <span class=" -Color -Color-Green">172.603 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-   ▇▇▁▂ ▆▃▄▆▃<span class=" -Color -Color-Blue">█</span>▆▅▂ <span class=" -Color -Color-Green"> </span>                                     ▁      
-  ▆██████████<span class=" -Color -Color-Blue">█</span>████<span class=" -Color -Color-Green">▆</span>▇▇▄▆▄▄▄▃▃▃▃▃▁▁▃▃▂▃▃▃▂▂▃▃▁▂▃▂▂▂▂▃▁▂▃▃▄██▅▅▃ ▄
-  5.98 ms         Histogram: frequency by time        6.41 ms <span class=" -Color -Color-Bold">&lt;</span>
+   ▁█▆▃▁        <span class=" -Color -Color-Blue"> </span>      <span class=" -Color -Color-Green"> </span>                                       
+  ▃█████▄▆▇▇▅▄▄▅<span class=" -Color -Color-Blue">▅</span>▄▄▃▃▄▄<span class=" -Color -Color-Green">▄</span>▃▃▅▃▂▂▂▂▁▂▁▂▂▃▃▃▃▃▁▂▃▃▂▂▃▁▂▂▄▇▆▇▄▃▂▁▁ ▃
+  5.83 ms         Histogram: frequency by time        6.31 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
@@ -1358,7 +1391,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.975432
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.831338
 </pre></div>
 </div>
 </div>
@@ -1375,13 +1408,13 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 19 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">262.999 ms</span> … <span class=" -Color -Color-Magenta">272.718 ms</span>  ┊ GC (min … max): 0.00% … 5.47%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">266.162 ms               </span>┊ GC (median):    5.21%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">266.929 ms</span> ± <span class=" -Color -Color-Green">  2.867 ms</span>  ┊ GC (mean ± σ):  4.24% ± 2.25%
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">268.978 ms</span> … <span class=" -Color -Color-Magenta">277.850 ms</span>  ┊ GC (min … max): 0.00% … 5.23%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">271.472 ms               </span>┊ GC (median):    5.05%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">272.555 ms</span> ± <span class=" -Color -Color-Green">  2.985 ms</span>  ┊ GC (mean ± σ):  4.08% ± 2.17%
 
-             █      ▃<span class=" -Color -Color-Blue"> </span> ▃   <span class=" -Color -Color-Green"> </span>                                     
-  ▇▁▁▁▇▁▁▁▁▁▁█▇▁▁▇▁▁█<span class=" -Color -Color-Blue">▇</span>▇█▇▁▁<span class=" -Color -Color-Green">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▇▁▁▁▁▁▁▁▁▁▁▇▁▁▇▁▁▁▇▁▁▁▇ ▁
-  263 ms           Histogram: frequency by time          273 ms <span class=" -Color -Color-Bold">&lt;</span>
+  ▃               ▃<span class=" -Color -Color-Blue">█</span>       <span class=" -Color -Color-Green"> </span>                            ▃        
+  █▁▁▇▁▁▁▁▁▁▇▇▁▁▇▁█<span class=" -Color -Color-Blue">█</span>▇▇▁▁▇▁▁<span class=" -Color -Color-Green">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▇█▁▁▁▁▇▇ ▁
+  269 ms           Histogram: frequency by time          278 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">152.59 MiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">9999999</span>.
 </pre></div>
@@ -1395,7 +1428,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>262.998801
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>268.977681
 </pre></div>
 </div>
 </div>
@@ -1429,12 +1462,12 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 350 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">14.131 ms</span> … <span class=" -Color -Color-Magenta"> 14.596 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">14.212 ms               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">14.305 ms</span> ± <span class=" -Color -Color-Green">168.802 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">14.117 ms</span> … <span class=" -Color -Color-Magenta"> 14.644 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">14.194 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">14.279 ms</span> ± <span class=" -Color -Color-Green">172.834 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-    ▃██      <span class=" -Color -Color-Blue"> </span>           <span class=" -Color -Color-Green"> </span>                                      
-  ▂▆███▇▆▆▅▅▇<span class=" -Color -Color-Blue">▆</span>▅▄▃▂▃▃▄▄▃▃▃<span class=" -Color -Color-Green">▁</span>▂▁▁▂▁▂▂▁▂▁▁▁▁▁▂▂▁▂▃▁▃▃▃▃▄▄▅▅▃▄▃▆██▅▃ ▃
+   ▄▇█▁▂    <span class=" -Color -Color-Blue"> </span>         <span class=" -Color -Color-Green"> </span>                                   ▁▁▁   
+  ▄████████▇<span class=" -Color -Color-Blue">▄</span>▄▆▆▅▄▆▆▅▄<span class=" -Color -Color-Green">▃</span>▃▂▂▁▂▂▁▁▁▁▁▁▁▁▁▁▁▁▃▁▁▂▂▂▁▃▂▁▃▂▃▃▂▄▆███▅ ▃
   14.1 ms         Histogram: frequency by time         14.6 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
@@ -1449,7 +1482,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.131375
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.116906
 </pre></div>
 </div>
 </div>
@@ -1482,14 +1515,14 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 840 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">5.863 ms</span> … <span class=" -Color -Color-Magenta"> 6.630 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">5.907 ms              </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">5.947 ms</span> ± <span class=" -Color -Color-Green">93.766 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 843 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">5.753 ms</span> … <span class=" -Color -Color-Magenta">  6.926 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">5.890 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">5.927 ms</span> ± <span class=" -Color -Color-Green">145.729 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-   ▁▇█▇<span class=" -Color -Color-Blue"> </span>    <span class=" -Color -Color-Green"> </span>                                                 
-  ▄████<span class=" -Color -Color-Blue">█</span>▆▃▃▃<span class=" -Color -Color-Green">▄</span>▆▆▇▅▄▄▄▃▃▃▃▃▂▃▂▃▃▂▂▂▂▂▁▂▂▂▂▁▂▁▁▂▁▁▂▂▁▂▁▁▁▂▂▂▁▂▃ ▃
-  5.86 ms        Histogram: frequency by time        6.33 ms <span class=" -Color -Color-Bold">&lt;</span>
+    ▆█▇▂▆▅▂       <span class=" -Color -Color-Blue"> </span>   <span class=" -Color -Color-Green"> </span>                                        
+  ▂▇███████▇▇▇▅▄▄▄<span class=" -Color -Color-Blue">▃</span>██▅<span class=" -Color -Color-Green">▇</span>▅▅▄▅▄▄▄▅▂▃▄▅▄▄▅▅▅▅▅▄▄▂▂▃▂▂▁▂▂▃▄▃▃▂▂▂▂▃ ▃
+  5.75 ms         Histogram: frequency by time        6.26 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
@@ -1503,7 +1536,7 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.862664
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.753133
 </pre></div>
 </div>
 </div>
@@ -1521,15 +1554,15 @@ array([ 2.54144468+0.j        , -0.33871911+0.j        ,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Julia (hand-written, fastmath)......5.86
-Julia (built-in)....................5.98
-Python (numpy)......................6.46
-C (fastmath)........................8.43
-C...................................14.0
-Julia (hand-written)...............14.13
-Python (built-in)..................49.92
-Julia (built-in, Any)..............263.0
-Python (hand-written)..............326.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Julia (hand-written, fastmath)......5.75
+Julia (built-in)....................5.83
+Python (numpy)......................6.35
+C (fastmath)........................8.37
+C..................................13.98
+Julia (hand-written)...............14.12
+Python (built-in)..................50.07
+Julia (built-in, Any).............268.98
+Python (hand-written).............327.38
 </pre></div>
 </div>
 </div>
@@ -1542,7 +1575,7 @@ Python (hand-written)..............326.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.618376036780818 + 5.36440939263753im
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.090233739426147 + 4.509382279448911im
 </pre></div>
 </div>
 </div>
@@ -1581,7 +1614,7 @@ Python (hand-written)..............326.5
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.695 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7.681 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7.515 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.033 ns (0 allocations: 0 bytes)
@@ -1617,13 +1650,13 @@ Python (hand-written)..............326.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.696 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.695 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8.581 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8.645 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.040 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.033 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1805,16 +1838,16 @@ Python (hand-written)..............326.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  829.949 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  801.989 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  135.991 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  133.729 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  236.209 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  234.933 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  440.520 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  440.581 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>

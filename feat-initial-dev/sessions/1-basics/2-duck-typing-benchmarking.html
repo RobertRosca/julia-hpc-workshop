@@ -184,6 +184,39 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 3 - Parallel
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/1-parallelism-concurrency.html">
+   Parallel Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/2-distributed-computing.html">
+   Distributed Computing:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/3-distributed-computing-mpi.html">
+   Distributed Computing: Message Passing Interface (MPI)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/4-multithreading.html">
+   Multithreading
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav></div>
@@ -674,7 +707,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.054129 seconds (2 allocations: 76.294 MiB, 28.49% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.045304 seconds (2 allocations: 76.294 MiB, 13.45% gc time)
 </pre></div>
 </div>
 </div>
@@ -687,7 +720,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000000 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000001 seconds
 </pre></div>
 </div>
 </div>
@@ -718,7 +751,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.096528 seconds (4 allocations: 152.588 MiB, 36.02% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.095906 seconds (4 allocations: 152.588 MiB, 33.10% gc time)
   0.000001 seconds
 20
 </pre></div>
@@ -734,7 +767,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.137820 seconds (2 allocations: 76.294 MiB, 67.53% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.140318 seconds (2 allocations: 76.294 MiB, 66.64% gc time)
   0.000001 seconds
 </pre></div>
 </div>
@@ -759,7 +792,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  192.219 ms (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  192.440 ms (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1198,12 +1231,12 @@ vectors:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.062762 seconds (218.69 k allocations: 11.186 MiB, 99.52% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.060537 seconds (218.68 k allocations: 11.185 MiB, 99.52% compilation time)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
- 0.971885  0.674907
- 0.688734  0.603286
+ 1.94166  1.37405
+ 2.24657  1.23629
 </pre></div>
 </div>
 </div>
@@ -1234,8 +1267,8 @@ vectors:
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
- 0.15418  0.750201
- 1.21254  2.62833
+ 0.00533278  2.14567
+ 2.95128     1.01495
 </pre></div>
 </div>
 </div>
@@ -1256,12 +1289,12 @@ vectors:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  44.874 ns (1 allocation: 96 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  44.083 ns (1 allocation: 96 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
- 0.971885  0.674907
- 0.688734  0.603286
+ 1.94166  1.37405
+ 2.24657  1.23629
 </pre></div>
 </div>
 </div>
@@ -1273,14 +1306,14 @@ vectors:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 989 evaluations.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">44.918 ns</span> … <span class=" -Color -Color-Magenta"> 1.580 μs</span>  ┊ GC (min … max): 0.00% … 95.22%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">46.888 ns              </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">51.767 ns</span> ± <span class=" -Color -Color-Green">56.078 ns</span>  ┊ GC (mean ± σ):  4.77% ±  4.29%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 990 evaluations.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">44.167 ns</span> … <span class=" -Color -Color-Magenta"> 1.565 μs</span>  ┊ GC (min … max): 0.00% … 96.31%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">45.724 ns              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">50.569 ns</span> ± <span class=" -Color -Color-Green">56.864 ns</span>  ┊ GC (mean ± σ):  4.95% ±  4.30%
 
-  ▂▇█<span class=" -Color -Color-Blue">▆</span>▃▁▁▂▂<span class=" -Color -Color-Green">▁</span>▂▁▁▁                                      ▁▁ ▁    ▂
-  ███<span class=" -Color -Color-Blue">█</span>█████<span class=" -Color -Color-Green">█</span>███████▆▆▅▄▄▄▁▁▁▄▁▁▁▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▆██████▇▇ █
-  44.9 ns      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      89.9 ns <span class=" -Color -Color-Bold">&lt;</span>
+  ▃█<span class=" -Color -Color-Blue">█</span>▄▂▁▁▁▂<span class=" -Color -Color-Green">▁</span>▁▂▁                                        ▁▁▁▁▁  ▂
+  ██<span class=" -Color -Color-Blue">█</span>██████<span class=" -Color -Color-Green">█</span>███████▇▇▆▅▃▃▄▃▄▁▃▄▁▄▃▅▁▁▁▃▁▁▃▁▁▃▁▃▁▁▁▁▁▁▆▇██████ █
+  44.2 ns      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time        87 ns <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">96 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">1</span>.
 </pre></div>
@@ -1305,10 +1338,10 @@ vectors:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  90.401 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  91.442 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  91.142 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  92.249 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
 </div>
@@ -1350,10 +1383,10 @@ vectors:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4.746 μs (2 allocations: 78.17 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5.480 μs (2 allocations: 78.17 KiB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  117.864 ns (3 allocations: 112 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  117.144 ns (3 allocations: 112 bytes)
 </pre></div>
 </div>
 </div>
@@ -1370,10 +1403,10 @@ vectors:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  85.980 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  83.564 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  192.195 ns (2 allocations: 912 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  192.559 ns (2 allocations: 912 bytes)
 </pre></div>
 </div>
 </div>
@@ -1405,7 +1438,7 @@ In [3]: %timeit d + d
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.139 ms (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.127 ms (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>

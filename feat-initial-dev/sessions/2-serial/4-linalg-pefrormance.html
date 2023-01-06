@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Parallel Computing" href="../3-parallel/1-parallelism-concurrency.html" />
     <link rel="prev" title="Programming language interoperability (Interop)" href="3-interop-microbenchmark.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -178,6 +179,39 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Performance Considerations for Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 3 - Parallel
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/1-parallelism-concurrency.html">
+   Parallel Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/2-distributed-computing.html">
+   Distributed Computing:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/3-distributed-computing-mpi.html">
+   Distributed Computing: Message Passing Interface (MPI)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/4-multithreading.html">
+   Multithreading
   </a>
  </li>
 </ul>
@@ -550,7 +584,7 @@ Libraries:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  70.421 μs (2 allocations: 78.17 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  70.254 μs (2 allocations: 78.17 KiB)
 </pre></div>
 </div>
 </div>
@@ -593,7 +627,7 @@ Libraries:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  32.753 μs (2 allocations: 78.17 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  51.990 μs (2 allocations: 78.17 KiB)
 </pre></div>
 </div>
 </div>
@@ -671,7 +705,7 @@ Libraries:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.062 μs (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.063 μs (1 allocation: 896 bytes)
 </pre></div>
 </div>
 </div>
@@ -742,7 +776,7 @@ Libraries:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  476.561 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  472.107 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
 </div>
@@ -794,7 +828,7 @@ Libraries:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  319.815 ns (2 allocations: 944 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  343.365 ns (2 allocations: 944 bytes)
 </pre></div>
 </div>
 </div>
@@ -843,6 +877,13 @@ Libraries:
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Programming language interoperability (Interop)</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="../3-parallel/1-parallelism-concurrency.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Parallel Computing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
