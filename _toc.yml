@@ -1,6 +1,3 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: README.md
 parts:
@@ -10,6 +7,6 @@ parts:
   - caption: Day 2 - Serial
     chapters:
       - glob: sessions/2-serial/*
-  # - caption: Day 3 - Parallel
-  #   chapters:
-  #     - glob: sessions/2-parallel/*
+  - caption: Day 3 - Parallel
+    chapters:
+      - glob: sessions/3-parallel/*
