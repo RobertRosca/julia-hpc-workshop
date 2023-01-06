@@ -1,0 +1,15 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: README.md
+parts:
+  - caption: Day 1 - Basics
+    chapters:
+      - glob: sessions/1-basics/*
+  - caption: Day 2 - Serial
+    chapters:
+      - glob: sessions/2-serial/*
+  # - caption: Day 3 - Parallel
+  #   chapters:
+  #     - glob: sessions/2-parallel/*

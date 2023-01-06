@@ -1,0 +1,24 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Julia for HPC<br>EuXFEL Workshop
+author: Robert Rosca
+logo: static/logo.svg
+
+exclude_patterns: [ .CondaPkg , .virtual_documents ]
+only_build_toc_files: true
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: cache
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/robertrosca/julia-hpc-workshop  # Online location of your book
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  use_issues_button: true
+  use_repository_button: true
