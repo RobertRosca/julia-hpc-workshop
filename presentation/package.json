@@ -1,0 +1,15 @@
+{
+  "name": "julia-hpc-workshop---euxfel-2022-jan-10",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "0.37.1",
+    "shiki": "0.11.1",
+    "slidev-theme-purplin": "^1.2.0",
+    "slidev-theme-unicorn": "^1.1.1"
+  }
+}
