@@ -1,0 +1,1862 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Code Specialization &#8212; Julia for HPC&lt;br&gt;EuXFEL Workshop</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Generic programming" href="4-generic-programming.html" />
+    <link rel="prev" title="Duck Typing, Interfaces, and Benchmarkin" href="2-duck-typing-benchmarking.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Julia for HPC<br>EuXFEL Workshop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Jupyter for HPC - EuXFEL Trial Run
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 1 - Basics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="0-syntax.html">
+   Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-types-dispatch.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-duck-typing-benchmarking.html">
+   Duck Typing, Interfaces, and Benchmarkin
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Code Specialization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-generic-programming.html">
+   Generic programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-workflow.html">
+   Development Workflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6-pkg-management.html">
+   Package Management
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 2 - Serial
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/1-optimizing-serial-performance.html">
+   Optimizing “Serial” Performance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/2-simd.html">
+   SIMD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/3-interop-microbenchmark.html">
+   Programming language interoperability (Interop)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/4-linalg-pefrormance.html">
+   Performance Considerations for Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 3 - Parallel
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/1-parallelism-concurrency.html">
+   Parallel Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/2-distributed-computing.html">
+   Distributed Computing:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/3-distributed-computing-mpi.html">
+   Distributed Computing: Message Passing Interface (MPI)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../3-parallel/4-multithreading.html">
+   Multithreading
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/robertrosca/julia-hpc-workshop/master?urlpath=tree/sessions/1-basics/3-specialization.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/robertrosca/julia-hpc-workshop"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/robertrosca/julia-hpc-workshop/issues/new?title=Issue%20on%20page%20%2Fsessions/1-basics/3-specialization.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/sessions/1-basics/3-specialization.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Code Specialization
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#just-ahead-of-time-jaot-compilation">
+     Just Ahead of Time (JAOT) Compilation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specialization">
+     Specialization
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introspection">
+     Introspection
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#code-lowering">
+       Code Lowering
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#type-inference">
+       Type Inference
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#llvm-ir">
+       LLVM IR
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#native-code">
+       Native Code
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-important-is-specialization">
+     How Important is Specialization?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-vs-values">
+     Types vs Values
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#why-not-always-use-static-arrays-then">
+       Why not always use static arrays then?!
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dispatch-and-specialization">
+       Dispatch and Specialization
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#example-determinant-of-a-2x2-matrix">
+         Example: Determinant of a 2x2 matrix
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-explicit-type-annotations-necessary">
+     Are Explicit Type Annotations Necessary?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#core-messages-of-this-notebook">
+   Core messages of this Notebook
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Code Specialization</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Code Specialization
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#just-ahead-of-time-jaot-compilation">
+     Just Ahead of Time (JAOT) Compilation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specialization">
+     Specialization
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introspection">
+     Introspection
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#code-lowering">
+       Code Lowering
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#type-inference">
+       Type Inference
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#llvm-ir">
+       LLVM IR
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#native-code">
+       Native Code
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-important-is-specialization">
+     How Important is Specialization?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-vs-values">
+     Types vs Values
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#why-not-always-use-static-arrays-then">
+       Why not always use static arrays then?!
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dispatch-and-specialization">
+       Dispatch and Specialization
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#example-determinant-of-a-2x2-matrix">
+         Example: Determinant of a 2x2 matrix
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-explicit-type-annotations-necessary">
+     Are Explicit Type Annotations Necessary?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#core-messages-of-this-notebook">
+   Core messages of this Notebook
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="code-specialization">
+<h1>Code Specialization<a class="headerlink" href="#code-specialization" title="Permalink to this headline">#</a></h1>
+<p>To be fast, Julia needs to <strong>specialize</strong> code, that is compile specific native versions of the code. <strong>The better the specialization the faster the code!</strong> In the following we will investigate how Julia achieves good code specialization while retaining the power of generic programming.</p>
+<section id="just-ahead-of-time-jaot-compilation">
+<h2>Just Ahead of Time (JAOT) Compilation<a class="headerlink" href="#just-ahead-of-time-jaot-compilation" title="Permalink to this headline">#</a></h2>
+<p><img alt="" src="../../_images/from_source_to_native.png" /></p>
+<p><strong>AST = Abstract Syntax Tree</strong></p>
+<p><strong>IR = Intermediate Representation</strong></p>
+<p><strong>SSA = Static Single Assignment</strong></p>
+<p><strong><a class="reference external" href="https://de.wikipedia.org/wiki/LLVM">LLVM</a> = Low Level Virtual Machine</strong></p>
+</section>
+<section id="specialization">
+<h2>Specialization<a class="headerlink" href="#specialization" title="Permalink to this headline">#</a></h2>
+<p><strong>Julia specializes on the types of function arguments</strong>, i.e. Julia compiles efficient machine code for the given input types, <strong>when a function is called for the first time</strong>.</p>
+<p>If it is called again, the already existing machine code is reused, until we call the function with different input types.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>func (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="mf">3.4</span><span class="p">,</span><span class="w"> </span><span class="mf">5.6</span><span class="p">]</span><span class="w"> </span><span class="c"># Vector{Float64}</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9</span><span class="p">]</span><span class="w"> </span><span class="c"># Vector{Float64}</span>
+
+<span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.098205 seconds (405.27 k allocations: 20.623 MiB, 99.99% compilation time)
+  0.000004 seconds (2 allocations: 160 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>First call:</strong> compilation + running the code</p>
+<p><strong>Second call:</strong> running the code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000004 seconds (2 allocations: 160 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If one of the input types changes, Julia compiles a new specialization of the function!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Float64} (alias for Array{Float64, 1})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Int64}:
+ 1
+ 3
+ 5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Int64} (alias for Array{Int64, 1})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c"># Vector{Int64}, Vector{Float64}</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.093486 seconds (345.65 k allocations: 17.312 MiB, 99.98% compilation time)
+  0.000004 seconds (2 allocations: 160 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now have two efficient native codes in the cache: one for all <code class="docutils literal notranslate"><span class="pre">Vector{Float64}</span></code> inputs and another one for <code class="docutils literal notranslate"><span class="pre">Vector{Int64}</span></code> as the first and <code class="docutils literal notranslate"><span class="pre">Vector{Float64}</span></code> as the second argument type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">MethodAnalysis</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"># 1 method for generic function <b>func</b>:<ul><li> func(x, y) in Main at In[1]:1</li> </ul></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methodinstances</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Core.MethodInstance}:
+ MethodInstance for func(::Vector{Float64}, ::Vector{Float64})
+ MethodInstance for func(::Vector{Int64}, ::Vector{Float64})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="introspection">
+<h2>Introspection<a class="headerlink" href="#introspection" title="Permalink to this headline">#</a></h2>
+<p>(<em>But I really want to see what happens!</em>)</p>
+<p>We can inspect the code at all transformation stages with a bunch of macros:</p>
+<img src="../../static/julia_introspection_macros.png" width=350px><section id="code-lowering">
+<h3>Code Lowering<a class="headerlink" href="#code-lowering" title="Permalink to this headline">#</a></h3>
+<p>Compiler optimisation is a very hard task, to make the compilers life easier it should be given ‘simple’ code.</p>
+<p>In Julia ‘simple’ means <a class="reference external" href="https://en.wikipedia.org/wiki/Static_single-assignment_form">static single-assignment form</a>:</p>
+<blockquote>
+<div><p>In compiler design, static single assignment form (often abbreviated as SSA form or simply SSA) is a property of an intermediate representation (IR) that requires each variable to be assigned exactly once and defined before it is used.</p>
+<p>…</p>
+<p>One can expect to find SSA in a compiler for Fortran, C or C++ …</p>
+</div></blockquote>
+<p>This transformation from source code to SSA form is called <strong>lowering</strong>, and the SSA form is called <strong>lowered code</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">basic_condition</span><span class="p">(</span><span class="n">bool</span><span class="o">::</span><span class="kt">Bool</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">bool</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>basic_condition (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">basic_condition</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+1 ─     goto #3 if not bool
+2 ─     return 0
+3 ─     return 1
+)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Increase verbosity with `debuginfo=:source`</span>
+<span class="nd">@code_lowered</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">basic_condition</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+   <span class=" -Color -Color-Yellow"> @ In[11]:2 within `basic_condition`</span>
+1 ─     goto #3 if not bool
+   <span class=" -Color -Color-Yellow"> @ In[11]:3 within `basic_condition`</span>
+2 ─     return 0
+   <span class=" -Color -Color-Yellow"> @ In[11]:5 within `basic_condition`</span>
+3 ─     return 1
+)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">basic_loop</span><span class="p">()</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="w">        </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>basic_loop (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">basic_loop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+   <span class=" -Color -Color-Yellow"> @ In[14]:2 within `basic_loop`</span>
+1 ─       a = 0
+│  <span class=" -Color -Color-Yellow"> @ In[14]:3 within `basic_loop`</span>
+│   %2  = Base.vect(1, 2, 3)
+│         @_2 = Base.iterate(%2)
+│   %4  = @_2 === nothing
+│   %5  = Base.not_int(%4)
+└──       goto #4 if not %5
+2 ┄ %7  = @_2
+│         i = Core.getfield(%7, 1)
+│   %9  = Core.getfield(%7, 2)
+│  <span class=" -Color -Color-Yellow"> @ In[14]:4 within `basic_loop`</span>
+│         a = a + i
+│  <span class=" -Color -Color-Yellow"> @ In[14]:5 within `basic_loop`</span>
+│         @_2 = Base.iterate(%2, %9)
+│   %12 = @_2 === nothing
+│   %13 = Base.not_int(%12)
+└──       goto #4 if not %13
+3 ─       goto #2
+   <span class=" -Color -Color-Yellow"> @ In[14]:6 within `basic_loop`</span>
+4 ┄       return a
+)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#N</span></code> refers to <a class="reference external" href="https://en.wikipedia.org/wiki/Basic_blockhttps://en.wikipedia.org/wiki/Basic_block">basic blocks</a> of code</p>
+<ul>
+<li><p>Blocks are shown on the left with <code class="docutils literal notranslate"><span class="pre">|</span></code> characters outlining their span</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%N</span></code> refers to single static assignment (SSA) valuesrefer to single static assignment (SSA) values, when a previous SSA value is used, it’s referenced by an <code class="docutils literal notranslate"><span class="pre">SSAValue</span></code> and printed as <code class="docutils literal notranslate"><span class="pre">%N</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;_N</span></code> refers to temporary variables</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">one</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">one</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span>
+<span class="w">        </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">b</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nextfib (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+   <span class=" -Color -Color-Yellow"> @ In[16]:2 within `nextfib`</span>
+1 ─ %1 = Main.one(n)
+│   %2 = Main.one(n)
+│        a = %1
+└──      b = %2
+   <span class=" -Color -Color-Yellow"> @ In[16]:3 within `nextfib`</span>
+2 ┄ %5 = b &lt; n
+└──      goto #4 if not %5
+   <span class=" -Color -Color-Yellow"> @ In[16]:4 within `nextfib`</span>
+3 ─ %7 = b
+│   %8 = a + b
+│        a = %7
+│        b = %8
+│  <span class=" -Color -Color-Yellow"> @ In[16]:5 within `nextfib`</span>
+└──      goto #2
+   <span class=" -Color -Color-Yellow"> @ In[16]:6 within `nextfib`</span>
+4 ─      return b
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="type-inference">
+<h3>Type Inference<a class="headerlink" href="#type-inference" title="Permalink to this headline">#</a></h3>
+<p>The above lowered code now starts to get <strong>specialised</strong>: argument types and any explicit annotations are used to infer the types of all SSA variables (where/if possible), and that information is then used to specialise the function calls:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_typed</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+1 ─      nothing::Nothing
+   <span class=" -Color -Color-Yellow"> @ In[16]:3 within `nextfib`</span>
+2 ┄ %2 = φ (#1 =&gt; 1.0, #3 =&gt; %6)<span class=" -Color -Color-Cyan">::Float64</span>
+│   %3 = φ (#1 =&gt; 1.0, #3 =&gt; %2)<span class=" -Color -Color-Cyan">::Float64</span>
+│  <span class=" -Color -Color-Yellow">┌ @ float.jl:412 within `&lt;`</span>
+│  <span class=" -Color -Color-Yellow">│</span> %4 = Base.lt_float(%2, n)<span class=" -Color -Color-Cyan">::Bool</span>
+│  <span class=" -Color -Color-Yellow">└</span>
+└──      goto #4 if not %4
+   <span class=" -Color -Color-Yellow"> @ In[16]:4 within `nextfib`</span>
+   <span class=" -Color -Color-Yellow">┌ @ float.jl:383 within `+`</span>
+3 ─<span class=" -Color -Color-Yellow">│</span> %6 = Base.add_float(%3, %2)<span class=" -Color -Color-Cyan">::Float64</span>
+│  <span class=" -Color -Color-Yellow">└</span>
+│  <span class=" -Color -Color-Yellow"> @ In[16]:5 within `nextfib`</span>
+└──      goto #2
+   <span class=" -Color -Color-Yellow"> @ In[16]:6 within `nextfib`</span>
+4 ─      return %2
+) =&gt; Float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_typed</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+1 ─      nothing::Nothing
+   <span class=" -Color -Color-Yellow"> @ In[16]:3 within `nextfib`</span>
+2 ┄ %2 = φ (#1 =&gt; 1, #3 =&gt; %6)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %3 = φ (#1 =&gt; 1, #3 =&gt; %2)<span class=" -Color -Color-Cyan">::Int64</span>
+│  <span class=" -Color -Color-Yellow">┌ @ int.jl:83 within `&lt;`</span>
+│  <span class=" -Color -Color-Yellow">│</span> %4 = Base.slt_int(%2, n)<span class=" -Color -Color-Cyan">::Bool</span>
+│  <span class=" -Color -Color-Yellow">└</span>
+└──      goto #4 if not %4
+   <span class=" -Color -Color-Yellow"> @ In[16]:4 within `nextfib`</span>
+   <span class=" -Color -Color-Yellow">┌ @ int.jl:87 within `+`</span>
+3 ─<span class=" -Color -Color-Yellow">│</span> %6 = Base.add_int(%3, %2)<span class=" -Color -Color-Cyan">::Int64</span>
+│  <span class=" -Color -Color-Yellow">└</span>
+│  <span class=" -Color -Color-Yellow"> @ In[16]:5 within `nextfib`</span>
+└──      goto #2
+   <span class=" -Color -Color-Yellow"> @ In[16]:6 within `nextfib`</span>
+4 ─      return %2
+) =&gt; Int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note the specialisation on the types, instead of generic <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, now specific <code class="docutils literal notranslate"><span class="pre">add_float</span></code>/<code class="docutils literal notranslate"><span class="pre">add_int</span></code> are used!</p>
+<p>Whereas in Python:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">dis</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">def</span> <span class="nf">nextfib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">return</span> <span class="n">b</span>
+   <span class="o">...</span><span class="p">:</span> 
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">nextfib</span><span class="p">)</span>
+  <span class="mi">2</span>           <span class="mi">0</span> <span class="n">LOAD_CONST</span>               <span class="mi">1</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+              <span class="mi">2</span> <span class="n">UNPACK_SEQUENCE</span>          <span class="mi">2</span>
+              <span class="mi">4</span> <span class="n">STORE_FAST</span>               <span class="mi">1</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+              <span class="mi">6</span> <span class="n">STORE_FAST</span>               <span class="mi">2</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+  <span class="mi">3</span>           <span class="mi">8</span> <span class="n">LOAD_FAST</span>                <span class="mi">2</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+             <span class="mi">10</span> <span class="n">LOAD_FAST</span>                <span class="mi">0</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
+             <span class="mi">12</span> <span class="n">COMPARE_OP</span>               <span class="mi">0</span> <span class="p">(</span><span class="o">&lt;</span><span class="p">)</span>
+             <span class="mi">14</span> <span class="n">POP_JUMP_IF_FALSE</span>       <span class="mi">19</span> <span class="p">(</span><span class="n">to</span> <span class="mi">38</span><span class="p">)</span>
+
+  <span class="mi">4</span>     <span class="o">&gt;&gt;</span>   <span class="mi">16</span> <span class="n">LOAD_FAST</span>                <span class="mi">2</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+             <span class="mi">18</span> <span class="n">LOAD_FAST</span>                <span class="mi">1</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+             <span class="mi">20</span> <span class="n">LOAD_FAST</span>                <span class="mi">2</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+             <span class="mi">22</span> <span class="n">BINARY_ADD</span>
+             <span class="mi">24</span> <span class="n">ROT_TWO</span>
+             <span class="mi">26</span> <span class="n">STORE_FAST</span>               <span class="mi">1</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+             <span class="mi">28</span> <span class="n">STORE_FAST</span>               <span class="mi">2</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+  <span class="mi">3</span>          <span class="mi">30</span> <span class="n">LOAD_FAST</span>                <span class="mi">2</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+             <span class="mi">32</span> <span class="n">LOAD_FAST</span>                <span class="mi">0</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
+             <span class="mi">34</span> <span class="n">COMPARE_OP</span>               <span class="mi">0</span> <span class="p">(</span><span class="o">&lt;</span><span class="p">)</span>
+             <span class="mi">36</span> <span class="n">POP_JUMP_IF_TRUE</span>         <span class="mi">8</span> <span class="p">(</span><span class="n">to</span> <span class="mi">16</span><span class="p">)</span>
+
+  <span class="mi">5</span>     <span class="o">&gt;&gt;</span>   <span class="mi">38</span> <span class="n">LOAD_FAST</span>                <span class="mi">2</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+             <span class="mi">40</span> <span class="n">RETURN_VALUE</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="o">...</span><span class="p">:</span> 
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+  <span class="mi">2</span>           <span class="mi">0</span> <span class="n">LOAD_FAST</span>                <span class="mi">0</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+              <span class="mi">2</span> <span class="n">LOAD_METHOD</span>              <span class="mi">0</span> <span class="p">(</span><span class="fm">__add__</span><span class="p">)</span>
+              <span class="mi">4</span> <span class="n">LOAD_FAST</span>                <span class="mi">1</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+              <span class="mi">6</span> <span class="n">CALL_METHOD</span>              <span class="mi">1</span>
+              <span class="mi">8</span> <span class="n">RETURN_VALUE</span>
+</pre></div>
+</div>
+<p>Types are not known, so the correct functions have to be found <strong>each time</strong> an operation is done.</p>
+<p>Whereas Julia can compile the code once for given input types and then directly call the required function.</p>
+<p>This crucial process is known as <strong>type inference</strong> and its success is the basis for a good specialization (i.e. performant native code as a result). It will concern us in much more detail tomorrow.</p>
+</section>
+<section id="llvm-ir">
+<h3>LLVM IR<a class="headerlink" href="#llvm-ir" title="Permalink to this headline">#</a></h3>
+<p>The next step is to go from lowered typed code to LLMV IR.</p>
+<p>Julia uses the LLVM compiler framework, which is also used by Rust, Swift, Kotlin, and other languages.</p>
+<p>‘IR’ means <a class="reference external" href="https://en.wikipedia.org/wiki/Intermediate_representation">Intermediary Representation</a>:</p>
+<blockquote>
+<div><p>An intermediate representation (IR) is the data structure or code used internally by a compiler or virtual machine to represent source code. An IR is designed to be conducive to further processing, such as optimization and translation</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">basic_condition</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w">  </span><span class="c"># dump_module=true shows the &#39;full&#39; ir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[11]:1 within `basic_condition`
+define 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Cyan">i64</span> @julia_basic_condition_2456<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i8</span> zeroext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+;  @ In[11]:2 within `basic_condition`
+  %1 = <span class=" -Color -Color-Bold">and</span> <span class=" -Color -Color-Cyan">i8</span> %0, <span class=" -Color -Color-Yellow">1</span>
+  %2 = <span class=" -Color -Color-Bold">xor</span> <span class=" -Color -Color-Cyan">i8</span> %1, <span class=" -Color -Color-Yellow">1</span>
+  %3 = <span class=" -Color -Color-Bold">zext</span> <span class=" -Color -Color-Cyan">i8</span> %2 to <span class=" -Color -Color-Cyan">i64</span>
+;  @ In[11] within `basic_condition`
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %3
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[16]:1 within `nextfib`
+define <span class=" -Color -Color-Cyan">i64</span> @julia_nextfib_2479<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  <span class=" -Color -Color-Bold">br</span> <span class=" -Color -Color-Cyan">label</span> %L2
+
+L2:                                               ; preds = %L2, %top
+  %value_phi = <span class=" -Color -Color-Bold">phi</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">[</span> <span class=" -Color -Color-Yellow">1</span>, %top <span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[</span> %1, %L2 <span class=" -Color -Color-Yellow">]</span>
+  %value_phi1 = <span class=" -Color -Color-Bold">phi</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">[</span> <span class=" -Color -Color-Yellow">1</span>, %top <span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[</span> %value_phi, %L2 <span class=" -Color -Color-Yellow">]</span>
+;  @ In[16]:3 within `nextfib`
+; ┌ @ int.jl:83 within `&lt;`
+   %.not = <span class=" -Color -Color-Bold">icmp</span> <span class=" -Color -Color-Bold">slt</span> <span class=" -Color -Color-Cyan">i64</span> %value_phi, %0
+; └
+;  @ In[16]:4 within `nextfib`
+; ┌ @ int.jl:87 within `+`
+   %1 = <span class=" -Color -Color-Bold">add</span> <span class=" -Color -Color-Cyan">i64</span> %value_phi1, %value_phi
+; └
+;  @ In[16]:3 within `nextfib`
+  <span class=" -Color -Color-Bold">br</span> <span class=" -Color -Color-Cyan">i1</span> %.not, <span class=" -Color -Color-Cyan">label</span> %L2, <span class=" -Color -Color-Cyan">label</span> %L8
+
+L8:                                               ; preds = %L2
+;  @ In[16]:6 within `nextfib`
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %value_phi
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="native-code">
+<h3>Native Code<a class="headerlink" href="#native-code" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">  </span><span class="c"># binary=true to see the raw binary code</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;nextfib&quot;
+	.globl	julia_nextfib_2495              # -- Begin function julia_nextfib_2495
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_nextfib_2495,@function
+julia_nextfib_2495:                     # @julia_nextfib_2495
+; ┌ @ In[16]:1 within `nextfib`
+	.cfi_startproc
+# %bb.0:                                # %top
+	<span class=" -Color -Color-Bold">movl</span>	<span class=" -Color -Color-Yellow">$1</span>, %ecx
+	<span class=" -Color -Color-Bold">movl</span>	<span class=" -Color -Color-Yellow">$1</span>, %eax
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+.LBB0_1:                                # %L2
+                                        # =&gt;This Inner Loop Header: Depth=1
+	<span class=" -Color -Color-Bold">movq</span>	%rax, %rdx
+	<span class=" -Color -Color-Bold">movq</span>	%rcx, %rax
+; │ @ In[16]:4 within `nextfib`
+; │┌ @ int.jl:87 within `+`
+	<span class=" -Color -Color-Bold">addq</span>	%rcx, %rdx
+	<span class=" -Color -Color-Bold">movq</span>	%rdx, %rcx
+; │└
+; │ @ In[16]:3 within `nextfib`
+; │┌ @ int.jl:83 within `&lt;`
+	<span class=" -Color -Color-Bold">cmpq</span>	%rdi, %rax
+; │└
+	<span class=" -Color -Color-Bold">jl</span>	.LBB0_1
+# %bb.2:                                # %L8
+; │ @ In[16]:6 within `nextfib`
+	<span class=" -Color -Color-Bold">retq</span>
+.Lfunc_end0:
+	.size	julia_nextfib_2495, .Lfunc_end0-julia_nextfib_2495
+	.cfi_endproc
+; └
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compare this to integer input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">debuginfo</span><span class="o">=</span><span class="ss">:source</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;nextfib&quot;
+	.section	.rodata.cst8,&quot;aM&quot;,@progbits,<span class=" -Color -Color-Yellow">8</span>
+	.p2align	<span class=" -Color -Color-Yellow">3</span>                               # -- Begin function julia_nextfib_2499
+.LCPI0_0:
+	.quad	<span class=" -Color -Color-Yellow">0x3ff0000000000000</span>              # double 1
+	.text
+	.globl	julia_nextfib_2499
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_nextfib_2499,@function
+julia_nextfib_2499:                     # @julia_nextfib_2499
+; ┌ @ In[16]:1 within `nextfib`
+	.cfi_startproc
+# %bb.0:                                # %top
+	<span class=" -Color -Color-Bold">movabsq</span>	$.LCPI0_0, %rax
+	<span class=" -Color -Color-Bold">vmovsd</span>	<span class=" -Color -Color-Yellow">(</span>%rax<span class=" -Color -Color-Yellow">)</span>, %xmm1                   # xmm1 = mem[0],zero
+; │ @ In[16]:3 within `nextfib`
+; │┌ @ float.jl:412 within `&lt;`
+	<span class=" -Color -Color-Bold">vucomisd</span>	%xmm1, %xmm0
+; │└
+	<span class=" -Color -Color-Bold">jbe</span>	.LBB0_3
+# %bb.1:                                # %L6.preheader
+	<span class=" -Color -Color-Bold">vmovsd</span>	<span class=" -Color -Color-Yellow">(</span>%rax<span class=" -Color -Color-Yellow">)</span>, %xmm2                   # xmm2 = mem[0],zero
+	<span class=" -Color -Color-Bold">vmovapd</span>	%xmm2, %xmm3
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+.LBB0_2:                                # %L6
+                                        # =&gt;This Inner Loop Header: Depth=1
+; │ @ In[16]:4 within `nextfib`
+; │┌ @ float.jl:383 within `+`
+	<span class=" -Color -Color-Bold">vaddsd</span>	%xmm2, %xmm3, %xmm1
+; │└
+; │ @ In[16]:3 within `nextfib`
+; │┌ @ float.jl:412 within `&lt;`
+	<span class=" -Color -Color-Bold">vucomisd</span>	%xmm1, %xmm0
+	<span class=" -Color -Color-Bold">vmovapd</span>	%xmm3, %xmm2
+	<span class=" -Color -Color-Bold">vmovapd</span>	%xmm1, %xmm3
+; │└
+	<span class=" -Color -Color-Bold">ja</span>	.LBB0_2
+.LBB0_3:                                # %L8
+; │ @ In[16]:6 within `nextfib`
+	<span class=" -Color -Color-Bold">vmovapd</span>	%xmm1, %xmm0
+	<span class=" -Color -Color-Bold">retq</span>
+.Lfunc_end0:
+	.size	julia_nextfib_2499, .Lfunc_end0-julia_nextfib_2499
+	.cfi_endproc
+; └
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="how-important-is-specialization">
+<h2>How Important is Specialization?<a class="headerlink" href="#how-important-is-specialization" title="Permalink to this headline">#</a></h2>
+<p>Let’s try to estimate the performance gain by specialization, we can do this by breaking the compilation process by throwing away type information.</p>
+<p>This way Julia will act, roughly, in the same way as Python: it has to work out what can be done to a variable every single time it encounters it. We can do this by storing the variables in a <code class="docutils literal notranslate"><span class="pre">Vector{Any}</span></code>.</p>
+<p>First, let’s write the same <code class="docutils literal notranslate"><span class="pre">nextfib</span></code> function in Python and benchmark it:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>In [1]: def nextfib(n):
+   ...:     a, b = 1, 1
+   ...:     while b &lt; n:
+   ...:         a, b = b, a + b
+   ...:     return b
+   ...: 
+
+In [2]: %timeit nextfib(100_000)
+951 ns ± 7.39 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+<span class="k">using</span><span class="w"> </span><span class="n">PythonCall</span>
+
+<span class="nd">@pyexec</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">global nextfib</span>
+
+<span class="s">def nextfib(n):</span>
+<span class="s">     a, b = 1, 1</span>
+<span class="s">     while b &lt; n:</span>
+<span class="s">         a, b = b, a + b</span>
+<span class="s">     return b</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="nd">@benchmark</span><span class="w"> </span><span class="nd">@pyexec</span><span class="w"> </span><span class="s">&quot;nextfib(100_000)&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 10 evaluations.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.815 μs</span> … <span class=" -Color -Color-Magenta"> 4.459 μs</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.849 μs              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.857 μs</span> ± <span class=" -Color -Color-Green">60.097 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+    ▂▆█<span class=" -Color -Color-Blue">█</span>▇<span class=" -Color -Color-Green">▄</span>▁                                                  ▂
+  ▄▇███<span class=" -Color -Color-Blue">█</span>█<span class=" -Color -Color-Green">█</span>█▅▄▄▃▃▆▇▇███▇▆▅▃▄▁▁▁▁▁▁▁▁▄▃▄▁▄▃▁▄▁▄▁▄▄▁▅▅▅▅▄▅▅▆▆▆▆ █
+  1.81 μs      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time     2.18 μs <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, for reference, here is the standard implementation in Julia:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">one</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">one</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span>
+<span class="w">        </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">b</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nextfib (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">nextfib</span><span class="p">(</span><span class="mi">100_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 1000 evaluations.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">3.034 ns</span> … <span class=" -Color -Color-Magenta">9.345 ns</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">3.037 ns             </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">3.045 ns</span> ± <span class=" -Color -Color-Green">0.159 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+                                            █<span class=" -Color -Color-Blue"> </span>               
+  ▂▁▁▁▁▁▁▁▁▁▁▁▁▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▁▁▁█<span class=" -Color -Color-Blue">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▇ ▂
+  3.03 ns        Histogram: frequency by time       3.04 ns <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the broken version, which:</p>
+<ul class="simple">
+<li><p>Throws away type information by storing variables in a <code class="docutils literal notranslate"><span class="pre">Vector{Any}</span></code></p></li>
+<li><p>Force enables bounds-checks for situations where they could be optimised away (e.g. the 3-element vector)</p></li>
+<li><p>Disables specialisation on the argument <code class="docutils literal notranslate"><span class="pre">n</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">nextfib_bad</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">vars</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Any</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">]</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">vars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">vars</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="w">        </span><span class="n">vars</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vars</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">vars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nextfib_bad (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">nextfib_bad</span><span class="p">(</span><span class="mi">100_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 10 evaluations.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.020 μs</span> … <span class=" -Color -Color-Magenta">  5.447 μs</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.096 μs               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.154 μs</span> ± <span class=" -Color -Color-Green">138.026 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+
+  ▅▇█▇▅▄▃<span class=" -Color -Color-Blue">▁</span>▁    <span class=" -Color -Color-Green"> </span>  ▅▇▆▆▅▅▄▃▂▃▂▁▁▁ ▁▂▂▁▁                        ▂
+  ███████<span class=" -Color -Color-Blue">█</span>███▇▆<span class=" -Color -Color-Green">▆</span>▅▆██████████████████████▇▆▇▆▇▇▆▅▅▄▄▅▂▂▅▄▄▄▄▄▅ █
+  1.02 μs      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      1.64 μs <span class=" -Color -Color-Bold">&lt;</span>
+
+ Memory estimate: <span class=" -Color -Color-Yellow">368 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">15</span>.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is (on my computer) <em>almost</em> the same as the Python version!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># @code_typed nextfib_bad(100)</span>
+<span class="c"># @code_native nextfib_bad(100)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="types-vs-values">
+<h2>Types vs Values<a class="headerlink" href="#types-vs-values" title="Permalink to this headline">#</a></h2>
+<p>In high performance computing, compilation time (order of seconds or minutes) is typically neglectable compared to the actual time it takes to perform the computation (readily on the orders of hours/days/weeks). Therefore, we generally want to optimize for runtime efficiency even if this means that compilation time goes up by a reasonable amount.</p>
+<p><strong>Julia specializes on input types and not values!</strong></p>
+<p>Primarily it is <strong>type information</strong> that is used by the compiler to specialize code. (There are special techniques like, e.g., constant propagation and others that we are neglecting here.)</p>
+<p>(Very) roughly speaking, the more information there is in <em>type space</em> (e.g. in type parameters) the higher the likelihood that the compiler produces fast and efficient code.</p>
+<p>As before, here is a Python benchmark:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>In [1]: import numpy as np
+
+In [2]: A = np.random.rand(10, 10)
+
+In [3]: B = np.random.rand(10, 10)
+
+In [4]: %timeit A + B
+507 ns ± 4.51 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pyimport</span><span class="p">(</span><span class="s">&quot;numpy&quot;</span><span class="p">)</span>
+
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  658.720 ns (1 allocation: 16 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  155.413 ns (1 allocation: 896 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix{Float64} (alias for Array{Float64, 2})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="w"> </span><span class="c"># the size of A isn&#39;t type information</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching size(::Type{Matrix{Float64}})
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Adjoint</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">},</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Transpose</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">}}</span> <span class="n">where</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="o">&lt;</span><span class="p">:(</span><span class="n">AbstractVector</span><span class="p">)})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">adjtrans</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">173</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Adjoint</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">},</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Transpose</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="p">}}</span> <span class="n">where</span> <span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">var</span><span class="s2">&quot;#s886&quot;</span><span class="o">&lt;</span><span class="p">:(</span><span class="n">AbstractMatrix</span><span class="p">)})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">adjtrans</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">174</span>
+  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QR</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QRCompactWY</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QRPivoted</span><span class="p">})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.8</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">qr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">581</span>
+  <span class="o">...</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">StaticArrays</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@SMatrix</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@SMatrix</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SMatrix{10, 10, Float64, 100} (alias for SArray{Tuple{10, 10}, Float64, 2, 100})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="w"> </span><span class="c"># the size of A is type information!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  21.080 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>StaticArrays.jl</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>============================================
+    Benchmarks for 3×3 Float64 matrices
+============================================
+Matrix multiplication               -&gt; 5.9x speedup
+Matrix multiplication (mutating)    -&gt; 1.8x speedup
+Matrix addition                     -&gt; 33.1x speedup
+Matrix addition (mutating)          -&gt; 2.5x speedup
+Matrix determinant                  -&gt; 112.9x speedup
+Matrix inverse                      -&gt; 67.8x speedup
+Matrix symmetric eigendecomposition -&gt; 25.0x speedup
+Matrix Cholesky decomposition       -&gt; 8.8x speedup
+Matrix LU decomposition             -&gt; 6.1x speedup
+Matrix QR decomposition             -&gt; 65.0x speedup
+</pre></div>
+</div>
+<section id="why-not-always-use-static-arrays-then">
+<h3>Why not always use static arrays then?!<a class="headerlink" href="#why-not-always-use-static-arrays-then" title="Permalink to this headline">#</a></h3>
+<p>By putting more information in the type you are putting more stress on the compiler to optimize things.</p>
+<p>Specifically, if static arrays are too big compile time can explode or the compiler might just give up and fall back to an inefficient default version.</p>
+<p>Generally speaking, static arrays are only useful as small fixed-size arrays.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># # should take (much) longer to compile and the speedup should be gone as well</span>
+<span class="c"># # if it isn&#39;t, increase N a little bit</span>
+<span class="c"># N = 50</span>
+<span class="c"># M = rand(N,N);</span>
+<span class="c"># Mstatic = SMatrix{N,N}(M);</span>
+
+<span class="c"># @btime $Mstatic + $Mstatic;</span>
+<span class="c"># @btime $M + $M;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dispatch-and-specialization">
+<h3>Dispatch and Specialization<a class="headerlink" href="#dispatch-and-specialization" title="Permalink to this headline">#</a></h3>
+<p>Having a reasonable amount of information encoded in the type domain isn’t only useful to help the compiler (specialization) but also for dispatching to the most specific (and therefore hopfully most performant) method of a function.</p>
+<p><strong>Types drive both specialization and multiple dispatch!</strong></p>
+<p>In this sense, multiple dispatch is essentially the first step of the specialization process where Julia chooses between different implementations.</p>
+<section id="example-determinant-of-a-2x2-matrix">
+<h4>Example: Determinant of a 2x2 matrix<a class="headerlink" href="#example-determinant-of-a-2x2-matrix" title="Permalink to this headline">#</a></h4>
+<p>Let’s say your task would be to write a function computing the determinant of a 2x2 matrix. How would you implement it?</p>
+<p>Probably you’d say, well I know the formula for computing the determinant of a 2x2 matrix! Let’s just implement it.</p>
+<p>In Python:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>In [1]: import numpy as np
+
+In [2]: M = np.array([[1, 2], [3, 4]])
+
+In [3]: def det_2x2(X):
+   ...:     return X[0, 0] * X[1, 1] - X[0, 1] * X[1, 0]
+   ...: 
+
+In [4]: %timeit det_2x2(M)
+502 ns ± 10.5 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+</pre></div>
+</div>
+<p>And for Julia:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det_2x2</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>det_2x2 (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Int64}:
+ 1  2
+ 3  4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det_2x2</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">det_2x2</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  17.429 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how Julia’s built-in <code class="docutils literal notranslate"><span class="pre">det</span></code> function compares to our algorithm, first in Numpy:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>In [6]: %timeit np.linalg.det(M)
+4.75 µs ± 59.9 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+</pre></div>
+</div>
+<p>Almost 10x slower than the hand-written version! And for Julia:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+
+<span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">det</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  335.937 ns (3 allocations: 192 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>20x slower!</p>
+<p>The reason isn’t just that the compiler doesn’t just know the size of the matrix from its type but also that <a class="reference external" href="https://github.com/JuliaLang/julia/blob/release-1.8/stdlib/LinearAlgebra/src/generic.jl#L1544-L1550">the code it considers</a> (selected by the dispatch mechanism) is too general to compete with our implementation in <code class="docutils literal notranslate"><span class="pre">det_2x2</span></code>.</p>
+<p>Let’s now move the size information to the type domain and see how things change.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">StaticArrays</span>
+<span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@SMatrix</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 SMatrix{2, 2, Int64, 4} with indices SOneTo(2)×SOneTo(2):
+ 1  2
+ 3  4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">det</span><span class="p">(</span><span class="o">$</span><span class="n">S</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.042 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that it is super faster because StaticArrays.jl provides <a class="reference external" href="https://github.com/JuliaArrays/StaticArrays.jl/blob/master/src/det.jl#L10-L12">a hand-coded version</a>, similar to our <code class="docutils literal notranslate"><span class="pre">det_2x2</span></code> above, which gets selected because of the size information in the type.</p>
+<p>The (tiny) speed difference compared to our own <code class="docutils literal notranslate"><span class="pre">det_2x2</span></code> is only due to bounds checking and matrix vs linear indexing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det_2x2_optimized</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">det_2x2_optimized</span><span class="p">(</span><span class="o">$</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.368 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="are-explicit-type-annotations-necessary">
+<h2>Are Explicit Type Annotations Necessary?<a class="headerlink" href="#are-explicit-type-annotations-necessary" title="Permalink to this headline">#</a></h2>
+<p>Fortan/C require them, are they required in Julia?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span>
+<span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">z</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">my_function_typed</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">y</span><span class="o">::</span><span class="kt">Float64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span>
+<span class="w">    </span><span class="n">z</span><span class="o">::</span><span class="kt">Float64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">z</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_function_typed (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nope! Julia’s type inference is powerful. Specifying types <strong>is not</strong> necessary for best performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">my_function</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">my_function_typed</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.311 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.314 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Annotating types explicitly can serve a purpose.</p>
+<ul class="simple">
+<li><p>Enforce conversions</p></li>
+<li><p>Very rarely: help the compiler infer types in tricky situations</p></li>
+</ul>
+<p>However, more often than not it is an indication of suboptimal code design. (It also makes functions much less generic and reusable!)</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="core-messages-of-this-notebook">
+<h1>Core messages of this Notebook<a class="headerlink" href="#core-messages-of-this-notebook" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p><strong>A function is compiled when called for the first time</strong> with a given set of argument types.</p></li>
+<li><p>The are <strong>multiple compilation steps</strong> which can be inspected through macros like <code class="docutils literal notranslate"><span class="pre">&#64;code_warntype</span></code>.</p></li>
+<li><p><strong>Code specialization</strong> based on the types of all of the input arguments is important for speed.</p></li>
+<li><p>Critical information can be moved to the <strong>type domain</strong> for better dispatch and specialization.</p></li>
+<li><p>In virtually all cases, <strong>explicit type annotations are irrelevant for performance</strong>.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/carstenbauer/JuliaHLRS22/blob/main/Day1/3_specialization.ipynb">https://github.com/carstenbauer/JuliaHLRS22/blob/main/Day1/3_specialization.ipynb</a></p></li>
+<li><p><a class="reference external" href="https://docs.julialang.org/en/v1/devdocs/ast/">https://docs.julialang.org/en/v1/devdocs/ast/</a></p></li>
+<li><p><a class="reference external" href="https://juliadebug.github.io/JuliaInterpreter.jl/stable/ast/">https://juliadebug.github.io/JuliaInterpreter.jl/stable/ast/</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/43453944/what-is-the-difference-between-code-native-code-typed-and-code-llvm-in-julia">https://stackoverflow.com/questions/43453944/what-is-the-difference-between-code-native-code-typed-and-code-llvm-in-julia</a></p></li>
+<li><p><a class="reference external" href="https://tenthousandmeters.com/blog/python-behind-the-scenes-4-how-python-bytecode-is-executed/">https://tenthousandmeters.com/blog/python-behind-the-scenes-4-how-python-bytecode-is-executed/</a></p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.8"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.8",
+            path: "./sessions/1-basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.8'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2-duck-typing-benchmarking.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Duck Typing, Interfaces, and Benchmarkin</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="4-generic-programming.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Generic programming</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Robert Rosca<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1887 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Multithreading &#8212; Julia for HPC&lt;br&gt;EuXFEL Workshop</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Distributed Computing: Message Passing Interface (MPI)" href="3-distributed-computing-mpi.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Julia for HPC<br>EuXFEL Workshop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Jupyter for HPC - EuXFEL Trial Run
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 1 - Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/0-syntax.html">
+   Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/1-types-dispatch.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/2-duck-typing-benchmarking.html">
+   Duck Typing, Interfaces, and Benchmarkin
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/3-specialization.html">
+   Code Specialization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/4-generic-programming.html">
+   Generic programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/5-workflow.html">
+   Development Workflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../1-basics/6-pkg-management.html">
+   Package Management
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 2 - Serial
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/1-optimizing-serial-performance.html">
+   Optimizing “Serial” Performance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/2-simd.html">
+   SIMD
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/3-interop-microbenchmark.html">
+   Programming language interoperability (Interop)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2-serial/4-linalg-pefrormance.html">
+   Performance Considerations for Linear Algebra
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Day 3 - Parallel
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-parallelism-concurrency.html">
+   Parallel Computing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-distributed-computing.html">
+   Distributed Computing:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Distributed
+    </span>
+   </code>
+   standard library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-distributed-computing-mpi.html">
+   Distributed Computing: Message Passing Interface (MPI)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Multithreading
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/robertrosca/julia-hpc-workshop/master?urlpath=tree/sessions/3-parallel/4-multithreading.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/robertrosca/julia-hpc-workshop"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/robertrosca/julia-hpc-workshop/issues/new?title=Issue%20on%20page%20%2Fsessions/3-parallel/4-multithreading.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/sessions/3-parallel/4-multithreading.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-threads">
+   What are threads?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#starting-julia-with-multiple-threads">
+   Starting Julia with multiple threads
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#user-threads-vs-default-threads">
+     User threads vs default threads
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-based-multithreading">
+   Task-based multithreading
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spawning-tasks-on-threads-threads-spawn">
+     Spawning tasks on threads:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Threads.@spawn
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-recursive-fibonacci-series">
+       Example: Recursive Fibonacci series
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-tmap-like-pmap">
+       Example:
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         tmap
+        </span>
+       </code>
+       (like
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         pmap
+        </span>
+       </code>
+       )
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#remarks-on-spawn">
+       Remarks on
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         @spawn
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multithreading-for-loops-threads">
+     Multithreading for-loops:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @threads
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scheduling-options">
+       Scheduling options
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-balancing">
+     Load-balancing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multithreading-things-to-be-aware-of">
+   Multithreading: Things to be aware of
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#race-conditions-and-thread-safety">
+     Race conditions and thread safety
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fix-1-divide-the-work">
+       Fix 1: Divide the work
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fix-2-atomics">
+       Fix 2: Atomics
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#garbage-collection">
+     Garbage collection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#high-level-tools-for-parallel-computing">
+   High-level tools for parallel computing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#threadsx-jl">
+     ThreadsX.jl
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#floops-jl">
+     FLoops.jl
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tullio-jl">
+     Tullio.jl
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loopvectorization-jl">
+     LoopVectorization.jl
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#system-topology-and-thread-affinity">
+   System topology and thread affinity
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hawk-compute-node">
+     Hawk compute node
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pinning-julia-threads-to-cpu-threads">
+     Pinning Julia threads to CPU threads
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Multithreading</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-threads">
+   What are threads?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#starting-julia-with-multiple-threads">
+   Starting Julia with multiple threads
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#user-threads-vs-default-threads">
+     User threads vs default threads
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-based-multithreading">
+   Task-based multithreading
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spawning-tasks-on-threads-threads-spawn">
+     Spawning tasks on threads:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Threads.@spawn
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-recursive-fibonacci-series">
+       Example: Recursive Fibonacci series
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-tmap-like-pmap">
+       Example:
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         tmap
+        </span>
+       </code>
+       (like
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         pmap
+        </span>
+       </code>
+       )
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#remarks-on-spawn">
+       Remarks on
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         @spawn
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multithreading-for-loops-threads">
+     Multithreading for-loops:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       @threads
+      </span>
+     </code>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scheduling-options">
+       Scheduling options
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-balancing">
+     Load-balancing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multithreading-things-to-be-aware-of">
+   Multithreading: Things to be aware of
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#race-conditions-and-thread-safety">
+     Race conditions and thread safety
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fix-1-divide-the-work">
+       Fix 1: Divide the work
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fix-2-atomics">
+       Fix 2: Atomics
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#garbage-collection">
+     Garbage collection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#high-level-tools-for-parallel-computing">
+   High-level tools for parallel computing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#threadsx-jl">
+     ThreadsX.jl
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#floops-jl">
+     FLoops.jl
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tullio-jl">
+     Tullio.jl
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loopvectorization-jl">
+     LoopVectorization.jl
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#system-topology-and-thread-affinity">
+   System topology and thread affinity
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hawk-compute-node">
+     Hawk compute node
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pinning-julia-threads-to-cpu-threads">
+     Pinning Julia threads to CPU threads
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="multithreading">
+<h1>Multithreading<a class="headerlink" href="#multithreading" title="Permalink to this headline">#</a></h1>
+<section id="what-are-threads">
+<h2>What are threads?<a class="headerlink" href="#what-are-threads" title="Permalink to this headline">#</a></h2>
+<p>Threads are execution units within a process that can run simultaneously.</p>
+<img src="../../static/processes_threads.png" width=400px>
+<p>While processes are entirely separate, threads run in a <strong>shared memory</strong> space.</p>
+</section>
+<section id="starting-julia-with-multiple-threads">
+<h2>Starting Julia with multiple threads<a class="headerlink" href="#starting-julia-with-multiple-threads" title="Permalink to this headline">#</a></h2>
+<p>By default, Julia starts with a single <em>user thread</em>. We must tell it explicitly to start multiple user threads. There are two ways to do this:</p>
+<ul class="simple">
+<li><p>Environment variable: <code class="docutils literal notranslate"><span class="pre">JULIA_NUM_THREADS=4</span></code></p></li>
+<li><p>Command line argument: <code class="docutils literal notranslate"><span class="pre">julia</span> <span class="pre">-t</span> <span class="pre">4</span></code> or, equivalently, <code class="docutils literal notranslate"><span class="pre">julia</span> <span class="pre">--threads</span> <span class="pre">4</span></code></p></li>
+</ul>
+<p><strong>Jupyter lab:</strong></p>
+<p>The simplest way is to globally set the environment variable <code class="docutils literal notranslate"><span class="pre">JULIA_NUM_THREADS</span></code> (e.g. in the <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>). But one can also create a specific Jupyter kernel for multithreaded Julia:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">IJulia</span>
+<span class="n">installkernel</span><span class="p">(</span><span class="s">&quot;Julia (4 threads)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="o">=</span><span class="kt">Dict</span><span class="p">(</span><span class="s">&quot;JULIA_NUM_THREADS&quot;</span><span class="o">=&gt;</span><span class="s">&quot;4&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We can readily check how many threads we are running:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<section id="user-threads-vs-default-threads">
+<h3>User threads vs default threads<a class="headerlink" href="#user-threads-vs-default-threads" title="Permalink to this headline">#</a></h3>
+<p>Technically, the Julia process is also spawning multiple threads already in “single-threaded” mode, like</p>
+<ul class="simple">
+<li><p>a thread for unix signal listening</p></li>
+<li><p>multiple OpenBLAS threads for BLAS/LAPACK operations</p></li>
+</ul>
+<p>For this reason, we call the threads specified via <code class="docutils literal notranslate"><span class="pre">--threads</span></code> or the environment variable <em>user threads</em> or simply <em>Julia threads</em>.</p>
+</section>
+</section>
+<section id="task-based-multithreading">
+<h2>Task-based multithreading<a class="headerlink" href="#task-based-multithreading" title="Permalink to this headline">#</a></h2>
+<p>Conceptually, Julia implements <strong>task-based</strong> multithreading. In this paradigm, a task - e.g. a computational piece of a code - is marked for parallel execution on <strong>any</strong> of the available Julia threads. Julias <strong>dynamic scheduler</strong> will automatically put the task on one of the threads and trigger the execution of the task on said thread.</p>
+<p>Ideally, <strong>a user should think about tasks and not threads</strong>.</p>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>high-level and convenient</p></li>
+<li><p><strong>composability / nestability</strong> (Multithreaded code can call multithreaded code can call multithreaded code ….)</p></li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul class="simple">
+<li><p><strong>scheduling overhead</strong></p></li>
+<li><p>can get in the way when performance engineering</p>
+<ul>
+<li><p>scheduler has limited information (e.g. about the system topology)</p></li>
+<li><p>low-level profiling (e.g. with LIKWID) currently requires a known task -&gt; thread -&gt; cpu core mapping.</p></li>
+</ul>
+</li>
+</ul>
+<p>(Blog post: <a class="reference external" href="https://julialang.org/blog/2019/07/multithreading/">Announcing composable multi-threaded parallelism in Julia</a>)</p>
+<section id="spawning-tasks-on-threads-threads-spawn">
+<h3>Spawning tasks on threads: <code class="docutils literal notranslate"><span class="pre">Threads.&#64;spawn</span></code><a class="headerlink" href="#spawning-tasks-on-threads-threads-spawn" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Threads.&#64;spawn</span></code> spawns a task on a Julia thread. Specifically, it creates (and immediately returns) a <code class="docutils literal notranslate"><span class="pre">Task</span></code> and schedules it for execution on an available Julia thread.</p>
+<p>Note the conceptual similarity between <code class="docutils literal notranslate"><span class="pre">Threads.&#64;spawn</span></code> (task -&gt; thread) and <code class="docutils literal notranslate"><span class="pre">Distributed.&#64;spawn</span></code> (task -&gt; process) and also <code class="docutils literal notranslate"><span class="pre">&#64;async</span></code>.</p>
+<p>To avoid having to prefix <code class="docutils literal notranslate"><span class="pre">Threads.</span></code> to <code class="docutils literal notranslate"><span class="pre">&#64;spawn</span></code> (and other threading-related functions) let’s load everything from <code class="docutils literal notranslate"><span class="pre">Base.Threads</span></code> into global scope.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">Threads</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@spawn</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>test
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00007f86a0d68e70
+</pre></div>
+</div>
+</div>
+</div>
+<p>While <code class="docutils literal notranslate"><span class="pre">Threads.&#64;spawn</span></code> returns the task right away - it is <strong>non-blocking</strong> - the result might only be fetchable after some time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawn</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="s">&quot;result&quot;</span>
+<span class="k">end</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.964315 seconds (1.97 k allocations: 92.584 KiB, 0.14% compilation time)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;result&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we can use (some of) the control flow tools that we’ve already covered, like <code class="docutils literal notranslate"><span class="pre">&#64;sync</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@sync</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawn</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="s">&quot;result&quot;</span>
+<span class="k">end</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000005 seconds
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;result&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="o">*</span><span class="n">nthreads</span><span class="p">()</span>
+<span class="w">    </span><span class="nd">@spawn</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hi, I&#39;m &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">threadid</span><span class="p">())</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hi, I&#39;m 
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-recursive-fibonacci-series">
+<h4>Example: Recursive Fibonacci series<a class="headerlink" href="#example-recursive-fibonacci-series" title="Permalink to this headline">#</a></h4>
+<div class="math notranslate nohighlight">
+\[ F(n) = F(n-1) + F(n-2), \qquad F(1) = F(2) = 1\]</div>
+<p>We can nest <code class="docutils literal notranslate"><span class="pre">&#64;spawn</span></code> calls freely!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawn</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fib (generic function with 1 method)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hi, I&#39;m 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fib</span><span class="o">.</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hi, I&#39;m 2
+Hi, I&#39;m 2
+Hi, I&#39;m 4
+Hi, I&#39;m 2
+Hi, I&#39;m 2
+Hi, I&#39;m 3
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element Vector{Int64}:
+  1
+  1
+  2
+  3
+  5
+  8
+ 13
+ 21
+ 34
+ 55
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Note: Algorithmically, this is a highly inefficient implementation of the Fibonacci series, of course!)</p>
+</section>
+<section id="example-tmap-like-pmap">
+<h4>Example: <code class="docutils literal notranslate"><span class="pre">tmap</span></code> (like <code class="docutils literal notranslate"><span class="pre">pmap</span></code>)<a class="headerlink" href="#example-tmap-like-pmap" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tmap</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span><span class="w"> </span><span class="n">itr</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">fetch</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@spawn</span><span class="p">(</span><span class="n">fn</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span><span class="w"> </span><span class="n">itr</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tmap (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">rand</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tmap</span><span class="p">(</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element Vector{Vector{Float64}}:
+ [100.18753003677057, 7.954338580027477, 7.799496169524875, 7.73668042420593, 7.634122740128819, 7.591822369179419, 7.461364854317185, 7.412989799641095, 7.3887507750487, 7.2612019036929984  …  0.30216583487975857, 0.2721565543273664, 0.2492469722084963, 0.24266736646639847, 0.164231971505762, 0.1408025720619857, 0.11167266586018931, 0.08529620377143354, 0.03965571110773948, 0.025270907437001878]
+ [99.72266498644579, 8.038383714297046, 7.929902912765913, 7.720380404167318, 7.638325110932742, 7.517775090494831, 7.472316009296888, 7.429391395260527, 7.301099075310839, 7.235097483114681  …  0.3254966720906813, 0.29544829933322364, 0.22092652920874792, 0.1913481822687155, 0.13342849883234292, 0.11594004510246905, 0.08721174839437283, 0.057618052569368104, 0.04587248815153665, 0.012304705894112117]
+ [100.26423545752861, 7.846039960926511, 7.761656762616611, 7.672714410911166, 7.560665655070384, 7.5200907049038985, 7.438887776935963, 7.415082698617361, 7.34359006027998, 7.196236351007384  …  0.2894853889908623, 0.2877539902364475, 0.2392578428487053, 0.22088545113639468, 0.186632514422355, 0.12953994870806856, 0.12288125548092937, 0.09022353504119077, 0.06455550582567164, 0.022567172901382812]
+ [100.7351535142107, 8.104736824232814, 7.785102465795249, 7.7739943487466645, 7.586621475920657, 7.529594271406228, 7.422816337066247, 7.347802697740682, 7.302345267181595, 7.240739533370923  …  0.2657518359020054, 0.2235526103071246, 0.20358390228322046, 0.17990038973725422, 0.15785369121520446, 0.13581286997998884, 0.09505053689968501, 0.05603866282446173, 0.013888082547300272, 0.009832497162693072]
+ [99.65687856630687, 8.100635986067918, 7.866552734093791, 7.765265100458161, 7.661211734705458, 7.648890699599002, 7.519964646296056, 7.5079300688128185, 7.400209833920695, 7.291000277820431  …  0.31446685740377983, 0.2743756076252917, 0.24373133397824479, 0.18831972929017157, 0.16893027153543697, 0.1543366888937236, 0.10038067413446203, 0.07749585675049706, 0.05064213932373901, 0.01182119460395479]
+ [100.15656139652373, 7.989704786631509, 7.7813937027148175, 7.714919592756114, 7.604308381596281, 7.561934491056215, 7.461017822515681, 7.408681096315566, 7.240015926501659, 7.233440600134052  …  0.2775350702485027, 0.2443926380249544, 0.2025970890823358, 0.18511372859286024, 0.16323554946122334, 0.14722196604858293, 0.09986790985302114, 0.07690478598180561, 0.03373954919408757, 0.011337935557450005]
+ [99.94255308402387, 7.952815890093087, 7.87693694958658, 7.77696649029901, 7.667480246834756, 7.553846507260756, 7.459157337538008, 7.37467049793583, 7.309293165912781, 7.24181816288949  …  0.29671457546670593, 0.27559479146783133, 0.2690828740694836, 0.21890722894699138, 0.17810360546234127, 0.1733187724339112, 0.1471617655535554, 0.08770818241472596, 0.044117593889352755, 0.014399901883297596]
+ [100.38978768611237, 8.227264193629878, 7.788780879903722, 7.697852807901817, 7.5792982204704975, 7.462341615314579, 7.396345306470728, 7.3346311878329145, 7.255925501890166, 7.217966496260297  …  0.261402774092695, 0.24324423073039345, 0.22259437408975724, 0.19105754874332825, 0.16021740092679834, 0.1056926222650986, 0.08078658565002854, 0.04543063779072497, 0.022951295420719282, 0.0038718051554798476]
+ [99.75086075371578, 7.992232176485693, 7.889744133825719, 7.704918027813335, 7.630202181058535, 7.598650586255193, 7.473978869700278, 7.442141362453642, 7.31115952732727, 7.285960726891511  …  0.27789751722022854, 0.268405819647736, 0.2371341130378748, 0.21197664524098983, 0.17361993102442105, 0.14971144823064103, 0.12104846115854094, 0.07815994623024129, 0.05050264072683351, 0.024434857342934935]
+ [100.14093126134745, 8.119041336815048, 7.647937858146699, 7.627951677432744, 7.595474140435746, 7.492952058632752, 7.449636076741542, 7.390912816763872, 7.363796316159308, 7.201239046571712  …  0.32956398718219254, 0.2481812116472116, 0.23151500581770396, 0.19393670776559296, 0.19147999368471233, 0.16505598636366647, 0.12695602398013348, 0.07349344190925927, 0.0583058196210193, 0.03145617868095239]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tmap</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; (</span><span class="si">$</span><span class="p">(</span><span class="n">threadid</span><span class="p">())</span><span class="s">)&quot;</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 (1)
+6 (1)
+1 (1)
+7 (3)
+10 (1)
+8 (1)
+2 (1)
+5 (4)
+9 (1)
+4 (2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note, however, that this implementation creates temporary allocations and thus isn’t particularly efficient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+
+<span class="nd">@btime</span><span class="w"> </span><span class="n">tmap</span><span class="p">(</span><span class="o">$</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">M</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="o">$</span><span class="n">svdvals</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">M</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  32.454 ms (145 allocations: 4.22 MiB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  62.055 ms (81 allocations: 4.22 MiB)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remarks-on-spawn">
+<h4>Remarks on <code class="docutils literal notranslate"><span class="pre">&#64;spawn</span></code><a class="headerlink" href="#remarks-on-spawn" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p><strong>Task migration</strong>: Not only does the scheduler dynamically assign tasks to Julia threads, but it is also free to move tasks between threads. Hence, <code class="docutils literal notranslate"><span class="pre">threadid()</span></code> isn’t necessarily constant over time and should be used with care!</p></li>
+<li><p><strong>Spawning tasks on specific threads</strong>: Julia doesn’t have a built-in tool for this (as of now). However, some packages like <a class="reference external" href="https://github.com/carstenbauer/ThreadPinning.jl">ThreadPinning.jl</a> export <code class="docutils literal notranslate"><span class="pre">&#64;tspawnat</span> <span class="pre">&lt;threadid&gt;</span> <span class="pre">...</span></code> which allows to spawn <em>sticky</em> tasks.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">ThreadPinning</span>
+
+<span class="nd">@tspawnat</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;running on thread &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">threadid</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (runnable) @0x00007f86a08c3260
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="multithreading-for-loops-threads">
+<h3>Multithreading for-loops: <code class="docutils literal notranslate"><span class="pre">&#64;threads</span></code><a class="headerlink" href="#multithreading-for-loops-threads" title="Permalink to this headline">#</a></h3>
+<p>Higher level interface to multithreading. (Compare <code class="docutils literal notranslate"><span class="pre">Distributed.&#64;spawnat</span></code> vs <code class="docutils literal notranslate"><span class="pre">&#64;distributed</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="o">*</span><span class="n">nthreads</span><span class="p">()</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hi, I&#39;m &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">threadid</span><span class="p">())</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>running on thread 3
+Hi, I&#39;m 3
+Hi, I&#39;m 3
+Hi, I&#39;m 1
+Hi, I&#39;m 3
+Hi, I&#39;m 4
+Hi, I&#39;m 2
+Hi, I&#39;m 2
+Hi, I&#39;m 4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">square!</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">square_threads!</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">square!</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">square_threads!</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  317.294 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  89.437 μs (25 allocations: 2.08 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="scheduling-options">
+<h4>Scheduling options<a class="headerlink" href="#scheduling-options" title="Permalink to this headline">#</a></h4>
+<p>Syntax: <code class="docutils literal notranslate"><span class="pre">&#64;threads</span> <span class="pre">[schedule]</span> <span class="pre">for</span> <span class="pre">...</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">:dynamic</span></code> (default)</p>
+<ul>
+<li><p>creates O(<code class="docutils literal notranslate"><span class="pre">nthreads()</span></code>) many tasks each processing a contigious region of the iteration space</p></li>
+<li><p>each task essentially spawned with <code class="docutils literal notranslate"><span class="pre">&#64;spawn</span></code></p>
+<ul>
+<li><p>-&gt; task migration</p></li>
+<li><p>-&gt; composability / nestability</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">:static</span></code></p>
+<ul>
+<li><p>evenly splits up the iteration space and creates one task per block</p></li>
+<li><p><strong>statically</strong> maps tasks to threads, specifically: task 1 -&gt; thread 1, task 2 -&gt; thread 2, etc.</p>
+<ul>
+<li><p>-&gt; no task migration, i.e. <strong>fixed task-thread mapping</strong></p></li>
+<li><p>-&gt; not composable / nestable</p></li>
+<li><p>-&gt; only little overhead</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@threads</span><span class="w"> </span><span class="ss">:dynamic</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="o">*</span><span class="n">nthreads</span><span class="p">()</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; -&gt; thread &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">threadid</span><span class="p">())</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7 -&gt; thread 3
+8 -&gt; thread 3
+5 -&gt; thread 1
+3 -&gt; thread 4
+4 -&gt; thread 4
+6 -&gt; thread 3
+1 -&gt; thread 2
+2 -&gt; thread 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@threads</span><span class="w"> </span><span class="ss">:static</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="o">*</span><span class="n">nthreads</span><span class="p">()</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; -&gt; thread &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">threadid</span><span class="p">())</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 -&gt; thread 2
+5 -&gt; thread 3
+1 -&gt; thread 1
+6 -&gt; thread 3
+2 -&gt; thread 1
+4 -&gt; thread 2
+7 -&gt; thread 4
+8 -&gt; thread 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">&#64;threads</span> <span class="pre">:static</span></code>, every thread handles precisely two iterations!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@threads</span><span class="w"> </span><span class="ss">:dynamic</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<span class="w">    </span><span class="nd">@threads</span><span class="w"> </span><span class="ss">:dynamic</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$i</span><span class="s">, </span><span class="si">$j</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 3
+2, 1
+3, 3
+1, 1
+1, 2
+2, 2
+3, 1
+2, 3
+3, 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@threads</span><span class="w"> </span><span class="ss">:static</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<span class="w">    </span><span class="nd">@threads</span><span class="w"> </span><span class="ss">:static</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$i</span><span class="s">, </span><span class="si">$j</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>TaskFailedException
+
+    nested task error: `@threads :static` cannot be used concurrently or nested
+    Stacktrace:
+     [1] error(s::String)
+       @ Base ./error.jl:35
+     [2] macro expansion
+       @ ./threadingconstructs.jl:91 [inlined]
+     [3] macro expansion
+       @ ./In[21]:2 [inlined]
+     [4] (::var&quot;#161#threadsfor_fun#41&quot;{var&quot;#161#threadsfor_fun#39#42&quot;{UnitRange{Int64}}})(tid::Int64; onethread::Bool)
+       @ Main ./threadingconstructs.jl:84
+     [5] #161#threadsfor_fun
+       @ ./threadingconstructs.jl:51 [inlined]
+     [6] (::Base.Threads.var&quot;#1#2&quot;{var&quot;#161#threadsfor_fun#41&quot;{var&quot;#161#threadsfor_fun#39#42&quot;{UnitRange{Int64}}}, Int64})()
+       @ Base.Threads ./threadingconstructs.jl:30
+
+Stacktrace:
+ [1] wait
+   @ ./task.jl:345 [inlined]
+ [2] threading_run(fun::var&quot;#161#threadsfor_fun#41&quot;{var&quot;#161#threadsfor_fun#39#42&quot;{UnitRange{Int64}}}, static::Bool)
+   @ Base.Threads ./threadingconstructs.jl:38
+ [3] top-level scope
+   @ ./threadingconstructs.jl:93
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="load-balancing">
+<h3>Load-balancing<a class="headerlink" href="#load-balancing" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">compute_nonuniform_spawn!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">niter</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">nthreads</span><span class="p">()),</span><span class="w"> </span><span class="n">load</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">nthreads</span><span class="p">()))</span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@spawn</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">abs2</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">i</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c"># only for bookkeeping</span>
+<span class="w">            </span><span class="n">niter</span><span class="p">[</span><span class="n">threadid</span><span class="p">()]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="n">load</span><span class="p">[</span><span class="n">threadid</span><span class="p">()]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">niter</span><span class="p">,</span><span class="w"> </span><span class="n">load</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>compute_nonuniform_spawn! (generic function with 3 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">nthreads</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="n">niter</span><span class="p">,</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compute_nonuniform_spawn!</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([1, 77, 1, 1], [17, 3206, 8, 9])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+
+<span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">niter</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;threadid&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;# iterations&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Number of iterations&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="n">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;threadid&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;workload&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Workload&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4-multithreading_47_0.svg" src="../../_images/4-multithreading_47_0.svg" /><img alt="../../_images/4-multithreading_47_1.svg" src="../../_images/4-multithreading_47_1.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">compute_nonuniform_threads!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">niter</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">nthreads</span><span class="p">()),</span><span class="w"> </span><span class="n">load</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">nthreads</span><span class="p">()))</span>
+<span class="w">    </span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">        </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">abs2</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">i</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c"># only for bookkeeping</span>
+<span class="w">        </span><span class="n">niter</span><span class="p">[</span><span class="n">threadid</span><span class="p">()]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">load</span><span class="p">[</span><span class="n">threadid</span><span class="p">()]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">niter</span><span class="p">,</span><span class="w"> </span><span class="n">load</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>compute_nonuniform_threads! (generic function with 3 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">nthreads</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="n">niter</span><span class="p">,</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compute_nonuniform_threads!</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([20, 20, 20, 20], [1010, 210, 1410, 610])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">niter</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;threadid&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;# iterations&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Number of iterations&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="n">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">load</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot;threadid&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">&quot;workload&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Workload&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4-multithreading_50_0.svg" src="../../_images/4-multithreading_50_0.svg" /><img alt="../../_images/4-multithreading_50_1.svg" src="../../_images/4-multithreading_50_1.svg" /></div>
+</div>
+<p>(There might be a scheduling option for <code class="docutils literal notranslate"><span class="pre">&#64;threads</span></code> that implements load-balancing in the future.)</p>
+</section>
+</section>
+<section id="multithreading-things-to-be-aware-of">
+<h2>Multithreading: Things to be aware of<a class="headerlink" href="#multithreading-things-to-be-aware-of" title="Permalink to this headline">#</a></h2>
+<section id="race-conditions-and-thread-safety">
+<h3>Race conditions and thread safety<a class="headerlink" href="#race-conditions-and-thread-safety" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_serial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_serial (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_threads_naive</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="w">    </span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_threads_naive (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">nthreads</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10_000</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">sum_serial</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">sum_threads_naive</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum(numbers) = 20109.221691779036
+sum_serial(numbers) = 20109.22169177903
+sum_threads_naive(numbers) = 5291.129590762232
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Wrong</strong> result! Even worse, it’s <strong>non-deterministic</strong> and different every time! It’s also slow…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_serial</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">sum_threads_naive</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  53.491 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.454 ms (80026 allocations: 1.22 MiB)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Reason: There is a <a class="reference external" href="https://en.wikipedia.org/wiki/Race_condition">race condition</a>.</p>
+<p>Note that race conditions aren’t specific to reductions. More generally, they can appear when multiple threads are modifying a shared “global” state simultaneously.</p>
+<p>Not all of Julia and its packages in the ecosystem are thread-safe! In general, it is safer to assume that they’re not unless proven otherwise.</p>
+<section id="fix-1-divide-the-work">
+<h4>Fix 1: Divide the work<a class="headerlink" href="#fix-1-divide-the-work" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_threads_subsums</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">blocksize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">÷</span><span class="w"> </span><span class="n">nthreads</span><span class="p">()</span>
+<span class="w">    </span><span class="nd">@assert</span><span class="w"> </span><span class="n">isinteger</span><span class="p">(</span><span class="n">blocksize</span><span class="p">)</span>
+<span class="w">    </span><span class="n">idcs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="n">Iterators</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">blocksize</span><span class="p">))</span>
+
+<span class="w">    </span><span class="n">subsums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">nthreads</span><span class="p">())</span>
+<span class="w">    </span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">nthreads</span><span class="p">()</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">idcs</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span>
+<span class="w">            </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">subsums</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">subsums</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_threads_subsums (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">sum_serial</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">sum_threads_subsums</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum(numbers) = 20109.221691779036
+sum_serial(numbers) = 20109.22169177903
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_threads_subsums(numbers) = 20109.221691779014
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_threads_subsums</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  17.788 μs (26 allocations: 2.39 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Speedup and correct result. But not ideal:</p>
+<ul class="simple">
+<li><p>cumbersome to do this manually</p></li>
+<li><p>can have more subtle performance issues like <a class="reference external" href="https://en.wikipedia.org/wiki/False_sharing#:~:text=In%20computer%20science%2C%20false%20sharing,managed%20by%20the%20caching%20mechanism.">false sharing</a></p></li>
+</ul>
+</section>
+<section id="fix-2-atomics">
+<h4>Fix 2: Atomics<a class="headerlink" href="#fix-2-atomics" title="Permalink to this headline">#</a></h4>
+<p>See <a class="reference external" href="https://docs.julialang.org/en/v1/manual/multi-threading/#Atomic-Operations">Atomic Operations</a> in the Julia doc for more information. But in generaly one shouldn’t avoid using them as much as possible since they actually limit the parallelism.</p>
+</section>
+</section>
+<section id="garbage-collection">
+<h3>Garbage collection<a class="headerlink" href="#garbage-collection" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=Ks0p6PQyIPs">As of now</a>, <strong>Julia’s GC is not parallel</strong> and doesn’t work nicely with multithreading.</p>
+<p>If it gets triggered, it essentially “stops the world” (all threads) for clearing up memory.</p>
+<p>Hence, when using multithreading, it is even more important to <strong>avoid heap allocations!</strong></p>
+<p>(If you can’t avoid allocations, consider using multiprocessing instead.)</p>
+</section>
+</section>
+<section id="high-level-tools-for-parallel-computing">
+<h2>High-level tools for parallel computing<a class="headerlink" href="#high-level-tools-for-parallel-computing" title="Permalink to this headline">#</a></h2>
+<section id="threadsx-jl">
+<h3><a class="reference external" href="https://github.com/tkf/ThreadsX.jl">ThreadsX.jl</a><a class="headerlink" href="#threadsx-jl" title="Permalink to this headline">#</a></h3>
+<p><em>Parallelized Base functions</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">ThreadsX</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20109.221691779036
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ThreadsX</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20109.221691779036
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">ThreadsX</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  38.538 μs (263 allocations: 17.89 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="floops-jl">
+<h3><a class="reference external" href="https://github.com/JuliaFolds/FLoops.jl">FLoops.jl</a><a class="headerlink" href="#floops-jl" title="Permalink to this headline">#</a></h3>
+<p><em>Fast sequential, threaded, and distributed for-loops for Julia</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FLoops</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_floops</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@floop</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">xi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">x</span>
+<span class="w">        </span><span class="nd">@reduce</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">xi</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_floops (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_floops</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  20.120 μs (31 allocations: 1.81 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">nthreads</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10_000</span><span class="p">);</span>
+
+<span class="n">sum_floops</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_serial</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">sum_floops</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  53.491 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  19.913 μs (31 allocations: 1.81 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;floop</span></code> supports different <em>executors</em> that allow for easy switching between serial and threaded execution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_floops</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">executor</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@floop</span><span class="w"> </span><span class="n">executor</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">xi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">x</span>
+<span class="w">        </span><span class="nd">@reduce</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">xi</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_floops (generic function with 2 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_floops</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="p">(</span><span class="n">SequentialEx</span><span class="p">()));</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">sum_floops</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="p">(</span><span class="n">ThreadedEx</span><span class="p">()));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  53.491 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  19.124 μs (28 allocations: 1.77 KiB)
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are many more <a class="reference external" href="https://juliafolds.github.io/FLoops.jl/stable/tutorials/parallel/#tutorials-executor">executors</a>, like <code class="docutils literal notranslate"><span class="pre">DistributedEx</span></code> or <code class="docutils literal notranslate"><span class="pre">CUDAEx</span></code>. See, e.g., <a class="reference external" href="https://github.com/JuliaFolds/FoldsThreads.jl">FoldsThreads.jl</a> and <a class="reference external" href="https://github.com/JuliaFolds/FoldsCUDA.jl">FoldsCUDA.jl</a>.</p>
+<p>Under the hood, FLoops is built on top of <a class="reference external" href="https://juliafolds.github.io/Transducers.jl/stable/tutorials/tutorial_parallel/">Transducers.jl</a> (i.e. it translates for-loop semantics into folds).</p>
+</section>
+<section id="tullio-jl">
+<h3><a class="reference external" href="https://github.com/mcabbott/Tullio.jl">Tullio.jl</a><a class="headerlink" href="#tullio-jl" title="Permalink to this headline">#</a></h3>
+<p><em>Tullio is a very flexible einsum macro</em> (<a class="reference external" href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein notation</a>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Tullio</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@tullio</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="c"># matrix multiplication</span>
+
+<span class="n">C</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum_tullio</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@tullio</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_tullio (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_tullio</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.890 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Uses <code class="docutils literal notranslate"><span class="pre">fastmath</span></code> and other tricks to be faster here.)</p>
+</section>
+<section id="loopvectorization-jl">
+<h3><a class="reference external" href="https://github.com/JuliaSIMD/LoopVectorization.jl">LoopVectorization.jl</a><a class="headerlink" href="#loopvectorization-jl" title="Permalink to this headline">#</a></h3>
+<p><em>Macro(s) for vectorizing loops.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LoopVectorization</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_turbo</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="w">    </span><span class="nd">@tturbo</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum_turbo (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_turbo</span><span class="p">(</span><span class="o">$</span><span class="n">numbers</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.624 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Uses all kinds of SIMD tricks to be faster than the others.)</p>
+</section>
+</section>
+<section id="system-topology-and-thread-affinity">
+<h2>System topology and thread affinity<a class="headerlink" href="#system-topology-and-thread-affinity" title="Permalink to this headline">#</a></h2>
+<section id="hawk-compute-node">
+<h3>Hawk compute node<a class="headerlink" href="#hawk-compute-node" title="Permalink to this headline">#</a></h3>
+<img src="../../static/lstopo_hawk.svg" width=100%><p><strong>Not pinning threads (or pinning them badly) can degrade performance massively!</strong></p>
+</section>
+<section id="pinning-julia-threads-to-cpu-threads">
+<h3>Pinning Julia threads to CPU threads<a class="headerlink" href="#pinning-julia-threads-to-cpu-threads" title="Permalink to this headline">#</a></h3>
+<p>What about external tools like <code class="docutils literal notranslate"><span class="pre">numactl</span></code>, <code class="docutils literal notranslate"><span class="pre">taskset</span></code>, etc.? Doesn’t work reliably because it <a class="reference external" href="https://discourse.julialang.org/t/thread-affinitization-pinning-julia-threads-to-cores/58069/5">can’t distinguish</a> between Julia threads and other internal threads.</p>
+<p><strong>Options:</strong></p>
+<ul class="simple">
+<li><p>Environment variable: <code class="docutils literal notranslate"><span class="pre">JULIA_EXCLUSIVE=1</span></code> (compact pinning)</p></li>
+<li><p>More control and convenient visualization: <a class="reference external" href="https://github.com/carstenbauer/ThreadPinning.jl">ThreadPinning.jl</a></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">compact</span></code>: pin to cpu thread 0, 1, 2, 3, … one after another</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spread</span></code>: alternate between sockets so, e.g., 0, 64, 1, 65, 2, 66, …. (if a socket has 64 cores)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numa</span></code>: same as <code class="docutils literal notranslate"><span class="pre">spread</span></code> but alternate between NUMA domains so, e.g., 0, 16, 32, 48, 64, …. (if a NUMA domain has 16 cores)</p></li>
+<li><p><strong>Caveat:</strong> currently one works on Linux.</p></li>
+</ul>
+</li>
+</ul>
+<img src="../../static/threadinfo.png" width=1000px></section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-4-threads-1.8"
+        },
+        kernelOptions: {
+            kernelName: "julia-4-threads-1.8",
+            path: "./sessions/3-parallel"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-4-threads-1.8'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="3-distributed-computing-mpi.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Distributed Computing: Message Passing Interface (MPI)</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Robert Rosca<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
