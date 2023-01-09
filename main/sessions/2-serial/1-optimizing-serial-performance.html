@@ -1039,10 +1039,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.696 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.694 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  30.512 ns (1 allocation: 64 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  30.478 ns (1 allocation: 64 bytes)
 </pre></div>
 </div>
 </div>
@@ -1074,7 +1074,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  752.390 μs (20001 allocations: 1.53 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  751.011 μs (20001 allocations: 1.53 MiB)
 </pre></div>
 </div>
 </div>
@@ -1102,7 +1102,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  327.940 μs (1 allocation: 80 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  334.203 μs (1 allocation: 80 bytes)
 </pre></div>
 </div>
 </div>
@@ -1147,7 +1147,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  250.670 μs (1 allocation: 80 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  233.968 μs (1 allocation: 80 bytes)
 </pre></div>
 </div>
 </div>
@@ -1206,14 +1206,14 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 68 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">73.275 ms</span> … <span class=" -Color -Color-Magenta"> 79.457 ms</span>  ┊ GC (min … max): 0.74% … 1.84%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">74.182 ms               </span>┊ GC (median):    1.45%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">74.306 ms</span> ± <span class=" -Color -Color-Green">786.663 μs</span>  ┊ GC (mean ± σ):  1.32% ± 0.36%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 65 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">74.228 ms</span> … <span class=" -Color -Color-Magenta">79.241 ms</span>  ┊ GC (min … max): 1.47% … 1.82%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">77.704 ms              </span>┊ GC (median):    2.10%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">77.310 ms</span> ± <span class=" -Color -Color-Green"> 1.630 ms</span>  ┊ GC (mean ± σ):  1.81% ± 0.51%
 
-        ▁              ▆█<span class=" -Color -Color-Blue">▃</span>█▆ <span class=" -Color -Color-Green"> </span>▁                                 
-  ▄▁▄▁▁▁█▁▁▇▄▇▁▄▇▄▁▇▄▇▄██<span class=" -Color -Color-Blue">█</span>██▄<span class=" -Color -Color-Green">▇</span>█▇▁▁▁▄▁▄▇▁▇▁▁▇▁▁▁▁▁▁▄▁▄▁▁▁▄▄▁▁▁▄ ▁
-  73.3 ms         Histogram: frequency by time         75.6 ms <span class=" -Color -Color-Bold">&lt;</span>
+              ▁                       <span class=" -Color -Color-Green"> </span>    <span class=" -Color -Color-Blue"> </span>         █▃▆▆▁     
+  ▇▁▇▁▇▇▁▄▁▄▄▁█▁▄▇▁▁▁▁▄▁▁▁▁▄▄▄▁▁▁▇▄▄▁▁<span class=" -Color -Color-Green">▁</span>▇▇▄▇<span class=" -Color -Color-Blue">▄</span>▇▁▁▄▁▁▁▇▄█████▁▄▄ ▁
+  74.2 ms         Histogram: frequency by time        79.2 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">76.49 MiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">2004</span>.
 </pre></div>
@@ -1244,14 +1244,14 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 718 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">6.877 ms</span> … <span class=" -Color -Color-Magenta"> 14.151 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">6.909 ms               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.963 ms</span> ± <span class=" -Color -Color-Green">338.208 μs</span>  ┊ GC (mean ± σ):  0.12% ± 1.53%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 720 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">6.887 ms</span> … <span class=" -Color -Color-Magenta"> 11.159 ms</span>  ┊ GC (min … max): 0.00% … 37.13%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">6.907 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">6.943 ms</span> ± <span class=" -Color -Color-Green">198.115 μs</span>  ┊ GC (mean ± σ):  0.12% ±  1.51%
 
-   ▆█<span class=" -Color -Color-Blue"> </span>   <span class=" -Color -Color-Green"> </span>                                                     
-  ▃██<span class=" -Color -Color-Blue">▃</span>▂▄▄<span class=" -Color -Color-Green">█</span>▅▂▃▆▃▂▂▂▁▁▂▁▁▁▁▁▁▁▁▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂ ▂
-  6.88 ms         Histogram: frequency by time        7.61 ms <span class=" -Color -Color-Bold">&lt;</span>
+      ▃▆█▄<span class=" -Color -Color-Blue"> </span>             <span class=" -Color -Color-Green"> </span>                                      
+  ▃▃▅▆████<span class=" -Color -Color-Blue">█</span>█▄▃▃▃▂▁▁▂▂▁▁▁<span class=" -Color -Color-Green">▂</span>▁▂▂▂▁▁▂▂▃▃▅▇▆▆▆▄▃▃▂▁▂▂▁▁▁▁▂▂▃▃▃▁▂▂▂▂ ▃
+  6.89 ms         Histogram: frequency by time        7.04 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">234.52 KiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">6</span>.
 </pre></div>
@@ -1281,7 +1281,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  140.757 ns (4 allocations: 320 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  140.366 ns (4 allocations: 320 bytes)
 </pre></div>
 </div>
 </div>
@@ -1300,7 +1300,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  41.653 ns (1 allocation: 80 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  41.772 ns (1 allocation: 80 bytes)
 </pre></div>
 </div>
 </div>
@@ -1319,7 +1319,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  174.704 ns (2 allocations: 288 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  174.184 ns (2 allocations: 288 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4111883712180104
@@ -1337,7 +1337,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  120.988 ns (1 allocation: 144 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  119.959 ns (1 allocation: 144 bytes)
 </pre></div>
 </div>
 </div>
@@ -1352,7 +1352,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  81.260 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  81.264 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1364,7 +1364,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  80.621 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  81.263 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1383,7 +1383,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  174.313 ns (2 allocations: 288 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  173.115 ns (2 allocations: 288 bytes)
 </pre></div>
 </div>
 </div>
@@ -1401,7 +1401,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  136.249 ns (1 allocation: 144 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  135.819 ns (1 allocation: 144 bytes)
 </pre></div>
 </div>
 </div>
@@ -1419,7 +1419,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  78.933 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  79.274 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1437,7 +1437,7 @@ There's a good chance that there will not be a large performance difference betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  78.979 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  78.917 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1546,20 +1546,20 @@ top:
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %5, <span class=" -Color -Color-Yellow">{}</span>*** %4, align <span class=" -Color -Color-Yellow">8</span>
   %6 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack to <span class=" -Color -Color-Yellow">{}</span>***
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %gcframe2.sub, <span class=" -Color -Color-Yellow">{}</span>*** %6, align <span class=" -Color -Color-Yellow">8</span>
-  %7 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139616999571672</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">8</span>
+  %7 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139677198024920</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">8</span>
   %8 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %7, <span class=" -Color -Color-Yellow">{}</span>** %8, align <span class=" -Color -Color-Yellow">16</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624437301408</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684618571936</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
   %9 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %0, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %7, <span class=" -Color -Color-Yellow">{}</span>** %9, align <span class=" -Color -Color-Yellow">8</span>
-  %10 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624224484400</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
-  %11 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139616982558104</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">8</span>
+  %10 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684405754928</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %11 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139677192955480</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">8</span>
   %12 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">3</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %10, <span class=" -Color -Color-Yellow">{}</span>** %12, align <span class=" -Color -Color-Yellow">8</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %11, <span class=" -Color -Color-Yellow">{}</span>** %8, align <span class=" -Color -Color-Yellow">16</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %10, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %11, <span class=" -Color -Color-Yellow">{}</span>** %9, align <span class=" -Color -Color-Yellow">8</span>
-  %13 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624222862560</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %13 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684404133088</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
   %14 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %3, align <span class=" -Color -Color-Yellow">8</span>
   %15 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack to <span class=" -Color -Color-Yellow">{}</span>**
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %14, <span class=" -Color -Color-Yellow">{}</span>** %15, align <span class=" -Color -Color-Yellow">8</span>
@@ -1958,7 +1958,7 @@ Body<span class=" -Color -Color-Bold">::Any</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  62.344 ns (3 allocations: 48 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  64.450 ns (3 allocations: 48 bytes)
 </pre></div>
 </div>
 </div>
@@ -1995,21 +1995,21 @@ top:
    %8 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %0, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
    %9 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %8 unordered, align <span class=" -Color -Color-Yellow">8</span>
 ; └
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624223708144</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684404978672</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
   %10 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %9, <span class=" -Color -Color-Yellow">{}</span>** %10, align <span class=" -Color -Color-Yellow">8</span>
   %11 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[3</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624230823888</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %11, align <span class=" -Color -Color-Yellow">8</span>
-  %12 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624223709712</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">3)</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684412094416</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** %11, align <span class=" -Color -Color-Yellow">8</span>
+  %12 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684404980240</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">3)</span>
   %13 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">3</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %12, <span class=" -Color -Color-Yellow">{}</span>** %13, align <span class=" -Color -Color-Yellow">8</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %9, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
-  %14 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624230843312</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">1)</span>
+  %14 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684412113840</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">1)</span>
   %15 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %14, <span class=" -Color -Color-Yellow">{}</span>** %15, align <span class=" -Color -Color-Yellow">16</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %12, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %14, <span class=" -Color -Color-Yellow">{}</span>** %10, align <span class=" -Color -Color-Yellow">8</span>
-  %16 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624222862560</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %16 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684404133088</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
   %17 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %4, align <span class=" -Color -Color-Yellow">8</span>
   %18 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %pgcstack to <span class=" -Color -Color-Yellow">{}</span>**
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %17, <span class=" -Color -Color-Yellow">{}</span>** %18, align <span class=" -Color -Color-Yellow">8</span>
@@ -2084,7 +2084,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.433 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.803 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -2113,7 +2113,7 @@ top:
    <span class=" -Color -Color-Bold">br</span> <span class=" -Color -Color-Cyan">i1</span> %3, <span class=" -Color -Color-Cyan">label</span> %L8, <span class=" -Color -Color-Cyan">label</span> %L6
 
 L6:                                               ; preds = %top
-   %4 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @j_throw_complex_domainerror_3196<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139624437655464</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Cyan">double</span> %2<span class=" -Color -Color-Yellow">)</span> #0
+   %4 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @j_throw_complex_domainerror_3196<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139684618925992</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Cyan">double</span> %2<span class=" -Color -Color-Yellow">)</span> #0
    <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @llvm.trap<span class=" -Color -Color-Yellow">()</span>
    <span class=" -Color -Color-Bold">unreachable</span>
 
@@ -2201,7 +2201,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.814 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.812 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -2290,10 +2290,10 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  84.073 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  85.082 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  188.554 ns (2 allocations: 912 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  186.628 ns (2 allocations: 912 bytes)
 </pre></div>
 </div>
 </div>
@@ -2492,13 +2492,13 @@ Body<span class=" -Color -Color-Bold">::CoolerDiagonalMatrix</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  83.474 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  84.021 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  189.947 ns (2 allocations: 912 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  184.630 ns (2 allocations: 912 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  83.942 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  86.395 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
 </div>
@@ -2517,10 +2517,10 @@ Body<span class=" -Color -Color-Bold">::CoolerDiagonalMatrix</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  84.192 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  84.281 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  121.758 ns (3 allocations: 112 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  122.159 ns (3 allocations: 112 bytes)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  12.050 ns (0 allocations: 0 bytes)
@@ -2572,7 +2572,7 @@ Body<span class=" -Color -Color-Cyan">::MuchCoolerDiagonalMatrix{Int64, StepRang
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  314.034 ns (3 allocations: 464 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  301.373 ns (3 allocations: 464 bytes)
 </pre></div>
 </div>
 </div>
@@ -2641,7 +2641,7 @@ Body<span class=" -Color -Color-Bold">::Any</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  162.338 ns (3 allocations: 480 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  155.269 ns (3 allocations: 480 bytes)
 </pre></div>
 </div>
 </div>
@@ -2972,7 +2972,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.222 μs (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.256 μs (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -3012,15 +3012,16 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for computation(::Vector{Union{Float64, Int64, String}})
-  from computation(data) in Main at In[84]:1
+  from computation(data) in Main
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> at In[84]:1
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(computation)</span>
   data<span class=" -Color -Color-Cyan">::Vector{Union{Float64, Int64, String}}</span>
 Locals
   c<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  b<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
+  b<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
   a<span class=" -Color -Color-Bold">::Union{Float64, Int64, String}</span>
 Body<span class=" -Color -Color-Cyan">::Float64</span>
 1 ─      (a = Base.getindex(data, 1))
@@ -3080,7 +3081,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  938.621 ns (1 allocation: 16 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  938.464 ns (1 allocation: 16 bytes)
 </pre></div>
 </div>
 </div>
@@ -3127,14 +3128,14 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 5034 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">665.128 μs</span> … <span class=" -Color -Color-Magenta">  2.710 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">722.871 μs               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">862.419 μs</span> ± <span class=" -Color -Color-Green">307.528 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 4905 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">687.379 μs</span> … <span class=" -Color -Color-Magenta">  2.519 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">734.717 μs               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">866.176 μs</span> ± <span class=" -Color -Color-Green">315.315 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-    █<span class=" -Color -Color-Blue">▅</span>       <span class=" -Color -Color-Green"> </span>                                                   
-  ▂▅█<span class=" -Color -Color-Blue">█</span>▂▂▃▆▄▂▂<span class=" -Color -Color-Green">▁</span>▁▁▂▁▁▂▂▂▂▁▁▁▁▁▁▁▁▁▁▂▃▄▂▂▂▁▂▂▂▂▂▂▂▂▁▁▁▁▂▂▁▂▂▂▂▃▃▂▂ ▂
-  665 μs           Histogram: frequency by time         1.75 ms <span class=" -Color -Color-Bold">&lt;</span>
+  ▄▇█<span class=" -Color -Color-Blue">▇</span>▃     <span class=" -Color -Color-Green"> </span>                      ▃▂▂▂                    ▂▃▃▂ ▁
+  ███<span class=" -Color -Color-Blue">█</span>█▁▁▃▁▁<span class=" -Color -Color-Green">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▆██████▄▃▁▁▃▁▁▁▁▁▁▁▃▄▁▅▅▅█████ █
+  687 μs        Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time       1.78 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
@@ -3148,14 +3149,14 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 1833 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">2.205 ms</span> … <span class=" -Color -Color-Magenta">  4.453 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">2.259 ms               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">2.589 ms</span> ± <span class=" -Color -Color-Green">512.858 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 1974 samples with 1 evaluation.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">2.214 ms</span> … <span class=" -Color -Color-Magenta">  4.209 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">2.257 ms               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">2.383 ms</span> ± <span class=" -Color -Color-Green">331.395 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-  ▄█<span class=" -Color -Color-Blue">▆</span>▄▃      ▁▁   <span class=" -Color -Color-Green"> </span>   ▁                          ▃▄▄▃▂   ▁▁    
-  ██<span class=" -Color -Color-Blue">█</span>██▆▁▄▁▁▅██▇▅▁<span class=" -Color -Color-Green">▄</span>▇▇██▇▅▄▄▁▄▄▁▄▁▁▄▁▁▄▁▁▁▁▁▄▄▁▁▄▅█████▇▇███▇▅ █
-  2.2 ms       Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      3.62 ms <span class=" -Color -Color-Bold">&lt;</span>
+  ▇█<span class=" -Color -Color-Blue">▇</span>▅    <span class=" -Color -Color-Green"> </span>   ▁▁         ▁                                     
+  ██<span class=" -Color -Color-Blue">█</span>█▅▃▃▁<span class=" -Color -Color-Green">▃</span>▄▆▆███▇▆▆▅▄▅▅▇█▇▅▁▃▃▃▃▁▁▃▃▁▁▁▁▄▃▅▇▇▆▇▆▇▇█▇▆▆▇██▇▆▃ █
+  2.21 ms      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      3.53 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
@@ -3186,7 +3187,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  267.381 μs (1 allocation: 80 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  200.578 μs (1 allocation: 80 bytes)
 </pre></div>
 </div>
 </div>
@@ -3208,7 +3209,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  501.242 μs (1 allocation: 80 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  501.244 μs (1 allocation: 80 bytes)
 </pre></div>
 </div>
 </div>
@@ -3239,7 +3240,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.292 μs (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.294 μs (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -3259,7 +3260,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  102.974 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  102.782 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -3305,10 +3306,10 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.292 μs (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.294 μs (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  58.881 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  58.511 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -3439,10 +3440,10 @@ julia_f_fastmath_4881:                  # @julia_f_fastmath_4881
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  939.900 ns (1 allocation: 7.94 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  913.161 ns (1 allocation: 7.94 KiB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  882.800 ns (1 allocation: 7.94 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  800.786 ns (1 allocation: 7.94 KiB)
 </pre></div>
 </div>
 </div>
@@ -3603,16 +3604,16 @@ julia_f_fastmath_4881:                  # @julia_f_fastmath_4881
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10×10 Matrix{Float64}:
- 0.308015  0.956787  0.93183   0.797131  …  0.932434  0.664151   0.811976
- 0.204722  0.868462  0.19732   0.26474      0.854743  0.0633619  0.725818
- 0.593911  0.527552  0.356724  0.613258     0.125343  0.269383   0.43678
- 0.59512   0.356973  0.261443  0.18426      0.283995  0.626455   0.204825
- 0.903477  0.22579   0.772885  0.172502     0.261419  0.36017    0.0108597
- 0.445014  0.535388  0.239836  0.813443  …  0.149002  0.790049   0.265908
- 0.239573  0.713987  0.476977  0.577885     0.259328  0.326482   0.851228
- 0.861096  0.338257  0.488873  0.693131     0.26117   0.674127   0.774491
- 0.662022  0.264346  0.659492  0.478881     0.577099  0.10761    0.342391
- 0.523692  0.789614  0.936177  0.547415     0.337767  0.87931    0.364605
+ 0.258691  0.0464967  0.263585   0.669632   …  0.125292   0.295299   0.416137
+ 0.170264  0.545957   0.0158409  0.13716       0.628801   0.231691   0.561139
+ 0.279717  0.268466   0.173288   0.0607093     0.784124   0.610417   0.587533
+ 0.334335  0.593489   0.383178   0.178968      0.158849   0.0148143  0.589773
+ 0.189268  0.0941343  0.920828   0.297028      0.29557    0.13355    0.837223
+ 0.230879  0.842215   0.794186   0.894374   …  0.0796169  0.865069   0.394498
+ 0.670888  0.809121   0.801168   0.450059      0.926456   0.370853   0.918959
+ 0.693241  0.975918   0.622532   0.332599      0.0759421  0.817194   0.660174
+ 0.507988  0.917185   0.101032   0.793746      0.0341003  0.567199   0.870177
+ 0.438935  0.510296   0.0892283  0.382818      0.707844   0.50728    0.291967
 </pre></div>
 </div>
 </div>

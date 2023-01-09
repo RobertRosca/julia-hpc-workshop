@@ -663,7 +663,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.098205 seconds (405.27 k allocations: 20.623 MiB, 99.99% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.098182 seconds (405.27 k allocations: 20.623 MiB, 99.99% compilation time)
   0.000004 seconds (2 allocations: 160 bytes)
 </pre></div>
 </div>
@@ -678,7 +678,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000004 seconds (2 allocations: 160 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000003 seconds (2 allocations: 160 bytes)
 </pre></div>
 </div>
 </div>
@@ -731,7 +731,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.093486 seconds (345.65 k allocations: 17.312 MiB, 99.98% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.092871 seconds (345.65 k allocations: 17.312 MiB, 99.99% compilation time)
   0.000004 seconds (2 allocations: 160 bytes)
 </pre></div>
 </div>
@@ -1276,13 +1276,13 @@ In [2]: %timeit nextfib(100_000)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 10 evaluations.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.815 μs</span> … <span class=" -Color -Color-Magenta"> 4.459 μs</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.849 μs              </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.857 μs</span> ± <span class=" -Color -Color-Green">60.097 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.812 μs</span> … <span class=" -Color -Color-Magenta">125.551 μs</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.837 μs               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.869 μs</span> ± <span class=" -Color -Color-Green">  1.247 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-    ▂▆█<span class=" -Color -Color-Blue">█</span>▇<span class=" -Color -Color-Green">▄</span>▁                                                  ▂
-  ▄▇███<span class=" -Color -Color-Blue">█</span>█<span class=" -Color -Color-Green">█</span>█▅▄▄▃▃▆▇▇███▇▆▅▃▄▁▁▁▁▁▁▁▁▄▃▄▁▄▃▁▄▁▄▁▄▄▁▅▅▅▅▄▅▅▆▆▆▆ █
-  1.81 μs      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time     2.18 μs <span class=" -Color -Color-Bold">&lt;</span>
+    ▂█<span class=" -Color -Color-Blue">▄</span>   <span class=" -Color -Color-Green"> </span>                                                    
+  ▂▄██<span class=" -Color -Color-Blue">█</span>▅▂▂<span class=" -Color -Color-Green">▂</span>▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▂▁▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ▂
+  1.81 μs         Histogram: frequency by time        2.22 μs <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
@@ -1316,12 +1316,12 @@ In [2]: %timeit nextfib(100_000)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 1000 evaluations.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">3.034 ns</span> … <span class=" -Color -Color-Magenta">9.345 ns</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">3.037 ns             </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">3.045 ns</span> ± <span class=" -Color -Color-Green">0.159 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">3.033 ns</span> … <span class=" -Color -Color-Magenta">7.869 ns</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">3.035 ns             </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">3.045 ns</span> ± <span class=" -Color -Color-Green">0.165 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-                                            █<span class=" -Color -Color-Blue"> </span>               
-  ▂▁▁▁▁▁▁▁▁▁▁▁▁▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▁▁▁█<span class=" -Color -Color-Blue">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▇ ▂
+                        █<span class=" -Color -Color-Blue"> </span>          ▆                        
+  ▂▁▁▁▁▁▁▁▁▁▁▆▁▁▁▁▁▁▁▁▁▁█<span class=" -Color -Color-Blue">▁</span>▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▄▁▁▁▁▁▁▁▁▁▁▂ ▂
   3.03 ns        Histogram: frequency by time       3.04 ns <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
@@ -1361,13 +1361,13 @@ In [2]: %timeit nextfib(100_000)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 10000 samples with 10 evaluations.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.020 μs</span> … <span class=" -Color -Color-Magenta">  5.447 μs</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.096 μs               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.154 μs</span> ± <span class=" -Color -Color-Green">138.026 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.077 μs</span> … <span class=" -Color -Color-Magenta">  2.928 μs</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.206 μs               </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.217 μs</span> ± <span class=" -Color -Color-Green">158.721 ns</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-  ▅▇█▇▅▄▃<span class=" -Color -Color-Blue">▁</span>▁    <span class=" -Color -Color-Green"> </span>  ▅▇▆▆▅▅▄▃▂▃▂▁▁▁ ▁▂▂▁▁                        ▂
-  ███████<span class=" -Color -Color-Blue">█</span>███▇▆<span class=" -Color -Color-Green">▆</span>▅▆██████████████████████▇▆▇▆▇▇▆▅▅▄▄▅▂▂▅▄▄▄▄▄▅ █
-  1.02 μs      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      1.64 μs <span class=" -Color -Color-Bold">&lt;</span>
+  ▄█▇▄▂▁    <span class=" -Color -Color-Blue"> </span> ▁▇▆▅▄▃▂▂▂▁▁ ▁▃▂▁                                ▂
+  ████████▇▆<span class=" -Color -Color-Blue">▅</span>▄█████████████████▇▇▇▇▇▅▅▅▅▄▃▄▄▄▃▄▂▄▂▄▄▃▃▄▃▂▄▄▄▅ █
+  1.08 μs      Histogram: <span class=" -Color -Color-Bold">log(</span>frequency<span class=" -Color -Color-Bold">)</span> by time      1.87 μs <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">368 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">15</span>.
 </pre></div>
@@ -1418,7 +1418,7 @@ In [4]: %timeit A + B
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  658.720 ns (1 allocation: 16 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  655.376 ns (1 allocation: 16 bytes)
 </pre></div>
 </div>
 </div>
@@ -1432,7 +1432,7 @@ In [4]: %timeit A + B
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  155.413 ns (1 allocation: 896 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  157.970 ns (1 allocation: 896 bytes)
 </pre></div>
 </div>
 </div>
@@ -1528,7 +1528,7 @@ In [4]: %timeit A + B
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  21.080 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  21.059 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1637,7 +1637,7 @@ In [4]: %timeit det_2x2(M)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  17.429 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  18.088 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1669,7 +1669,7 @@ In [4]: %timeit det_2x2(M)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  335.937 ns (3 allocations: 192 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  336.357 ns (3 allocations: 192 bytes)
 </pre></div>
 </div>
 </div>
@@ -1699,7 +1699,7 @@ In [4]: %timeit det_2x2(M)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.042 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.035 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1714,7 +1714,7 @@ In [4]: %timeit det_2x2(M)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.368 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.043 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -1756,10 +1756,10 @@ In [4]: %timeit det_2x2(M)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.311 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.394 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.314 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.386 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
