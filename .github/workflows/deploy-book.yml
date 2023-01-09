@@ -33,7 +33,10 @@ jobs:
 
     - name: Cache
       uses: actions/cache@v1
+      env:
+        cache-name: jupyter_cache
       with:
+        key: ${{ env.cache-name }}
         path: ./_build/.jupyter_cache
 
     - name: Setup
