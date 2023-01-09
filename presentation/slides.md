@@ -7,12 +7,6 @@ layout: cover
 
 European XFEL *10th January 2023*
 
-<BarBottom  title="Julia HPC Workshop">
-  <Item text="RobertRosca/julia-hpc-workshop">
-    <carbon:logo-github />
-  </Item>
-</BarBottom>
-
 ---
 
 # Aims for this Workshop/Course Thing
@@ -31,26 +25,54 @@ European XFEL *10th January 2023*
 - Intended as a starting point for further learning
 - Or as a 'taster' to see if Julia is something you want to learn more about
 
-<BarBottom  title="Julia HPC Workshop">
-  <Item text="RobertRosca/julia-hpc-workshop">
-    <carbon:logo-github />
-  </Item>
-</BarBottom>
-
 ---
 
 <img src="https://indico.desy.de/event/36933/attachments/78369/101679/julia-hpc-provisional-timetable.png">
-
-<BarBottom  title="Julia HPC Workshop">
-  <Item text="RobertRosca/julia-hpc-workshop">
-    <carbon:logo-github />
-  </Item>
-</BarBottom>
 
 <!--
 - Three days of sessions
 - One core two hour session, two one hour sessions
 -->
+
+---
+layout: two-cols
+---
+
+# Participation
+
+Optional but encouraged
+
+Can be done from any device:
+
+- Maxwell via Max-JHub
+- Desktop/Laptop
+- MyBinder
+- Static Website
+
+::right::
+
+Set up Julia on a computer where it is not available:
+
+```sh
+curl -fsSL https://install.julialang.org | sh
+juliaup add 1.8
+# this has been written and tested using 1.8.4
+# but any version ~1.8 should work
+```
+
+Clone repository and setup:
+
+```sh
+git clone https://github.com/RobertRosca/julia-hpc-workshop.git
+cd julia-hpc-workshop
+# module load maxwell julia  # If you are on Maxwell
+make setup  # will install required Julia dependencies
+```
+
+This will:
+
+- Create the environment with all dependencies
+- Install kernels for Jupyter
 
 ---
 
@@ -74,12 +96,6 @@ https://julialang.org/blog/2012/02/why-we-created-julia/
 - The main appeal is that it aims to be both fast and easy to use
 -->
 
-<BarBottom  title="Julia HPC Workshop">
-  <Item text="RobertRosca/julia-hpc-workshop">
-    <carbon:logo-github />
-  </Item>
-</BarBottom>
-
 ---
 
 # Did They Achieve It?
@@ -99,12 +115,6 @@ Case Studies
 - Real-world use is more interesting than benchmarks
 - Julia is used by a huge range of companies, not just a bit but for crucial workloads
 -->
-
-<BarBottom  title="Julia HPC Workshop">
-  <Item text="RobertRosca/julia-hpc-workshop">
-    <carbon:logo-github />
-  </Item>
-</BarBottom>
 
 ---
 layout: iframe
@@ -171,12 +181,6 @@ Compiler optimises away all code - returns a constant integer!
 
 </div>
 
-<BarBottom  title="Julia HPC Workshop">
-  <Item text="RobertRosca/julia-hpc-workshop">
-    <carbon:logo-github />
-  </Item>
-</BarBottom>
-
 ---
 
 # Julia Bridges Gaps
@@ -195,9 +199,3 @@ Compiler optimises away all code - returns a constant integer!
 
 - Also bridges gap between expert researchers and expert developers
   - Performant Julia code is written in Julia, not C (numpy is 53% C)
-
-<BarBottom  title="Julia HPC Workshop">
-  <Item text="RobertRosca/julia-hpc-workshop">
-    <carbon:logo-github />
-  </Item>
-</BarBottom>
