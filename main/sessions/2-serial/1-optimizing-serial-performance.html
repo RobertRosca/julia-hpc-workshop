@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Optimizing “Serial” Performance &#8212; Julia for HPC&lt;br&gt;EuXFEL Workshop</title>
+    <title>Optimizing Serial Performance &#8212; Julia for HPC&lt;br&gt;EuXFEL Workshop</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -131,7 +131,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../1-basics/2-duck-typing-benchmarking.html">
-   Duck Typing, Interfaces, and Benchmarkin
+   Duck Typing, Interfaces, and Benchmarking
   </a>
  </li>
  <li class="toctree-l1">
@@ -141,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../1-basics/4-generic-programming.html">
-   Generic programming
+   Generic Programming
   </a>
  </li>
  <li class="toctree-l1">
@@ -163,7 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Optimizing “Serial” Performance
+   Optimizing Serial Performance
   </a>
  </li>
  <li class="toctree-l1">
@@ -173,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="3-interop-microbenchmark.html">
-   Programming language interoperability (Interop)
+   Programming Language Interoperability (Interop)
   </a>
  </li>
  <li class="toctree-l1">
@@ -422,7 +422,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Optimizing “Serial” Performance
+   Optimizing Serial Performance
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -711,7 +711,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Optimizing “Serial” Performance</h1>
+                <h1>Optimizing Serial Performance</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -723,7 +723,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Optimizing “Serial” Performance
+   Optimizing Serial Performance
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -1014,7 +1014,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="optimizing-serial-performance">
-<h1>Optimizing “Serial” Performance<a class="headerlink" href="#optimizing-serial-performance" title="Permalink to this headline">#</a></h1>
+<h1>Optimizing Serial Performance<a class="headerlink" href="#optimizing-serial-performance" title="Permalink to this headline">#</a></h1>
 <p>At the heart of fast parallel code must be fast serial code. Parallelism can make a good serial code faster. But it can also make a bad code even worse. One can write terribly slow code in any language, including Julia. In this notebook we want to understand what makes Julia code slow and how to detect and avoid common pitfalls. This will lead to multiple concrete performance tips that will help you speed up your Julia code and to write more efficient code in the first place.</p>
 <p>By far the most common reasons for slow Julia code are</p>
 <ul class="simple">
