@@ -46,7 +46,7 @@ Can be done from any device:
 
 - Maxwell via Max-JHub
 - Desktop/Laptop
-- MyBinder
+- MyBinder (experimental)
 - Static Website
 
 ::right::
@@ -183,7 +183,7 @@ Compiler optimises away all code - returns a constant integer!
 
 ---
 
-# Julia Bridges Gaps
+# Julia 'Bridges Gaps'
 
 - Gap between domain science and HPC
   - Researchers/scientists want to use high-level languages, e.g. Python, Matlab, R
@@ -198,4 +198,10 @@ Compiler optimises away all code - returns a constant integer!
   - Provides ways to **gradually increase performance** as needed
 
 - Also bridges gap between expert researchers and expert developers
-  - Performant Julia code is written in Julia, not C (numpy is 53% C)
+  - Performant Julia code is written in Julia, not C (numpy is 53% C, pyFAI ~12%)
+
+---
+layout: center
+---
+
+# Questions?
