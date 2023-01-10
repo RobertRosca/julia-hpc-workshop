@@ -2,7 +2,8 @@ setup:
 	julia --project=$(CURDIR) -e "using Pkg; Pkg.instantiate(); Pkg.precompile()"
 	julia --project=$(CURDIR) -e "using PythonCall"
 	julia --project=$(CURDIR) -e "using MPI; MPI.install_mpiexecjl(; force=true)"
-	julia --project=$(CURDIR) -e 'using IJulia; installkernel("Julia (4 Threads)", "--threads=4", "--project=@.", specname="julia-4-threads")'
+	julia -e 'using Pkg; Pkg.add("IJulia")'
+	julia -e 'using IJulia; installkernel("Julia (4 Threads)", "--threads=4", "--project=@.", specname="julia-4-threads")'
 
 html:
 	jupyter-book build . --builder html
